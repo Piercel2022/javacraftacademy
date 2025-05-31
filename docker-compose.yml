@@ -1,0 +1,286 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: jca-postgres
+    environment:
+      POSTGRES_DB: javacraftacademy
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Pier@614540
+      POSTGRES_SCHEMA: jca_schema
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/database/init:/docker-entrypoint-initdb.d
+    networks:
+      - jca-network
+    restart: unless-stopped
+
+  # Cache Redis
+  redis:
+    image: redis:7-alpine
+    container_name: jca-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./infrastructure/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - jca-network
+    restart: unless-stopped
+
+  # Service Gateway (API Gateway)
+  gateway-service:
+    build:
+      context: ./backend/gateway-service
+      dockerfile: Dockerfile.dev
+    container_name: jca-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=javacraftacademy
+      - POSTGRES_USER=jca_user
+      - POSTGRES_PASSWORD=jca_dev_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - jca-network
+    volumes:
+      - ./backend/gateway-service:/app
+      - /app/target
+    restart: unless-stopped
+
+  # Service Utilisateurs
+  user-service:
+    build:
+      context: ./backend/user-service
+      dockerfile: Dockerfile.dev
+    container_name: jca-user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=javacraftacademy
+      - POSTGRES_USER=jca_user
+      - POSTGRES_PASSWORD=jca_dev_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GATEWAY_URL=http://gateway-service:8080
+    depends_on:
+      - postgres
+      - redis
+      - gateway-service
+    networks:
+      - jca-network
+    volumes:
+      - ./backend/user-service:/app
+      - /app/target
+    restart: unless-stopped
+
+  # Service Cours
+  course-service:
+    build:
+      context: ./backend/course-service
+      dockerfile: Dockerfile.dev
+    container_name: jca-course-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=javacraftacademy
+      - POSTGRES_USER=jca_user
+      - POSTGRES_PASSWORD=jca_dev_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GATEWAY_URL=http://gateway-service:8080
+    depends_on:
+      - postgres
+      - redis
+      - gateway-service
+    networks:
+      - jca-network
+    volumes:
+      - ./backend/course-service:/app
+      - /app/target
+    restart: unless-stopped
+
+  # Service Progression
+  progress-service:
+    build:
+      context: ./backend/progress-service
+      dockerfile: Dockerfile.dev
+    container_name: jca-progress-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=javacraftacademy
+      - POSTGRES_USER=jca_user
+      - POSTGRES_PASSWORD=jca_dev_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GATEWAY_URL=http://gateway-service:8080
+    depends_on:
+      - postgres
+      - redis
+      - gateway-service
+    networks:
+      - jca-network
+    volumes:
+      - ./backend/progress-service:/app
+      - /app/target
+    restart: unless-stopped
+
+  # Service Compilateur
+  compiler-service:
+    build:
+      context: ./backend/compiler-service
+      dockerfile: Dockerfile.dev
+    container_name: jca-compiler-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=javacraftacademy
+      - POSTGRES_USER=jca_user
+      - POSTGRES_PASSWORD=jca_dev_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GATEWAY_URL=http://gateway-service:8080
+    depends_on:
+      - postgres
+      - redis
+      - gateway-service
+    networks:
+      - jca-network
+    volumes:
+      - ./backend/compiler-service:/app
+      - /app/target
+      - /var/run/docker.sock:/var/run/docker.sock  # Pour exécution sécurisée
+    restart: unless-stopped
+
+  # Service Notifications
+  notification-service:
+    build:
+      context: ./backend/notification-service
+      dockerfile: Dockerfile.dev
+    container_name: jca-notification-service
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=javacraftacademy
+      - POSTGRES_USER=jca_user
+      - POSTGRES_PASSWORD=jca_dev_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - GATEWAY_URL=http://gateway-service:8080
+    depends_on:
+      - postgres
+      - redis
+      - gateway-service
+    networks:
+      - jca-network
+    volumes:
+      - ./backend/notification-service:/app
+      - /app/target
+    restart: unless-stopped
+
+  # Application Frontend React
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: jca-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+      - REACT_APP_WS_URL=ws://localhost:8080
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - jca-network
+    restart: unless-stopped
+
+  # Serveur Nginx (Reverse Proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: jca-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infrastructure/nginx/dev.conf:/etc/nginx/nginx.conf
+      - ./infrastructure/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - gateway-service
+    networks:
+      - jca-network
+    restart: unless-stopped
+
+  # Monitoring avec Adminer (Interface BDD)
+  adminer:
+    image: adminer:latest
+    container_name: jca-adminer
+    ports:
+      - "8090:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+    networks:
+      - jca-network
+    restart: unless-stopped
+
+  # Redis Commander (Interface Redis)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: jca-redis-commander
+    ports:
+      - "8091:8081"
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    depends_on:
+      - redis
+    networks:
+      - jca-network
+    restart: unless-stopped
+
+# Volumes persistants
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# Réseau personnalisé
+networks:
+  jca-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
