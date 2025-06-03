@@ -1,0 +1,244 @@
+/* frontend/src/components/common/Navigation/Navigation.module.css */
+
+.navigation {
+  background: transparent;
+}
+
+.navigation.horizontal {
+  width: 100%;
+}
+
+.navigation.vertical {
+  width: 100%;
+  max-width: 280px;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.horizontal .navList {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.vertical .navList {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color, #333);
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: var(--nav-background, transparent);
+  border: 1px solid transparent;
+  min-height: 44px;
+}
+
+.horizontal .navLink {
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.vertical .navLink {
+  gap: 12px;
+  flex-direction: column;
+  text-align: center;
+  padding: 16px 12px;
+}
+
+.navLink:hover {
+  background: var(--nav-hover-background, rgba(0, 123, 255, 0.1));
+  color: var(--nav-hover-color, #007bff);
+  transform: translateY(-2px);
+  border-color: var(--nav-hover-border, rgba(0, 123, 255, 0.2));
+}
+
+.navLink.active {
+  background: var(--nav-active-background, #007bff);
+  color: var(--nav-active-color, #ffffff);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.navLink.active:hover {
+  background: var(--nav-active-hover-background, #0056b3);
+  transform: translateY(-2px);
+}
+
+.navIcon {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vertical .navIcon {
+  font-size: 24px;
+}
+
+.navLabel {
+  font-size: 14px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.vertical .navLabel {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.navDescription {
+  font-size: 11px;
+  opacity: 0.8;
+  line-height: 1.2;
+  margin-top: 4px;
+  display: block;
+}
+
+.activeIndicator {
+  position: absolute;
+  background: var(--nav-indicator-color, #ffffff);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.horizontal .activeIndicator {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+}
+
+.vertical .activeIndicator {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+}
+
+/* Themes */
+.navigation.light {
+  --text-color: #333333;
+  --nav-background: #ffffff;
+  --nav-hover-background: rgba(0, 123, 255, 0.08);
+  --nav-hover-color: #007bff;
+  --nav-hover-border: rgba(0, 123, 255, 0.2);
+  --nav-active-background: #007bff;
+  --nav-active-color: #ffffff;
+  --nav-active-hover-background: #0056b3;
+  --nav-indicator-color: #ffffff;
+}
+
+.navigation.dark {
+  --text-color: #ffffff;
+  --nav-background: #2d2d2d;
+  --nav-hover-background: rgba(77, 171, 247, 0.15);
+  --nav-hover-color: #4dabf7;
+  --nav-hover-border: rgba(77, 171, 247, 0.3);
+  --nav-active-background: #4dabf7;
+  --nav-active-color: #ffffff;
+  --nav-active-hover-background: #339af0;
+  --nav-indicator-color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .horizontal .navList {
+    gap: 4px;
+  }
+
+  .horizontal .navLink {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .navLabel {
+    font-size: 13px;
+  }
+
+  .navIcon {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .horizontal .navLink {
+    padding: 8px 10px;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 60px;
+  }
+
+  .horizontal .navLabel {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .horizontal .navIcon {
+    font-size: 18px;
+  }
+
+  .horizontal .activeIndicator {
+    width: 16px;
+    height: 2px;
+  }
+}
+
+/* Animation effects */
+@keyframes navPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+  }
+}
+
+.navLink.active {
+  animation: navPulse 2s infinite;
+}
+
+/* Focus styles for accessibility */
+.navLink:focus {
+  outline: 2px solid var(--nav-hover-color, #007bff);
+  outline-offset: 2px;
+}
+
+.navLink:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .navLink {
+    border: 2px solid transparent;
+  }
+
+  .navLink:hover,
+  .navLink.active {
+    border-color: currentColor;
+  }
+}

@@ -1,0 +1,355 @@
+/* RegisterForm.module.css */
+
+.registerContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.registerCard {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.registerHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.registerTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.registerSubtitle {
+  color: #718096;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.errorAlert {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #fed7d7;
+  border: 1px solid #feb2b2;
+  border-radius: 12px;
+  color: #c53030;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.errorIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.nameGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.formInput {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  color: #2d3748;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.formInput:disabled {
+  background-color: #f7fafc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.formInput::placeholder {
+  color: #a0aec0;
+}
+
+.inputError {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+.inputError:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+.passwordInputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 0.875rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #718096;
+  transition: color 0.2s ease;
+  border-radius: 8px;
+}
+
+.passwordToggle:hover {
+  color: #4a5568;
+  background-color: #f7fafc;
+}
+
+.passwordToggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.eyeIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.passwordStrength {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.strengthBar {
+  flex: 1;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.strengthFill {
+  height: 100%;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+.strengthLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #718096;
+  min-width: 80px;
+  text-align: right;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.checkbox {
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: #667eea;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.checkbox:checked {
+  border-color: #667eea;
+}
+
+.checkboxText {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
+.errorMessage {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.registerFooter {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.loginPrompt {
+  color: #718096;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.loginLink {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.loginLink:hover {
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .registerContainer {
+    padding: 1rem 0.5rem;
+  }
+  
+  .registerCard {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .registerTitle {
+    font-size: 1.75rem;
+  }
+  
+  .nameGroup {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .formInput {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .passwordToggle {
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .registerCard {
+    padding: 1.5rem 1rem;
+  }
+  
+  .registerTitle {
+    font-size: 1.5rem;
+  }
+  
+  .registerSubtitle {
+    font-size: 0.875rem;
+  }
+}
+
+/* Animation pour le chargement */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.formInput:disabled {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Style pour les navigateurs webkit */
+.formInput::-webkit-outer-spin-button,
+.formInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.formInput[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Focus visible pour l'accessibilité */
+.checkbox:focus-visible,
+.passwordToggle:focus-visible,
+.link:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Animation de hover pour la carte */
+.registerCard {
+  transition: transform 0.2s ease;
+}
+
+.registerCard:hover {
+  transform: translateY(-2px);
+}
+
+/* Style pour les messages d'erreur avec icône */
+.errorMessage::before {
+  content: '⚠';
+  color: #e53e3e;
+  font-weight: bold;
+}

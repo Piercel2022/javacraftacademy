@@ -1,0 +1,168 @@
+// ErrorBoundary.module.css
+.errorContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.errorContent {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.errorIcon {
+  color: #e74c3c;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.errorTitle {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.errorMessage {
+  color: #5a6c7d;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.errorActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.buttonPrimary {
+  background: #3498db;
+  color: white;
+}
+
+.buttonPrimary:hover {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+.buttonSecondary {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+.buttonSecondary:hover {
+  background: #d5dbdb;
+  transform: translateY(-1px);
+}
+
+.errorDetails {
+  margin-top: 2rem;
+  text-align: left;
+  background: #f8f9fa;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.errorSummary {
+  padding: 1rem;
+  background: #e9ecef;
+  cursor: pointer;
+  font-weight: 600;
+  color: #495057;
+  border: none;
+  outline: none;
+}
+
+.errorSummary:hover {
+  background: #dee2e6;
+}
+
+.errorTrace {
+  padding: 1rem;
+  font-size: 0.875rem;
+}
+
+.errorTrace h3 {
+  color: #495057;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.errorTrace h3:first-child {
+  margin-top: 0;
+}
+
+.errorTrace pre {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  font-size: 0.8rem;
+  color: #e74c3c;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .errorContainer {
+    padding: 1rem;
+  }
+  
+  .errorContent {
+    padding: 2rem;
+  }
+  
+  .errorTitle {
+    font-size: 1.5rem;
+  }
+  
+  .errorActions {
+    flex-direction: column;
+  }
+  
+  .button {
+    width: 100%;
+  }
+}
