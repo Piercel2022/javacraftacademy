@@ -1,0 +1,270 @@
+# Configuration principale Gateway Service - JavaCraft Academy
+# Localisation: gateway-service/src/main/resources/application.yml
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: javacraftacademy-gateway
+  
+  profiles:
+    active: dev
+  
+  # Configuration Base de données PostgreSQL
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:javacraftacademy}
+    username: ${POSTGRES_USER:jca_user}
+    password: ${POSTGRES_PASSWORD:jca_dev_password}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      auto-commit: false
+  
+  # Configuration JPA/Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.SnakeCasePhysicalNamingStrategy
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 25
+          order_inserts: true
+          order_updates: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+  
+  # Configuration Redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+  
+  # Configuration Cache
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000 # 10 minutes
+      cache-null-values: false
+  
+  # Configuration Cloud Gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+      
+      routes:
+        # Route User Service
+        - id: user-service
+          uri: http://user-service:8081
+          predicates:
+            - Path=/api/v1/users/**,/api/v1/auth/**
+          filters:
+            - StripPrefix=2
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.requestedTokens: 1
+        
+        # Route Course Service
+        - id: course-service
+          uri: http://course-service:8082
+          predicates:
+            - Path=/api/v1/courses/**,/api/v1/modules/**,/api/v1/lessons/**
+          filters:
+            - StripPrefix=2
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 15
+                redis-rate-limiter.burstCapacity: 30
+                redis-rate-limiter.requestedTokens: 1
+        
+        # Route Notification Service
+        - id: notification-service
+          uri: http://notification-service:8083
+          predicates:
+            - Path=/api/v1/notifications/**
+          filters:
+            - StripPrefix=2
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.requestedTokens: 1
+        
+        # Route Progress Service
+        - id: progress-service
+          uri: http://course-service:8082
+          predicates:
+            - Path=/api/v1/progress/**,/api/v1/enrollments/**
+          filters:
+            - StripPrefix=2
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 20
+                redis-rate-limiter.burstCapacity: 40
+                redis-rate-limiter.requestedTokens: 1
+
+# Configuration Management & Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,gateway
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    gateway:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        spring.cloud.gateway: true
+
+# Configuration Logging
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    org.springframework.web.reactive: INFO
+    reactor.netty: INFO
+    com.javacraftacademy: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/gateway-service.log
+    max-size: 10MB
+    max-history: 30
+
+# Configuration spécifique JavaCraft Academy
+javacraftacademy:
+  gateway:
+    security:
+      jwt:
+        secret: ${JWT_SECRET:jca-super-secret-key-for-development-only}
+        expiration: 86400000 # 24 heures
+      cors:
+        allowed-origins: 
+          - "http://localhost:3000"
+          - "http://localhost:8080"
+          - "${FRONTEND_URL:http://localhost:3000}"
+        allowed-methods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        allowed-headers:
+          - "*"
+        allow-credentials: true
+    
+    rate-limiting:
+      enabled: true
+      default-rate: 100
+      default-burst: 200
+      
+    circuit-breaker:
+      enabled: true
+      failure-threshold: 50
+      wait-duration: 30000
+      permitted-calls: 10
+
+---
+# Profil Development
+spring:
+  config:
+    activate:
+      on-profile: dev
+  
+  cloud:
+    gateway:
+      routes:
+        - id: user-service-dev
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/users/**,/api/v1/auth/**
+          filters:
+            - StripPrefix=2
+        
+        - id: course-service-dev
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/courses/**,/api/v1/modules/**,/api/v1/lessons/**
+          filters:
+            - StripPrefix=2
+        
+        - id: notification-service-dev
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/notifications/**
+          filters:
+            - StripPrefix=2
+
+logging:
+  level:
+    com.javacraftacademy: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+
+---
+# Profil Production
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 10
+
+  jpa:
+    show-sql: false
+
+logging:
+  level:
+    com.javacraftacademy: INFO
+    org.springframework.cloud.gateway: WARN
+    reactor.netty: WARN
+  file:
+    name: /var/log/javacraftacademy/gateway-service.log
+
+javacraftacademy:
+  gateway:
+    rate-limiting:
+      default-rate: 50
+      default-burst: 100
