@@ -60,10 +60,30 @@ public class AssignmentSubmission extends BaseEntity {
     
     // Méthodes utilitaires
     public boolean isPassed() {
-        if (grade == null || assignment == null || assignment.getPassingPoints() == null) {
+        if (grade == null || assignment == null) {
             return false;
         }
-        return grade >= assignment.getPassingPoints();
+        
+        // Option 1: Si Assignment a un champ maxPoints, utilisez un pourcentage
+        Integer maxPoints = assignment.getMaxPoints();
+        if (maxPoints == null || maxPoints == 0) {
+            return false;
+        }
+        
+        // Considère comme réussi si >= 60% des points maximum
+        double passingThreshold = maxPoints * 0.6;
+        return grade >= passingThreshold;
+        
+        // Option 2: Si vous voulez utiliser une valeur fixe
+        // return grade >= 60; // ou toute autre valeur de seuil
+        
+        // Option 3: Si Assignment devrait avoir un champ passingPoints
+        // Ajoutez ce champ à l'entité Assignment et décommentez:
+        // Integer passingPoints = assignment.getPassingPoints();
+        // if (passingPoints == null) {
+        //     return false;
+        // }
+        // return grade >= passingPoints;
     }
     
     public boolean isGraded() {
