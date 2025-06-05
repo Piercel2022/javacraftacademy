@@ -243,7 +243,8 @@ public class AssignmentFile extends BaseEntity {
     @Override
     public String toString() {
         return "AssignmentFile{" +
-                "id=" + getId() +
+                "id=" + (this.getId() != null ? this.getId() : "null") +
+
                 ", fileName='" + fileName + '\'' +
                 ", fileSize=" + fileSize +
                 ", mimeType='" + mimeType + '\'' +
