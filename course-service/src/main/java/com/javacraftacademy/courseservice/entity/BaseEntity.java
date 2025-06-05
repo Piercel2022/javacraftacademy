@@ -54,7 +54,7 @@ import java.time.LocalDateTime;
  *   <li>Ajouter un champ <code>updatedFromIp</code> pour sécurité renforcée.</li>
  * </ul>
  *
- * @author 
+ * @author : JavaCraftAcademy Team
  * @since 1.0
  */
 @MappedSuperclass
