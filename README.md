@@ -44,7 +44,10 @@ REQUIRED SECTIONS:
 
 
 
-**[JavaCraft Academy 🚀]** Une plateforme d'apprentissage Java moderne et interactive construite avec des technologies open source.
+**[JavaCraft Academy 🚀]** est une plateforme éducative dédiée pour l'apprentissage du langage Java et de son écosystème, 
+Javacraftacademy propose un environnement structuré et moderne pour accompagner les apprenants, du niveau débutant à avancé. 
+Conçue comme une véritable application distribuée, elle repose sur une architecture microservices, offrant à la fois modularité, 
+scalabilité et évolutivité.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -63,6 +66,12 @@ REQUIRED SECTIONS:
   <summary>Server</summary>
   <ul>
     <li><a href="https://nginx.org/">NGinX</a></li>
+  </ul>
+</details>
+<details>
+  <summary>Framework</summary>
+  <ul>
+    <li><a href="https://spring.io/">Spring</a></li>
   </ul>
 </details>
 <details>
