@@ -313,7 +313,7 @@ public enum AssignmentType {
      */
     public static List<AssignmentType> getSupervisedTypes() {
         return Arrays.stream(values())
-                .filter(AssignmentType::isRequiresSupervision)
+                .filter(AssignmentType::requiresSupervision)
                 .collect(Collectors.toList());
     }
     
@@ -324,7 +324,7 @@ public enum AssignmentType {
      */
     public static List<AssignmentType> getMultipleSubmissionTypes() {
         return Arrays.stream(values())
-                .filter(AssignmentType::isAllowsMultipleSubmissions)
+                .filter(AssignmentType::allowsMultipleSubmissions)
                 .collect(Collectors.toList());
     }
     
