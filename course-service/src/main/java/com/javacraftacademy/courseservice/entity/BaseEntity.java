@@ -59,7 +59,6 @@ import java.time.LocalDateTime;
  */
 @MappedSuperclass
 @Data
-@EqualsAndHashCode(of = "id")
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 
@@ -71,6 +70,7 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    
     /** Date/heure de création. Gérée automatiquement par Hibernate. */
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
