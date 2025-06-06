@@ -252,7 +252,9 @@ public class Assignment extends BaseEntity {
             submissions = new ArrayList<>();
         }
         submissions.add(submission);
-        submission.setAssignment(this);
+        if (submission != null) {
+            submission.setAssignment(this);
+        }
     }
     
     /**
@@ -266,7 +268,9 @@ public class Assignment extends BaseEntity {
             files = new ArrayList<>();
         }
         files.add(file);
-        file.setAssignment(this);
+        if (file != null) {
+            file.setAssignment(this);
+        }
     }
     
     /**
@@ -277,7 +281,7 @@ public class Assignment extends BaseEntity {
     @Override
     public String toString() {
         return "Assignment{" +
-                "id=" + (getId() != null ? getId() : "null") +
+                "id=" + (super.getId() != null ? super.getId() : "null") +
                 ", title='" + title + '\'' +
                 ", assignmentType=" + assignmentType +
                 ", maxPoints=" + maxPoints +
