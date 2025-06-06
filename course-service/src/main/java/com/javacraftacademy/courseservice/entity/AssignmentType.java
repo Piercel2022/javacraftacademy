@@ -313,7 +313,7 @@ public enum AssignmentType {
      */
     public static List<AssignmentType> getSupervisedTypes() {
         return Arrays.stream(values())
-                .filter(AssignmentType::requiresSupervision)
+               .filter(AssignmentType::isRequiresSupervision) // ✅ Getter généré par Lombok
                 .collect(Collectors.toList());
     }
     
@@ -324,7 +324,7 @@ public enum AssignmentType {
      */
     public static List<AssignmentType> getMultipleSubmissionTypes() {
         return Arrays.stream(values())
-                .filter(AssignmentType::allowsMultipleSubmissions)
+               .filter(AssignmentType::isAllowsMultipleSubmissions)
                 .collect(Collectors.toList());
     }
     
