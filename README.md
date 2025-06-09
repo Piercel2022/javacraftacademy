@@ -40,11 +40,11 @@ REQUIRED SECTIONS:
 
 
 
-# 📖 [JavaCraft Academy 🚀] <a name="about-project"></a>
+# 📖 JavaCraft Academy 🚀 <a name="about-project"></a>
 
 
 
-**[JavaCraft Academy 🚀]** est une plateforme éducative dédiée pour l'apprentissage du langage Java et de son écosystème, 
+**JavaCraft Academy 🚀** est une plateforme éducative dédiée pour l'apprentissage du langage Java et de son écosystème, 
 Javacraftacademy propose un environnement structuré et moderne pour accompagner les apprenants, du niveau débutant à avancé. 
 Conçue comme une véritable application distribuée, elle repose sur une architecture microservices, offrant à la fois modularité, 
 scalabilité et évolutivité.
