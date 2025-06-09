@@ -86,7 +86,7 @@ scalabilité et évolutivité.
 ### Key Features <a name="key-features"></a>
 
 
-- [ ] **[🟢 Débutant (2-3 mois)]**
+- [ ] **🟢 Débutant (2-3 mois)**
 - [ ] **[🟡 Intermédiaire (3-4 mois)]**
 - [ ] **[🟠 Avancé (4-5 mois)]**
 - [ ] **[🔴 Expert (5-6 mois)]**
