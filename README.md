@@ -87,9 +87,9 @@ scalabilité et évolutivité.
 
 
 - [ ] **🟢 Débutant (2-3 mois)**
-- [ ] **[🟡 Intermédiaire (3-4 mois)]**
-- [ ] **[🟠 Avancé (4-5 mois)]**
-- [ ] **[🔴 Expert (5-6 mois)]**
+- [ ] **🟡 Intermédiaire (3-4 mois)**
+- [ ] **🟠 Avancé (4-5 mois)**
+- [ ] **🔴 Expert (5-6 mois)**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
