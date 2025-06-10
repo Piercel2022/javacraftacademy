@@ -1,0 +1,97 @@
+/* Container de chargement */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 2rem;
+}
+
+.loadingText {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--color-text-secondary, #666);
+  text-align: center;
+}
+
+/* Styles pour l'accès refusé */
+.accessDenied {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 2rem;
+  background-color: var(--color-background-light, #f8f9fa);
+}
+
+.accessDeniedContent {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.accessDeniedContent h2 {
+  color: var(--color-error, #dc3545);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.accessDeniedContent p {
+  color: var(--color-text-secondary, #666);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.accessDeniedContent p:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.accessDeniedContent strong {
+  color: var(--color-text-primary, #333);
+  font-weight: 600;
+}
+
+.backButton {
+  background-color: var(--color-primary, #007bff);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: var(--color-primary-dark, #0056b3);
+  transform: translateY(-1px);
+}
+
+.backButton:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .accessDeniedContent {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .accessDeniedContent h2 {
+    font-size: 1.5rem;
+  }
+  
+  .loadingContainer {
+    min-height: 40vh;
+    padding: 1rem;
+  }
+}
