@@ -1,0 +1,99 @@
+// Absolute path: frontend/src/pages/CourseDetail/CourseDetail.module.css
+.courseDetailContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.courseHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.courseImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.courseInfo h1 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.courseStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.courseStats span {
+  background: #f8f9fa;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.instructor {
+  margin-bottom: 1.5rem;
+  color: #007bff;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.priceTag {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.courseContent {
+  display: grid;
+  gap: 2rem;
+}
+
+.section h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.syllabus {
+  list-style: none;
+  padding: 0;
+}
+
+.syllabus li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.syllabus li:before {
+  content: "✓ ";
+  color: #28a745;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .courseHeader {
+    grid-template-columns: 1fr;
+  }
+  
+  .price {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
