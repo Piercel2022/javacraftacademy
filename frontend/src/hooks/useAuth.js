@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { authService } from '../services/authService';
+import authService from '../services/authService';
 import { useNotification } from './useNotification';
 
 /**
