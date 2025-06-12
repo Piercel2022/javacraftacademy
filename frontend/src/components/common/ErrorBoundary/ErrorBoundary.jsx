@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styles from './ErrorBoundary.module.css';
 
@@ -17,7 +16,6 @@ class ErrorBoundary extends React.Component {
       error: error,
       errorInfo: errorInfo
     });
-
     // Log l'erreur pour le monitoring
     console.error('ErrorBoundary caught an error:', error, errorInfo);
     
@@ -88,7 +86,11 @@ class ErrorBoundary extends React.Component {
                   <pre>{this.state.error && this.state.error.toString()}</pre>
                   
                   <h3>Stack trace:</h3>
-                  <pre>{this.state.errorInfo.componentStack}</pre>
+                  <pre>
+                    {this.state.errorInfo && this.state.errorInfo.componentStack 
+                      ? this.state.errorInfo.componentStack 
+                      : 'Stack trace non disponible'}
+                  </pre>
                 </div>
               </details>
             )}
