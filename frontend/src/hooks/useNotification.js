@@ -1,7 +1,7 @@
 // frontend/src/hooks/useNotification.js
 import { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import { NotificationContext } from '../context/NotificationContext';
-import { notificationService } from '../services/notificationService';
+import notificationService from '../services/notificationService';
 import { useLocalStorage } from './useLocalStorage';
 
 /**
