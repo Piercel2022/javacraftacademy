@@ -42,7 +42,6 @@ function App() {
     <ErrorBoundary>
       <div className="App">
         <Header />
-        
         <main className="main-content">
           <Routes>
             {/* Routes publiques */}
@@ -53,59 +52,58 @@ function App() {
             <Route path="/courses/:id" element={<CourseDetail />} />
             
             {/* Routes protégées */}
-            <Route 
-              path="/dashboard" 
+            <Route
+              path="/dashboard"
               element={
                 <ProtectedRoute>
                   <Dashboard />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/lesson/:courseId/:lessonId" 
+            <Route
+              path="/lesson/:courseId/:lessonId"
               element={
                 <ProtectedRoute>
                   <Lesson />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/playground" 
+            <Route
+              path="/playground"
               element={
                 <ProtectedRoute>
                   <CodePlayground />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/profile" 
+            <Route
+              path="/profile"
               element={
                 <ProtectedRoute>
                   <Profile />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/progress" 
+            <Route
+              path="/progress"
               element={
                 <ProtectedRoute>
                   <Progress />
                 </ProtectedRoute>
-              } 
+              }
             />
             
             {/* Route 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-
         <Footer />
-
+        
         {/* Notifications Toast */}
         {notifications.length > 0 && (
           <div className="notifications-container">
             {notifications.map((notification) => (
-              <div 
+              <div
                 key={notification.id}
                 className={`notification notification--${notification.type}`}
               >
