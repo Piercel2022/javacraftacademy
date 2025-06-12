@@ -1,8 +1,9 @@
 // frontend/src/components/common/Loading/index.js
-export { default } from './Loading';
+
 export { 
   SkeletonList, 
   SkeletonCard, 
   LoadingWithProgress, 
-  useLoading 
+  useLoading,
+  default
 } from './Loading';
