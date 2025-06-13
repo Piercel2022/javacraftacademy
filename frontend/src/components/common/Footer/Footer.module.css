@@ -1,0 +1,390 @@
+/* Footer.module.css */
+
+.footer {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #ffffff;
+  padding: 40px 0 20px;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  flex: 1;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #4ade80;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, #4ade80, #22d3ee);
+}
+
+.brandSection {
+  flex: 1.5;
+  max-width: 350px;
+  min-width: 280px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background: linear-gradient(45deg, #4ade80, #22d3ee);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 12px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.socialLink:hover {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+  transform: translateY(-2px);
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkItem {
+  margin-bottom: 12px;
+}
+
+.link {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.link:hover {
+  color: #4ade80;
+  transform: translateX(4px);
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #4ade80;
+  transition: width 0.3s ease;
+}
+
+.link:hover::before {
+  width: 100%;
+}
+
+.contactSection {
+  flex: 1;
+  min-width: 250px;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.contactIcon {
+  width: 20px;
+  height: 20px;
+  color: #4ade80;
+  flex-shrink: 0;
+}
+
+.newsletter {
+  margin-top: 20px;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.emailInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.emailInput::placeholder {
+  color: #94a3b8;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
+}
+
+.subscribeBtn {
+  padding: 12px 20px;
+  background: linear-gradient(45deg, #4ade80, #22d3ee);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.subscribeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  margin: 20px 0;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.legalLinks {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.legalLink {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.legalLink:hover {
+  color: #4ade80;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .content {
+    gap: 30px;
+  }
+  
+  .brandSection {
+    flex: 1;
+    max-width: 300px;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 0 15px;
+  }
+  
+  .content {
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .section,
+  .brandSection,
+  .contactSection {
+    flex: none;
+    min-width: auto;
+    max-width: 100%;
+  }
+  
+  .bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .legalLinks {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .newsletterForm {
+    flex-direction: column;
+  }
+  
+  .socialLinks {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .content {
+    gap: 20px;
+  }
+  
+  .logo {
+    justify-content: flex-start;
+  }
+  
+  .socialLinks {
+    justify-content: flex-start;
+  }
+}
+
+/* Variante pour écrans très larges */
+@media (min-width: 1400px) {
+  .content {
+    gap: 60px;
+  }
+  
+  .brandSection {
+    max-width: 400px;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+  }
+}
+
+/* Animation pour l'entrée du footer */
+.footer {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Effet de survol pour les sections */
+.section:hover .sectionTitle::after {
+  width: 50px;
+  transition: width 0.3s ease;
+}
+
+/* Amélioration de l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .footer,
+  .socialLink,
+  .link,
+  .subscribeBtn {
+    animation: none;
+    transition: none;
+  }
+  
+  .socialLink:hover,
+  .link:hover,
+  .subscribeBtn:hover {
+    transform: none;
+  }
+}
