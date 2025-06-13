@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
+
 
 // Contextes globaux
 import { AuthProvider } from './context/AuthContext';
@@ -33,7 +33,7 @@ root.render(
 );
 
 // Mesure des performances
-reportWebVitals(console.log);
+//reportWebVitals(console.log);
 
 // Service Worker pour PWA (optionnel)
 if ('serviceWorker' in navigator) {
