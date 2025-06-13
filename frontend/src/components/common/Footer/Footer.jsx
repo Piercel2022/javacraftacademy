@@ -22,7 +22,7 @@ const Footer = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
-  const supportLinks = [
+  const resourceLinks = [
     { name: 'Centre d\'aide', path: '/help' },
     { name: 'FAQ', path: '/faq' },
     { name: 'Communauté', path: '/community' },
@@ -37,12 +37,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className={`${styles.footer} ${styles[theme]}`}>
+    <footer className={styles.footer}>
       <div className={styles.container}>
-        {/* Section principale */}
-        <div className={styles.mainSection}>
-          {/* Logo et description */}
-          <div className={styles.brandSection}>
+        <div className={styles.content}>
+          <div className={`${styles.section} ${styles.brandSection}`}>
+            {/* Logo et description */}
             <div className={styles.logo}>
               <img 
                 src="/assets/images/logo.png" 
@@ -71,50 +70,47 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Liens de navigation */}
-          <div className={styles.linksSection}>
-            <div className={styles.linkColumn}>
-              <h3 className={styles.linkTitle}>Navigation</h3>
-              <ul className={styles.linkList}>
-                {quickLinks.map((link) => (
-                  <li key={link.name} className={styles.linkItem}>
-                    <Link to={link.path} className={styles.link}>
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.linkColumn}>
-              <h3 className={styles.linkTitle}>Support</h3>
-              <ul className={styles.linkList}>
-                {supportLinks.map((link) => (
-                  <li key={link.name} className={styles.linkItem}>
-                    <Link to={link.path} className={styles.link}>
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className={styles.linkColumn}>
-              <h3 className={styles.linkTitle}>Légal</h3>
-              <ul className={styles.linkList}>
-                {legalLinks.map((link) => (
-                  <li key={link.name} className={styles.linkItem}>
-                    <Link to={link.path} className={styles.link}>
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className={styles.section}>
+            {/* Liens rapides */}
+            <h3 className={styles.linkTitle}>Navigation</h3>
+            <ul className={styles.linkList}>
+              {quickLinks.map((link) => (
+                <li key={link.name} className={styles.linkItem}>
+                  <Link to={link.path} className={styles.link}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Newsletter */}
-          <div className={styles.newsletterSection}>
+          <div className={styles.section}>
+            {/* Ressources */}
+            <h3 className={styles.linkTitle}>Ressources</h3>
+            <ul className={styles.linkList}>
+              {resourceLinks.map((link) => (
+                <li key={link.name} className={styles.linkItem}>
+                  <Link to={link.path} className={styles.link}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            
+            <h4 className={styles.subTitle}>Légal</h4>
+            <ul className={styles.linkList}>
+              {legalLinks.map((link) => (
+                <li key={link.name} className={styles.linkItem}>
+                  <Link to={link.path} className={styles.link}>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={`${styles.section} ${styles.contactSection}`}>
+            {/* Contact et newsletter */}
             <h3 className={styles.linkTitle}>Newsletter</h3>
             <p className={styles.newsletterDescription}>
               Recevez les dernières actualités et cours directement dans votre boîte mail.
@@ -137,7 +133,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Section du bas */}
+        {/* Bottom section */}
         <div className={styles.bottomSection}>
           <div className={styles.copyright}>
             <p>© {currentYear} JavaCraft Academy. Tous droits réservés.</p>
