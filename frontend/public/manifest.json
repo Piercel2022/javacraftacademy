@@ -1,0 +1,82 @@
+{
+  "short_name": "JavaCraft",
+  "name": "JavaCraft Academy - Maîtrisez Java",
+  "description": "Apprenez Java de manière interactive avec des projets pratiques et un éditeur de code intégré.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["education", "developer", "programming"],
+  "screenshots": [
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Accéder à votre tableau de bord",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "dashboard-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Cours",
+      "short_name": "Cours",
+      "description": "Parcourir les cours disponibles",
+      "url": "/courses",
+      "icons": [
+        {
+          "src": "courses-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Éditeur",
+      "short_name": "Code",
+      "description": "Ouvrir l'éditeur de code",
+      "url": "/playground",
+      "icons": [
+        {
+          "src": "code-icon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

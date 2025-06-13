@@ -1,0 +1,44 @@
+# robots.txt pour JavaCraft Academy
+
+# Permettre à tous les robots d'accéder au site
+User-agent: *
+Allow: /
+
+# Pages à ne pas indexer (si nécessaire)
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /test/
+
+# Délai entre les requêtes (en secondes)
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://javacraftacademy.com/sitemap.xml
+
+# Règles spécifiques pour différents robots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Bloquer les robots indésirables
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
