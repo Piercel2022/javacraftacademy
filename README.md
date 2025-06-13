@@ -178,9 +178,12 @@ You can deploy this project using:
 ## 🔭 Future Features <a name="future-features"></a>
 
 
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
+- **📚 Modular Learning Paths – Beginner to Pro Java & Spring courses.**
+- **👨‍💻 Built-in Code Playground – Practice Java code directly in the browser.**
+- **📈 User Progress Tracking – Save and monitor learning progress.**
+- **🧪 Quizzes & Challenges – Test knowledge with interactive assessments.**
+- **📊 Admin Dashboard – Manage courses, content, and users.**
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
