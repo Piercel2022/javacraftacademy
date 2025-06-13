@@ -42,7 +42,7 @@ const Header = () => {
               alt="JavaCraft Academy" 
               className={styles.logoImage}
             />
-            <span className={styles.logoText}>JavaCraft Academy</span>
+            
           </Link>
         </div>
 
