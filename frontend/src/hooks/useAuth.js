@@ -18,7 +18,14 @@ export const useAuth = () => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
 
-  const { user, token, isAuthenticated, login: contextLogin, logout: contextLogout } = context;
+  const { 
+    user, 
+    token, 
+    isAuthenticated, 
+    isLoading: contextLoading,
+    login: contextLogin, 
+    logout: contextLogout 
+  } = context;
 
   // Fonction de connexion
   const login = useCallback(async (credentials) => {
@@ -120,33 +127,6 @@ export const useAuth = () => {
     }
   }, [showNotification]);
 
-  // Fonction de réinitialisation du mot de passe avec token
-  const resetPassword = useCallback(async (token, newPassword) => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const response = await authService.resetPassword(token, newPassword);
-      
-      if (response.success) {
-        showNotification('Mot de passe réinitialisé avec succès !', 'success');
-        return { success: true };
-      } else {
-        const errorMsg = response.message || 'Erreur lors de la réinitialisation';
-        setError(errorMsg);
-        showNotification(errorMsg, 'error');
-        return { success: false, error: errorMsg };
-      }
-    } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Erreur lors de la réinitialisation';
-      setError(errorMsg);
-      showNotification(errorMsg, 'error');
-      return { success: false, error: errorMsg };
-    } finally {
-      setLoading(false);
-    }
-  }, [showNotification]);
-
   // Fonction de mise à jour du profil
   const updateProfile = useCallback(async (profileData) => {
     setLoading(true);
@@ -174,33 +154,6 @@ export const useAuth = () => {
       setLoading(false);
     }
   }, [contextLogin, token, showNotification]);
-
-  // Fonction de changement de mot de passe
-  const changePassword = useCallback(async (currentPassword, newPassword) => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const response = await authService.changePassword(currentPassword, newPassword);
-      
-      if (response.success) {
-        showNotification('Mot de passe modifié avec succès !', 'success');
-        return { success: true };
-      } else {
-        const errorMsg = response.message || 'Erreur lors du changement de mot de passe';
-        setError(errorMsg);
-        showNotification(errorMsg, 'error');
-        return { success: false, error: errorMsg };
-      }
-    } catch (err) {
-      const errorMsg = err.response?.data?.message || 'Erreur lors du changement de mot de passe';
-      setError(errorMsg);
-      showNotification(errorMsg, 'error');
-      return { success: false, error: errorMsg };
-    } finally {
-      setLoading(false);
-    }
-  }, [showNotification]);
 
   // Vérification de la validité du token
   const checkTokenValidity = useCallback(async () => {
@@ -239,22 +192,12 @@ export const useAuth = () => {
     setError(null);
   }, []);
 
-  // Vérification automatique du token au chargement
-  useEffect(() => {
-    if (isAuthenticated && token) {
-      checkTokenValidity().then(isValid => {
-        if (!isValid) {
-          refreshToken();
-        }
-      });
-    }
-  }, [isAuthenticated, token, checkTokenValidity, refreshToken]);
-
   return {
     // État
     user,
     token,
     isAuthenticated,
+    isLoading: contextLoading || loading, // Combine les deux états de chargement
     loading,
     error,
     
@@ -263,9 +206,7 @@ export const useAuth = () => {
     register,
     logout,
     forgotPassword,
-    resetPassword,
     updateProfile,
-    changePassword,
     checkTokenValidity,
     refreshToken,
     clearError
