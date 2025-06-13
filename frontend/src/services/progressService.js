@@ -1,4 +1,4 @@
-// src/services/progressService.js
+
 // services/progressService.js
 import { apiCall, endpoints } from './api';
 
@@ -20,6 +20,8 @@ class ProgressService {
       };
     }
   }
+
+  // Obtenir la progression de l'utilisateur (alias pour getOverallProgress)
 
   // Obtenir la progression d'un cours spécifique
   async getCourseProgress(courseId) {
