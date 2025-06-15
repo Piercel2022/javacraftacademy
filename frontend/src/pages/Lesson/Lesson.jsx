@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './Lesson.module.css'
 
 const Lesson = ({ lessonId = 1 }) => {
   const id = lessonId;
