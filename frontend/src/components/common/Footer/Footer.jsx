@@ -48,7 +48,7 @@ const Footer = () => {
                 alt="JavaCraft Academy" 
                 className={styles.logoImage}
               />
-              <span className={styles.brandName}>JavaCraft Academy</span>
+              
             </div>
             <p className={styles.description}>
               Apprenez Java de manière interactive avec des cours pratiques, 
