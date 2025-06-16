@@ -1,0 +1,261 @@
+
+/* Alert.module.css */
+
+.alert {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.iconContainer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.message {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.description {
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.dismissButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.dismissIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Tailles */
+.small {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.small .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.small .dismissIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.medium {
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.large {
+  padding: 16px 20px;
+  font-size: 16px;
+}
+
+.large .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.large .dismissIcon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Types - Variante filled */
+.info.filled {
+  background-color: #dbeafe;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+
+.info.filled .dismissButton:hover {
+  background-color: rgba(30, 64, 175, 0.1);
+}
+
+.success.filled {
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.success.filled .dismissButton:hover {
+  background-color: rgba(22, 101, 52, 0.1);
+}
+
+.warning.filled {
+  background-color: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #92400e;
+}
+
+.warning.filled .dismissButton:hover {
+  background-color: rgba(146, 64, 14, 0.1);
+}
+
+.error.filled {
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+}
+
+.error.filled .dismissButton:hover {
+  background-color: rgba(220, 38, 38, 0.1);
+}
+
+/* Types - Variante outlined */
+.info.outlined {
+  background-color: #ffffff;
+  border: 2px solid #3b82f6;
+  color: #1e40af;
+}
+
+.info.outlined .dismissButton:hover {
+  background-color: #f0f9ff;
+}
+
+.success.outlined {
+  background-color: #ffffff;
+  border: 2px solid #10b981;
+  color: #059669;
+}
+
+.success.outlined .dismissButton:hover {
+  background-color: #f0fdf4;
+}
+
+.warning.outlined {
+  background-color: #ffffff;
+  border: 2px solid #f59e0b;
+  color: #d97706;
+}
+
+.warning.outlined .dismissButton:hover {
+  background-color: #fffbeb;
+}
+
+.error.outlined {
+  background-color: #ffffff;
+  border: 2px solid #ef4444;
+  color: #dc2626;
+}
+
+.error.outlined .dismissButton:hover {
+  background-color: #fef2f2;
+}
+
+/* Types - Variante minimal */
+.info.minimal {
+  background-color: transparent;
+  border: none;
+  color: #3b82f6;
+  box-shadow: none;
+}
+
+.info.minimal .dismissButton:hover {
+  background-color: #f0f9ff;
+}
+
+.success.minimal {
+  background-color: transparent;
+  border: none;
+  color: #10b981;
+  box-shadow: none;
+}
+
+.success.minimal .dismissButton:hover {
+  background-color: #f0fdf4;
+}
+
+.warning.minimal {
+  background-color: transparent;
+  border: none;
+  color: #f59e0b;
+  box-shadow: none;
+}
+
+.warning.minimal .dismissButton:hover {
+  background-color: #fffbeb;
+}
+
+.error.minimal {
+  background-color: transparent;
+  border: none;
+  color: #ef4444;
+  box-shadow: none;
+}
+
+.error.minimal .dismissButton:hover {
+  background-color: #fef2f2;
+}
+
+/* Animation de sortie */
+.alert:not(.visible) {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .content {
+    gap: 8px;
+  }
+  
+  .small {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .medium {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .large {
+    padding: 14px 18px;
+    font-size: 15px;
+  }
+}
