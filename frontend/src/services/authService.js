@@ -1,377 +1,404 @@
-// src/services/authService.js
-/** const authService = {
-  // Récupérer l'utilisateur actuel depuis le localStorage
-  getCurrentUser: () => {
-    try {
-      const user = localStorage.getItem('user');
-      return user ? JSON.parse(user) : null;
-    } catch (error) {
-      console.error('Erreur lors de la récupération de l\'utilisateur:', error);
-      return null;
-    }
-  },
+// authService.js
+import api from './api';
 
-  // Récupérer le token depuis le localStorage
-  getToken: () => {
-    try {
-      return localStorage.getItem('token');
-    } catch (error) {
-      console.error('Erreur lors de la récupération du token:', error);
-      return null;
-    }
-  },
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-  // Sauvegarder les données d'authentification
-  setAuthData: (user, token) => {
-    try {
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
-    } catch (error) {
-      console.error('Erreur lors de la sauvegarde des données d\'authentification:', error);
-    }
-  },
+class AuthService {
+  constructor() {
+    this.token = localStorage.getItem('authToken');
+    this.user = JSON.parse(localStorage.getItem('user') || 'null');
+  }
 
-  // Connexion
-  login: async (credentials) => {
+  // Connexion classique avec email/password
+  async login(email, password) {
     try {
-      // Simulation d'un appel API - remplacez par votre vraie API
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
+      const response = await api.post('/auth/login', {
+        email,
+        password
       });
 
-      const data = await response.json();
-      
-      if (response.ok) {
+      if (response.data.success) {
+        this.setAuthData(response.data.user, response.data.token);
         return {
           success: true,
-          user: data.user,
-          token: data.token,
-        };
-      } else {
-        return {
-          success: false,
-          message: data.message || 'Erreur de connexion',
+          user: response.data.user,
+          token: response.data.token,
+          message: 'Connexion réussie'
         };
       }
+
+      return {
+        success: false,
+        message: response.data.message || 'Échec de la connexion'
+      };
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
       return {
         success: false,
-        message: 'Erreur de connexion',
+        message: error.response?.data?.message || 'Erreur de connexion'
       };
     }
-  },
+  }
 
   // Inscription
-  register: async (userData) => {
+  async register(userData) {
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await api.post('/auth/register', userData);
 
-      const data = await response.json();
-      
-      if (response.ok) {
+      if (response.data.success) {
+        this.setAuthData(response.data.user, response.data.token);
         return {
           success: true,
-          user: data.user,
-          token: data.token,
-        };
-      } else {
-        return {
-          success: false,
-          message: data.message || 'Erreur lors de l\'inscription',
+          user: response.data.user,
+          token: response.data.token,
+          message: 'Inscription réussie'
         };
       }
+
+      return {
+        success: false,
+        message: response.data.message || 'Échec de l\'inscription'
+      };
     } catch (error) {
       console.error('Erreur lors de l\'inscription:', error);
       return {
         success: false,
-        message: 'Erreur lors de l\'inscription',
+        message: error.response?.data?.message || 'Erreur d\'inscription'
       };
     }
-  },
+  }
 
-  // Déconnexion
-  logout: async () => {
+  // Connexion avec Google (redirection)
+  async googleLogin() {
     try {
-      // Optionnel : appel API pour invalider le token côté serveur
-      // await fetch('/api/auth/logout', { method: 'POST' });
-      
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
+      // Cette méthode redirige vers le backend pour l'authentification OAuth
+      const googleAuthUrl = `${API_BASE_URL}/auth/google`;
+      window.location.href = googleAuthUrl;
     } catch (error) {
-      console.error('Erreur lors de la déconnexion:', error);
+      console.error('Erreur connexion Google:', error);
+      throw new Error('Erreur lors de la connexion Google');
     }
-  },
+  }
+
+  // Connexion avec GitHub (redirection)
+  async githubLogin() {
+    try {
+      // Cette méthode redirige vers le backend pour l'authentification OAuth
+      const githubAuthUrl = `${API_BASE_URL}/auth/github`;
+      window.location.href = githubAuthUrl;
+    } catch (error) {
+      console.error('Erreur connexion GitHub:', error);
+      throw new Error('Erreur lors de la connexion GitHub');
+    }
+  }
+
+  // Gestion de callback OAuth (appelé après redirection depuis Google/GitHub)
+  async handleOAuthCallback(provider, code, state) {
+    try {
+      const response = await api.post(`/auth/${provider}/callback`, {
+        code,
+        state
+      });
+
+      if (response.data.success) {
+        this.setAuthData(response.data.user, response.data.token);
+        return {
+          success: true,
+          user: response.data.user,
+          token: response.data.token
+        };
+      }
+
+      return {
+        success: false,
+        message: response.data.message || `Échec de la connexion ${provider}`
+      };
+    } catch (error) {
+      console.error(`Erreur callback ${provider}:`, error);
+      return {
+        success: false,
+        message: error.response?.data?.message || `Erreur de connexion ${provider}`
+      };
+    }
+  }
 
   // Mot de passe oublié
-  forgotPassword: async (email) => {
+  async forgotPassword(email) {
     try {
-      const response = await fetch('/api/auth/forgot-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-      
+      const response = await api.post('/auth/forgot-password', { email });
       return {
-        success: response.ok,
-        message: data.message,
+        success: response.data.success,
+        message: response.data.message || 'Email de réinitialisation envoyé'
       };
     } catch (error) {
-      console.error('Erreur lors de l\'envoi de l\'email:', error);
+      console.error('Erreur mot de passe oublié:', error);
       return {
         success: false,
-        message: 'Erreur lors de l\'envoi de l\'email',
+        message: error.response?.data?.message || 'Erreur lors de l\'envoi de l\'email'
       };
     }
-  },
+  }
 
-  // Mise à jour du profil
-  updateProfile: async (profileData) => {
+  // Réinitialisation du mot de passe
+  async resetPassword(token, newPassword) {
     try {
-      const token = authService.getToken();
-      const response = await fetch('/api/auth/profile', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(profileData),
+      const response = await api.post('/auth/reset-password', {
+        token,
+        password: newPassword
       });
 
-      const data = await response.json();
-      
-      if (response.ok) {
-        return {
-          success: true,
-          user: data.user,
-        };
-      } else {
-        return {
-          success: false,
-          message: data.message || 'Erreur lors de la mise à jour',
-        };
+      return {
+        success: response.data.success,
+        message: response.data.message || 'Mot de passe réinitialisé avec succès'
+      };
+    } catch (error) {
+      console.error('Erreur réinitialisation mot de passe:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Erreur lors de la réinitialisation'
+      };
+    }
+  }
+
+  // Déconnexion
+  async logout() {
+    try {
+      // Optionnel: appeler le backend pour invalider le token
+      if (this.token) {
+        await api.post('/auth/logout');
       }
     } catch (error) {
-      console.error('Erreur lors de la mise à jour du profil:', error);
-      return {
-        success: false,
-        message: 'Erreur lors de la mise à jour du profil',
-      };
+      console.error('Erreur lors de la déconnexion:', error);
+    } finally {
+      this.clearAuthData();
     }
-  },
+  }
 
-  // Vérification de la validité du token
-  verifyToken: async (token) => {
+  // Actualiser le token
+  async refreshToken() {
     try {
-      const response = await fetch('/api/auth/verify-token', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      return {
-        valid: response.ok,
-      };
-    } catch (error) {
-      console.error('Erreur lors de la vérification du token:', error);
-      return {
-        valid: false,
-      };
-    }
-  },
-
-  // Rafraîchir le token
-  refreshToken: async () => {
-    try {
-      const token = authService.getToken();
-      const response = await fetch('/api/auth/refresh-token', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      const data = await response.json();
+      const response = await api.post('/auth/refresh');
       
-      if (response.ok) {
-        return {
-          success: true,
-          user: data.user,
-          token: data.token,
-        };
-      } else {
-        return {
-          success: false,
-        };
+      if (response.data.success) {
+        this.setAuthData(response.data.user, response.data.token);
+        return response.data.token;
       }
+      
+      // Si le refresh échoue, déconnecter l'utilisateur
+      this.clearAuthData();
+      return null;
     } catch (error) {
-      console.error('Erreur lors du rafraîchissement du token:', error);
-      return {
-        success: false,
-      };
-    }
-  },
-};
-
-export default authService;
-
-*/
- // src/services/authService.js (version de simulation pour test)
-const authService = {
-  getCurrentUser: () => {
-    try {
-      const user = localStorage.getItem('user');
-      return user ? JSON.parse(user) : null;
-    } catch (error) {
-      console.error('Erreur lors de la récupération de l\'utilisateur:', error);
+      console.error('Erreur refresh token:', error);
+      this.clearAuthData();
       return null;
     }
-  },
+  }
 
-  getToken: () => {
-    try {
-      return localStorage.getItem('token');
-    } catch (error) {
-      console.error('Erreur lors de la récupération du token:', error);
-      return null;
-    }
-  },
+  // Vérifier si l'utilisateur est connecté
+  isAuthenticated() {
+    return !!(this.token && this.user);
+  }
 
-  setAuthData: (user, token) => {
-    try {
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
-    } catch (error) {
-      console.error('Erreur lors de la sauvegarde des données d\'authentification:', error);
-    }
-  },
+  // Obtenir l'utilisateur actuel
+  getCurrentUser() {
+    return this.user;
+  }
 
-  // Simulation de connexion
-  login: async (credentials) => {
-    // Simulation d'un délai réseau
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  // Obtenir le token actuel
+  getToken() {
+    return this.token;
+  }
+
+  // Vérifier si le token est expiré
+  isTokenExpired() {
+    if (!this.token) return true;
     
-    // Simulation de validation simple
-    if (credentials.email && credentials.password) {
-      const mockUser = {
-        id: 1,
-        email: credentials.email,
-        name: 'Utilisateur Test',
-        avatar: null,
-      };
-      const mockToken = 'mock-jwt-token-' + Date.now();
-      
-      return {
-        success: true,
-        user: mockUser,
-        token: mockToken,
-      };
-    } else {
-      return {
-        success: false,
-        message: 'Email ou mot de passe incorrect',
-      };
+    try {
+      const payload = JSON.parse(atob(this.token.split('.')[1]));
+      const currentTime = Date.now() / 1000;
+      return payload.exp < currentTime;
+    } catch (error) {
+      return true;
     }
-  },
+  }
 
-  register: async (userData) => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  // Mettre à jour les données d'authentification
+  setAuthData(user, token) {
+    this.user = user;
+    this.token = token;
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('authToken', token);
     
-    if (userData.email && userData.password && userData.name) {
-      const mockUser = {
-        id: 2,
-        email: userData.email,
-        name: userData.name,
-        avatar: null,
-      };
-      const mockToken = 'mock-jwt-token-' + Date.now();
-      
-      return {
-        success: true,
-        user: mockUser,
-        token: mockToken,
-      };
-    } else {
-      return {
-        success: false,
-        message: 'Données d\'inscription invalides',
-      };
+    // Configurer le header Authorization pour les futures requêtes
+    if (token) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
-  },
+  }
 
-  logout: async () => {
+  // Effacer les données d'authentification
+  clearAuthData() {
+    this.user = null;
+    this.token = null;
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
-  },
+    localStorage.removeItem('authToken');
+    delete api.defaults.headers.common['Authorization'];
+  }
 
-  forgotPassword: async (email) => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    return {
-      success: true,
-      message: 'Email de réinitialisation envoyé (simulation)',
-    };
-  },
+  // Initialiser l'authentification au démarrage de l'app
+  initializeAuth() {
+    if (this.token && !this.isTokenExpired()) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+      return true;
+    } else if (this.token && this.isTokenExpired()) {
+      // Essayer de refresh le token
+      return this.refreshToken();
+    }
+    return false;
+  }
 
-  updateProfile: async (profileData) => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const currentUser = authService.getCurrentUser();
-    if (currentUser) {
-      const updatedUser = { ...currentUser, ...profileData };
-      return {
-        success: true,
-        user: updatedUser,
-      };
-    } else {
+  // Mettre à jour le profil utilisateur
+  async updateProfile(profileData) {
+    try {
+      const response = await api.put('/auth/profile', profileData);
+      
+      if (response.data.success) {
+        this.user = { ...this.user, ...response.data.user };
+        localStorage.setItem('user', JSON.stringify(this.user));
+        return {
+          success: true,
+          user: this.user,
+          message: 'Profil mis à jour avec succès'
+        };
+      }
+
       return {
         success: false,
-        message: 'Utilisateur non trouvé',
+        message: response.data.message || 'Erreur lors de la mise à jour'
       };
-    }
-  },
-
-  verifyToken: async (token) => {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    return {
-      valid: token && token.startsWith('mock-jwt-token'),
-    };
-  },
-
-  refreshToken: async () => {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    const currentUser = authService.getCurrentUser();
-    if (currentUser) {
-      const newToken = 'mock-jwt-token-refreshed-' + Date.now();
-      return {
-        success: true,
-        user: currentUser,
-        token: newToken,
-      };
-    } else {
+    } catch (error) {
+      console.error('Erreur mise à jour profil:', error);
       return {
         success: false,
+        message: error.response?.data?.message || 'Erreur lors de la mise à jour du profil'
       };
     }
-  },
-};
+  }
+
+  // Changer le mot de passe
+  async changePassword(currentPassword, newPassword) {
+    try {
+      const response = await api.put('/auth/change-password', {
+        currentPassword,
+        newPassword
+      });
+
+      return {
+        success: response.data.success,
+        message: response.data.message || 'Mot de passe modifié avec succès'
+      };
+    } catch (error) {
+      console.error('Erreur changement mot de passe:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Erreur lors du changement de mot de passe'
+      };
+    }
+  }
+
+  // Supprimer le compte utilisateur
+  async deleteAccount(password) {
+    try {
+      const response = await api.delete('/auth/account', {
+        data: { password }
+      });
+
+      if (response.data.success) {
+        this.clearAuthData();
+        return {
+          success: true,
+          message: 'Compte supprimé avec succès'
+        };
+      }
+
+      return {
+        success: false,
+        message: response.data.message || 'Erreur lors de la suppression du compte'
+      };
+    } catch (error) {
+      console.error('Erreur suppression compte:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Erreur lors de la suppression du compte'
+      };
+    }
+  }
+
+  // Vérifier l'email (si système de vérification par email)
+  async verifyEmail(token) {
+    try {
+      const response = await api.post('/auth/verify-email', { token });
+      
+      if (response.data.success && response.data.user) {
+        // Mettre à jour les données utilisateur avec le statut vérifié
+        this.user = { ...this.user, ...response.data.user };
+        localStorage.setItem('user', JSON.stringify(this.user));
+      }
+
+      return {
+        success: response.data.success,
+        message: response.data.message || 'Email vérifié avec succès'
+      };
+    } catch (error) {
+      console.error('Erreur vérification email:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Erreur lors de la vérification de l\'email'
+      };
+    }
+  }
+
+  // Renvoyer l'email de vérification
+  async resendVerificationEmail() {
+    try {
+      const response = await api.post('/auth/resend-verification');
+      return {
+        success: response.data.success,
+        message: response.data.message || 'Email de vérification renvoyé'
+      };
+    } catch (error) {
+      console.error('Erreur renvoi email vérification:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Erreur lors du renvoi de l\'email'
+      };
+    }
+  }
+
+  // Obtenir les informations de session
+  getSessionInfo() {
+    return {
+      isAuthenticated: this.isAuthenticated(),
+      user: this.getCurrentUser(),
+      token: this.getToken(),
+      isTokenExpired: this.isTokenExpired()
+    };
+  }
+
+  // Middleware pour vérifier l'auth avant certaines actions
+  requireAuth() {
+    if (!this.isAuthenticated()) {
+      throw new Error('Authentification requise');
+    }
+    
+    if (this.isTokenExpired()) {
+      throw new Error('Session expirée, veuillez vous reconnecter');
+    }
+    
+    return true;
+  }
+}
+
+// Créer une instance unique du service
+const authService = new AuthService();
 
 export default authService;
- 
