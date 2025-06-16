@@ -145,7 +145,7 @@ cd frontend && npm install
 To run the project, execute the following command:
 
 ```sh
-  npm run dev
+  npm start && mvn clean compile
 ```
 
 ### Deployment
