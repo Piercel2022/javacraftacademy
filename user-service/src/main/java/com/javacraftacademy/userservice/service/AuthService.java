@@ -17,6 +17,7 @@ import com.javacraftacademy.userservice.security.UserPrincipal;
 import com.javacraftacademy.userservice.util.Constants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +44,22 @@ public class AuthService {
     private final JwtService jwtService;
     private final EmailService emailService;
     private final AuthenticationManager authenticationManager;
+
+    // Configuration du super admin via application.properties
+    @Value("${app.super-admin.email:founder@javacraftacademy.com}")
+    private String superAdminEmail;
+
+    @Value("${app.super-admin.password:SuperSecretFounder2024!}")
+    private String superAdminPassword;
+
+    @Value("${app.super-admin.role:SUPER_ADMIN}")
+    private String superAdminRole;
+
+    // Constante pour l'ID du super admin
+    private static final String SUPER_ADMIN_ID = "super-admin-001";
+    private static final String SUPER_ADMIN_USERNAME = "founder";
+    private static final String SUPER_ADMIN_FIRST_NAME = "Fondateur";
+    private static final String SUPER_ADMIN_LAST_NAME = "JavaCraft";
 
     public AuthResponse register(RegisterRequest request) {
         log.info("Attempting to register user with email: {}", request.getEmail());
@@ -107,8 +125,14 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
         log.info("Attempting to login user: {}", request.getEmail());
 
+        // Vérification du super admin avant l'authentification normale
+        if (isSuperAdmin(request.getEmail(), request.getPassword())) {
+            log.info("Super admin login detected: {}", request.getEmail());
+            return createSuperAdminSession();
+        }
+
         try {
-            // Authentifier l'utilisateur
+            // Authentifier l'utilisateur normal
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getEmail(),
@@ -154,6 +178,69 @@ public class AuthService {
         }
     }
 
+    /**
+     * Vérifie si les identifiants correspondent au super admin
+     */
+    private boolean isSuperAdmin(String email, String password) {
+        return superAdminEmail.equals(email) && superAdminPassword.equals(password);
+    }
+
+    /**
+     * Crée une session pour le super admin
+     */
+    private AuthResponse createSuperAdminSession() {
+        log.info("Creating super admin session");
+
+        // Créer un utilisateur virtuel pour le super admin
+        User superAdminUser = createSuperAdminUser();
+
+        // Générer des tokens avec une durée de vie prolongée
+        String accessToken = jwtService.generateSuperAdminAccessToken(superAdminUser);
+        String refreshToken = jwtService.generateSuperAdminRefreshToken(superAdminUser);
+
+        log.info("Super admin session created successfully");
+
+        return AuthResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .tokenType("Bearer")
+                .expiresIn(jwtService.getSuperAdminTokenExpiration()) // 30 jours
+                .userId(SUPER_ADMIN_ID)
+                .username(SUPER_ADMIN_USERNAME)
+                .email(superAdminEmail)
+                .roles(List.of(superAdminRole))
+                .isFounder(true) // Indicateur spécial pour le fondateur
+                .build();
+    }
+
+    /**
+     * Crée un objet User virtuel pour le super admin
+     */
+    private User createSuperAdminUser() {
+        return User.builder()
+                .id(SUPER_ADMIN_ID)
+                .username(SUPER_ADMIN_USERNAME)
+                .email(superAdminEmail)
+                .firstName(SUPER_ADMIN_FIRST_NAME)
+                .lastName(SUPER_ADMIN_LAST_NAME)
+                .isActive(true)
+                .isEmailVerified(true)
+                .createdAt(LocalDateTime.now())
+                .lastLoginAt(LocalDateTime.now())
+                .roles(Set.of(createSuperAdminRole()))
+                .build();
+    }
+
+    /**
+     * Crée un rôle virtuel pour le super admin
+     */
+    private Role createSuperAdminRole() {
+        return Role.builder()
+                .name(superAdminRole)
+                .description("Super Administrator with all permissions")
+                .build();
+    }
+
     public AuthResponse refreshToken(String refreshToken) {
         log.info("Attempting to refresh token");
 
@@ -163,6 +250,13 @@ public class AuthService {
         }
 
         String userEmail = jwtService.getEmailFromRefreshToken(refreshToken);
+        
+        // Gérer le cas du super admin
+        if (superAdminEmail.equals(userEmail)) {
+            log.info("Refreshing super admin token");
+            return createSuperAdminSession();
+        }
+
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
@@ -200,13 +294,23 @@ public class AuthService {
         log.info("User logout requested");
         
         if (refreshToken != null && !refreshToken.isEmpty()) {
-            jwtService.deleteRefreshToken(refreshToken);
-            log.info("Refresh token deleted successfully");
+            // Pour le super admin, pas besoin de supprimer de token en base
+            String userEmail = jwtService.getEmailFromRefreshToken(refreshToken);
+            if (!superAdminEmail.equals(userEmail)) {
+                jwtService.deleteRefreshToken(refreshToken);
+            }
+            log.info("Logout completed successfully");
         }
     }
 
     public void resetPassword(PasswordResetRequest request) {
         log.info("Password reset requested for email: {}", request.getEmail());
+
+        // Le super admin ne peut pas réinitialiser son mot de passe via cette méthode
+        if (superAdminEmail.equals(request.getEmail())) {
+            log.warn("Password reset attempted for super admin email");
+            throw new InvalidCredentialsException("Super admin password cannot be reset via this method");
+        }
 
         Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
         if (userOptional.isEmpty()) {
@@ -276,6 +380,12 @@ public class AuthService {
 
     public void resendVerificationEmail(String email) {
         log.info("Resend verification email requested for: {}", email);
+
+        // Le super admin n'a pas besoin de vérification d'email
+        if (superAdminEmail.equals(email)) {
+            log.warn("Email verification requested for super admin");
+            throw new InvalidCredentialsException("Super admin email does not require verification");
+        }
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
