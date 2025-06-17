@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import java.util.*;
 
 import java.io.IOException;
 
@@ -30,6 +31,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    
 
     @Override
     protected void doFilterInternal(
@@ -71,5 +73,76 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7);
         }
         return null;
+    }
+}
+// Ajoutez cette méthode à votre JwtAuthenticationFilter ou créez un nouveau filtre
+
+@Component
+public class SuperAdminAuthenticationFilter extends OncePerRequestFilter {
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, 
+                                  HttpServletResponse response, 
+                                  FilterChain filterChain) throws ServletException, IOException {
+        
+        String authHeader = request.getHeader("Authorization");
+        
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            
+            if (jwtService.isSuperAdminToken(token) && jwtService.validateToken(token)) {
+                // Créer une authentification spéciale pour le super admin
+                String email = jwtService.getEmailFromToken(token);
+                List<String> permissions = jwtService.getPermissionsFromToken(token);
+                
+                // Créer les autorités avec tous les permissions
+                List<SimpleGrantedAuthority> authorities = permissions.contains("ALL") 
+                    ? List.of(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN"),
+                             new SimpleGrantedAuthority("PERMISSION_ALL"))
+                    : permissions.stream()
+                        .map(perm -> new SimpleGrantedAuthority("PERMISSION_" + perm))
+                        .collect(Collectors.toList());
+                
+                UsernamePasswordAuthenticationToken authentication = 
+                    new UsernamePasswordAuthenticationToken(email, null, authorities);
+                
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        }
+        
+        filterChain.doFilter(request, response);
+    }
+}
+
+// Annotation pour contrôler l'accès au super admin
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@PreAuthorize("hasRole('SUPER_ADMIN') or hasAuthority('PERMISSION_ALL')")
+public @interface RequireSuperAdmin {
+}
+
+// Exemple d'utilisation dans un contrôleur
+@RestController
+@RequestMapping("/api/v1/admin")
+public class AdminController {
+    
+    @GetMapping("/super-admin-only")
+    @RequireSuperAdmin
+    public ResponseEntity<String> superAdminOnlyEndpoint() {
+        return ResponseEntity.ok("Accès réservé au super admin");
+    }
+    
+    @GetMapping("/stats")
+    @PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+    public ResponseEntity<Map<String, Object>> getSystemStats() {
+        // Statistiques système
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalUsers", userService.getTotalUsers());
+        stats.put("activeUsers", userService.getActiveUsers());
+        stats.put("systemUptime", getSystemUptime());
+        return ResponseEntity.ok(stats);
     }
 }
