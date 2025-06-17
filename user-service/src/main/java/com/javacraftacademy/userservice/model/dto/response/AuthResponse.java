@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -31,6 +32,17 @@ public class AuthResponse {
     
     @JsonProperty("timestamp")
     private LocalDateTime timestamp;
+
+    private List<String> roles;
+    
+    // Nouveau champ pour identifier le fondateur/super admin
+    @Builder.Default
+    private Boolean isFounder = false;
+    
+    // Champs additionnels pour le super admin
+    private String firstName;
+    private String lastName;
+    private String lastLoginAt;
     
     @Data
     @Builder
