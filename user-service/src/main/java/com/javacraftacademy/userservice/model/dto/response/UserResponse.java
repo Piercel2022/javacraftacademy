@@ -51,5 +51,4 @@ public class UserResponse {
     
     @JsonProperty("failed_login_attempts")
     private int failedLoginAttempts;
-}.model.dto.response;
-
+}
