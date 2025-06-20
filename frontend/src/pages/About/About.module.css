@@ -1,0 +1,129 @@
+/* About.module.css */
+
+.aboutPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.aboutPage h1 {
+  text-align: center;
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.aboutContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.mission,
+.values,
+.team {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission:hover,
+.values:hover,
+.team:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.mission h2,
+.values h2,
+.team h2 {
+  color: #667eea;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.mission p,
+.team p {
+  color: #555;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.values ul {
+  list-style: none;
+  padding: 0;
+}
+
+.values li {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.values li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .aboutPage {
+    padding: 1rem 0;
+  }
+  
+  .aboutPage h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .aboutContent {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .mission,
+  .values,
+  .team {
+    padding: 1.5rem;
+  }
+  
+  .mission h2,
+  .values h2,
+  .team h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .aboutPage h1 {
+    font-size: 1.8rem;
+  }
+  
+  .mission,
+  .values,
+  .team {
+    padding: 1rem;
+  }
+}
