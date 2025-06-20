@@ -41,15 +41,21 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={`${styles.section} ${styles.brandSection}`}>
-            {/* Logo et description */}
+            {/* Logo et description 
             <div className={styles.logo}>
-              <img 
-                src="/assets/images/logo.png" 
-                alt="JavaCraft Academy" 
-                className={styles.logoImage}
-              />
-              
-            </div>
+              <Link to="/" className={styles.logoLink}>
+                <div className={styles.logoContainer}>
+                  <div className={styles.logoIcon}>
+                    <div className={styles.javaSymbol}>☕</div>
+                    <div className={styles.craftSymbol}>⚒️</div>
+                  </div>
+                  <div className={styles.logoText}>
+                    <span className={styles.logoTitle}>JavaCraft</span>
+                    <span className={styles.logoSubtitle}>Academy</span>
+                  </div>
+                </div>
+              </Link>
+            </div> */}
             <p className={styles.description}>
               Apprenez Java de manière interactive avec des cours pratiques, 
               des exercices guidés et une communauté active de développeurs.
