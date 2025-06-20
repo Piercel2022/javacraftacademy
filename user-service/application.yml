@@ -1,0 +1,20 @@
+# application.yml
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: piercel.coder2022@gmail.com
+    password: reactRails@65
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  mail:
+    from: piercel.coder2022@gmail.com
+    enabled: true
+  frontend:
+    url: http://localhost:3000
