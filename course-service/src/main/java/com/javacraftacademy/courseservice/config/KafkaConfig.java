@@ -1,4 +1,4 @@
-package com.javacraftacademy.config;
+package com.javacraftacademy.courseservice.config;
 
 // Imports Spring Framework - Framework principal pour l'injection de dépendances et la configuration
 import org.springframework.beans.factory.annotation.Value;
