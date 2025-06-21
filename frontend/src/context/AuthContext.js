@@ -40,6 +40,20 @@ export const AuthProvider = ({ children }) => {
     authService.setAuthData(userData, userToken);
   };
 
+  // Fonction de connexion pour utilisateur de développement
+  const devUser = () => {
+    const mockUser = {
+      id: 'dev-001',
+      email: 'dev@example.com',
+      name: 'Développeur',
+      role: 'admin',
+      isDevUser: true
+    };
+    const mockToken = 'dev-token-' + Date.now();
+    
+    login(mockUser, mockToken);
+  };
+
   // Fonction de déconnexion
   const logout = () => {
     setUser(null);
@@ -53,6 +67,7 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     isLoading,
     login,
+    devUser,
     logout
   };
 
