@@ -1,0 +1,605 @@
+/* ================================================================================================
+   VARIABLES.CSS - Variables CSS globales de JavaCraft Academy
+   ================================================================================================
+   
+   @fileoverview Définition centralisée de toutes les variables CSS utilisées dans l'application
+   @author JavaCraft Academy Team
+   @version 1.0.0
+   
+   Fonctionnalités principales :
+   - Palette de couleurs complète avec variantes
+   - Système typographique cohérent
+   - Espacements standardisés
+   - Breakpoints responsive
+   - Variables d'animation et de transition
+   - Z-index et ombres standardisés
+   
+   Relations :
+   - Importé par tous les fichiers CSS
+   - Base pour les thèmes light.css et dark.css
+   - Utilisé par tous les modules CSS des composants
+   - Référencé dans les animations globales
+   ================================================================================================ */
+
+:root {
+  /* =============================
+     PALETTE DE COULEURS PRINCIPALE
+     ============================= */
+  
+  /**
+   * Couleurs primaires - Basées sur l'identité JavaCraft
+   * Orange énergique rappelant Java et la créativité
+   */
+  --color-primary: #ff6b35;
+  --color-primary-light: #ff8a65;
+  --color-primary-dark: #e64a19;
+  --color-primary-50: rgba(255, 107, 53, 0.05);
+  --color-primary-100: rgba(255, 107, 53, 0.1);
+  --color-primary-200: rgba(255, 107, 53, 0.2);
+  --color-primary-500: rgba(255, 107, 53, 0.5);
+  
+  /**
+   * Couleurs secondaires - Bleu professionnel
+   * Évoque la technologie et la confiance
+   */
+  --color-secondary: #2196f3;
+  --color-secondary-light: #64b5f6;
+  --color-secondary-dark: #1976d2;
+  --color-secondary-50: rgba(33, 150, 243, 0.05);
+  --color-secondary-100: rgba(33, 150, 243, 0.1);
+  --color-secondary-200: rgba(33, 150, 243, 0.2);
+  --color-secondary-500: rgba(33, 150, 243, 0.5);
+  
+  /**
+   * Couleurs d'état - Pour les notifications et feedback
+   */
+  --color-success: #4caf50;
+  --color-success-light: #81c784;
+  --color-success-dark: #388e3c;
+  --color-success-bg: rgba(76, 175, 80, 0.1);
+  
+  --color-warning: #ff9800;
+  --color-warning-light: #ffb74d;
+  --color-warning-dark: #f57c00;
+  --color-warning-bg: rgba(255, 152, 0, 0.1);
+  
+  --color-error: #f44336;
+  --color-error-light: #ef5350;
+  --color-error-dark: #d32f2f;
+  --color-error-bg: rgba(244, 67, 54, 0.1);
+  
+  --color-info: #2196f3;
+  --color-info-light: #64b5f6;
+  --color-info-dark: #1976d2;
+  --color-info-bg: rgba(33, 150, 243, 0.1);
+  
+  /* =============================
+     COULEURS NEUTRES ET TEXTE
+     ============================= */
+  
+  /**
+   * Échelle de gris pour les interfaces
+   */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #eeeeee;
+  --color-gray-300: #e0e0e0;
+  --color-gray-400: #bdbdbd;
+  --color-gray-500: #9e9e9e;
+  --color-gray-600: #757575;
+  --color-gray-700: #616161;
+  --color-gray-800: #424242;
+  --color-gray-900: #212121;
+  
+  /**
+   * Couleurs de texte sémantiques
+   */
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-700);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-disabled: var(--color-gray-400);
+  --color-text-heading: var(--color-gray-900);
+  --color-text-inverse: #ffffff;
+  
+  /**
+   * Couleurs d'arrière-plan
+   */
+  --color-background-primary: #ffffff;
+  --color-background-secondary: var(--color-gray-50);
+  --color-background-tertiary: var(--color-gray-100);
+  --color-background-elevated: #ffffff;
+  --color-background-overlay: rgba(0, 0, 0, 0.5);
+  --color-background-code: #f8f9fa;
+  
+  /**
+   * Couleurs de bordure et séparateurs
+   */
+  --color-border: var(--color-gray-300);
+  --color-border-light: var(--color-gray-200);
+  --color-border-dark: var(--color-gray-400);
+  --color-border-focus: var(--color-primary);
+  --color-divider: var(--color-gray-200);
+  
+  /* =============================
+     SYSTÈME TYPOGRAPHIQUE
+     ============================= */
+  
+  /**
+   * Familles de polices avec fallbacks système
+   */
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+                         'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+                         'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-family-mono: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', 
+                      'Courier New', monospace;
+  
+  /**
+   * Échelle typographique modulaire (1.25 - Major Third)
+   */
+  --font-size-xs: 1.2rem;    /* 12px */
+  --font-size-sm: 1.4rem;    /* 14px */
+  --font-size-base: 1.6rem;  /* 16px */
+  --font-size-lg: 1.8rem;    /* 18px */
+  --font-size-xl: 2.0rem;    /* 20px */
+  --font-size-2xl: 2.4rem;   /* 24px */
+  --font-size-3xl: 3.0rem;   /* 30px */
+  --font-size-4xl: 3.6rem;   /* 36px */
+  --font-size-5xl: 4.8rem;   /* 48px */
+  --font-size-6xl: 6.0rem;   /* 60px */
+  
+  /**
+   * Poids de police
+   */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /**
+   * Hauteurs de ligne pour une lisibilité optimale
+   */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  --line-height-base: var(--line-height-normal);
+  
+  /**
+   * Espacement des lettres
+   */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  
+  /* =============================
+     SYSTÈME D'ESPACEMENT
+     ============================= */
+  
+  /**
+   * Échelle d'espacement basée sur des multiples de 4px
+   * Assure une cohérence visuelle et un alignement parfait
+   */
+  --spacing-0: 0;
+  --spacing-px: 1px;
+  --spacing-0_5: 0.2rem;  /* 2px */
+  --spacing-1: 0.4rem;    /* 4px */
+  --spacing-1_5: 0.6rem;  /* 6px */
+  --spacing-2: 0.8rem;    /* 8px */
+  --spacing-2_5: 1.0rem;  /* 10px */
+  --spacing-3: 1.2rem;    /* 12px */
+  --spacing-3_5: 1.4rem;  /* 14px */
+  --spacing-4: 1.6rem;    /* 16px */
+  --spacing-5: 2.0rem;    /* 20px */
+  --spacing-6: 2.4rem;    /* 24px */
+  --spacing-7: 2.8rem;    /* 28px */
+  --spacing-8: 3.2rem;    /* 32px */
+  --spacing-9: 3.6rem;    /* 36px */
+  --spacing-10: 4.0rem;   /* 40px */
+  --spacing-11: 4.4rem;   /* 44px */
+  --spacing-12: 4.8rem;   /* 48px */
+  --spacing-14: 5.6rem;   /* 56px */
+  --spacing-16: 6.4rem;   /* 64px */
+  --spacing-20: 8.0rem;   /* 80px */
+  --spacing-24: 9.6rem;   /* 96px */
+  --spacing-28: 11.2rem;  /* 112px */
+  --spacing-32: 12.8rem;  /* 128px */
+  
+  /**
+   * Aliases sémantiques pour les espacements
+   */
+  --spacing-xs: var(--spacing-1);
+  --spacing-sm: var(--spacing-2);
+  --spacing-md: var(--spacing-4);
+  --spacing-lg: var(--spacing-6);
+  --spacing-xl: var(--spacing-8);
+  --spacing-2xl: var(--spacing-12);
+  --spacing-3xl: var(--spacing-16);
+  
+  /* =============================
+     BORDURES ET RAYONS
+     ============================= */
+  
+  /**
+   * Largeurs de bordure standardisées
+   */
+  --border-width-0: 0;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+  --border-width-default: var(--border-width-1);
+  
+  /**
+   * Rayons de bordure pour différents éléments
+   */
+  --border-radius-none: 0;
+  --border-radius-sm: 0.2rem;   /* 2px */
+  --border-radius-base: 0.4rem; /* 4px */
+  --border-radius-md: 0.6rem;   /* 6px */
+  --border-radius-lg: 0.8rem;   /* 8px */
+  --border-radius-xl: 1.2rem;   /* 12px */
+  --border-radius-2xl: 1.6rem;  /* 16px */
+  --border-radius-3xl: 2.4rem;  /* 24px */
+  --border-radius-full: 9999px;
+  
+  /* =============================
+     OMBRES ET ÉLÉVATIONS
+     ============================= */
+  
+  /**
+   * Système d'ombres pour créer de la profondeur
+   * Inspiré de Material Design avec adaptation
+   */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-none: 0 0 #0000;
+  
+  /**
+   * Ombres colorées pour les états spéciaux
+   */
+  --shadow-primary: 0 10px 15px -3px rgba(255, 107, 53, 0.1), 
+                    0 4px 6px -2px rgba(255, 107, 53, 0.05);
+  --shadow-secondary: 0 10px 15px -3px rgba(33, 150, 243, 0.1), 
+                      0 4px 6px -2px rgba(33, 150, 243, 0.05);
+  
+  /* =============================
+     Z-INDEX SYSTÈME
+     ============================= */
+  
+  /**
+   * Hiérarchie des couches d'affichage
+   * Évite les conflits de superposition
+   */
+  --z-index-hide: -1;
+  --z-index-auto: auto;
+  --z-index-base: 0;
+  --z-index-docked: 10;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-banner: 1030;
+  --z-index-overlay: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-skiplink: 1070;
+  --z-index-toast: 1080;
+  --z-index-tooltip: 1090;
+  
+  /* =============================
+     TRANSITIONS ET ANIMATIONS
+     ============================= */
+  
+  /**
+   * Durées d'animation standardisées
+   */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 250ms;
+  --transition-duration-slow: 350ms;
+  --transition-duration-slower: 500ms;
+  
+  /**
+   * Fonctions d'accélération (easing)
+   */
+  --transition-timing-ease: ease;
+  --transition-timing-ease-in: ease-in;
+  --transition-timing-ease-out: ease-out;
+  --transition-timing-ease-in-out: ease-in-out;
+  --transition-timing-linear: linear;
+  --transition-timing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-timing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /**
+   * Transitions prédéfinies pour les propriétés communes
+   */
+  --transition-base: all var(--transition-duration-base) var(--transition-timing-smooth);
+  --transition-fast: all var(--transition-duration-fast) var(--transition-timing-smooth);
+  --transition-slow: all var(--transition-duration-slow) var(--transition-timing-smooth);
+  --transition-colors: color var(--transition-duration-base) var(--transition-timing-smooth),
+                       background-color var(--transition-duration-base) var(--transition-timing-smooth),
+                       border-color var(--transition-duration-base) var(--transition-timing-smooth);
+  --transition-opacity: opacity var(--transition-duration-base) var(--transition-timing-smooth);
+  --transition-transform: transform var(--transition-duration-base) var(--transition-timing-smooth);
+  
+  /* =============================
+     BREAKPOINTS RESPONSIVE
+     ============================= */
+  
+  /**
+   * Points de rupture pour le design responsive
+   * Basés sur les tailles d'écran communes
+   */
+  --breakpoint-xs: 320px;   /* Petits mobiles */
+  --breakpoint-sm: 640px;   /* Mobiles */
+  --breakpoint-md: 768px;   /* Tablettes */
+  --breakpoint-lg: 1024px;  /* Ordinateurs portables */
+  --breakpoint-xl: 1280px;  /* Écrans de bureau */
+  --breakpoint-2xl: 1536px; /* Grands écrans */
+  
+  /* =============================
+     DIMENSIONS COMMUNES
+     ============================= */
+  
+  /**
+   * Hauteurs standardisées pour les éléments d'interface
+   */
+  --height-header: 6.4rem;     /* 64px */
+  --height-sidebar: 100vh;
+  --height-footer: 8.0rem;     /* 80px */
+  --height-button-sm: 3.2rem;  /* 32px */
+  --height-button-md: 4.0rem;  /* 40px */
+  --height-button-lg: 4.8rem;  /* 48px */
+  --height-input: 4.0rem;      /* 40px */
+  
+  /**
+   * Largeurs communes pour les conteneurs
+   */
+  --width-sidebar: 25.6rem;    /* 256px */
+  --width-sidebar-collapsed: 6.4rem; /* 64px */
+  --width-modal-sm: 32.0rem;   /* 320px */
+  --width-modal-md: 48.0rem;   /* 480px */
+  --width-modal-lg: 64.0rem;   /* 640px */
+  --width-modal-xl: 80.0rem;   /* 800px */
+  
+  /**
+   * Largeurs maximales pour le contenu
+   */
+  --max-width-xs: 32rem;    /* 320px */
+  --max-width-sm: 38.4rem;  /* 384px */
+  --max-width-md: 44.8rem;  /* 448px */
+  --max-width-lg: 51.2rem;  /* 512px */
+  --max-width-xl: 57.6rem;  /* 576px */
+  --max-width-2xl: 67.2rem; /* 672px */
+  --max-width-3xl: 76.8rem; /* 768px */
+  --max-width-4xl: 89.6rem; /* 896px */
+  --max-width-5xl: 102.4rem; /* 1024px */
+  --max-width-6xl: 115.2rem; /* 1152px */
+  --max-width-7xl: 128rem;   /* 1280px */
+  --max-width-full: 100%;
+  --max-width-screen-sm: var(--breakpoint-sm);
+  --max-width-screen-md: var(--breakpoint-md);
+  --max-width-screen-lg: var(--breakpoint-lg);
+  --max-width-screen-xl: var(--breakpoint-xl);
+  --max-width-screen-2xl: var(--breakpoint-2xl);
+  
+  /* =============================
+     GRILLE ET LAYOUT
+     ============================= */
+  
+  /**
+   * Système de grille flexible
+   */
+  --grid-columns: 12;
+  --grid-gap: var(--spacing-4);
+  --grid-gap-sm: var(--spacing-2);
+  --grid-gap-lg: var(--spacing-6);
+  
+  /**
+   * Conteneur principal
+   */
+  --container-padding: var(--spacing-4);
+  --container-padding-sm: var(--spacing-6);
+  --container-padding-lg: var(--spacing-8);
+  
+  /* =============================
+     FORMULAIRES ET CONTRÔLES
+     ============================= */
+  
+  /**
+   * Dimensions des éléments de formulaire
+   */
+  --form-element-height-sm: 3.2rem;  /* 32px */
+  --form-element-height-md: 4.0rem;  /* 40px */
+  --form-element-height-lg: 4.8rem;  /* 48px */
+  --form-element-padding-x: var(--spacing-3);
+  --form-element-padding-y: var(--spacing-2);
+  
+  /**
+   * États des éléments de formulaire
+   */
+  --form-element-border-width: var(--border-width-1);
+  --form-element-border-radius: var(--border-radius-base);
+  --form-element-focus-ring-width: 3px;
+  --form-element-focus-ring-color: var(--color-primary-200);
+  --form-element-focus-ring-offset: 2px;
+  
+  /* =============================
+     ANIMATIONS PERSONNALISÉES
+     ============================= */
+  
+  /**
+   * Animations de fade et slide
+   */
+  --animation-fade-in: fadeIn var(--transition-duration-base) var(--transition-timing-ease-out);
+  --animation-fade-out: fadeOut var(--transition-duration-base) var(--transition-timing-ease-in);
+  --animation-slide-in-up: slideInUp var(--transition-duration-base) var(--transition-timing-smooth);
+  --animation-slide-in-down: slideInDown var(--transition-duration-base) var(--transition-timing-smooth);
+  --animation-slide-in-left: slideInLeft var(--transition-duration-base) var(--transition-timing-smooth);
+  --animation-slide-in-right: slideInRight var(--transition-duration-base) var(--transition-timing-smooth);
+  
+  /**
+   * Animations de rotation et scaling
+   */
+  --animation-spin: spin 1s var(--transition-timing-linear) infinite;
+  --animation-pulse: pulse 2s var(--transition-timing-ease-in-out) infinite;
+  --animation-bounce: bounce 1s var(--transition-timing-bounce) infinite;
+  --animation-scale-in: scaleIn var(--transition-duration-base) var(--transition-timing-smooth);
+  --animation-scale-out: scaleOut var(--transition-duration-base) var(--transition-timing-smooth);
+  
+  /* =============================
+     ICÔNES ET ÉLÉMENTS VISUELS
+     ============================= */
+  
+  /**
+   * Tailles d'icônes standardisées
+   */
+  --icon-size-xs: 1.2rem;   /* 12px */
+  --icon-size-sm: 1.6rem;   /* 16px */
+  --icon-size-md: 2.0rem;   /* 20px */
+  --icon-size-lg: 2.4rem;   /* 24px */
+  --icon-size-xl: 3.2rem;   /* 32px */
+  --icon-size-2xl: 4.0rem;  /* 40px */
+  --icon-size-3xl: 4.8rem;  /* 48px */
+  
+  /**
+   * Avatars et images de profil
+   */
+  --avatar-size-xs: 2.4rem;  /* 24px */
+  --avatar-size-sm: 3.2rem;  /* 32px */
+  --avatar-size-md: 4.0rem;  /* 40px */
+  --avatar-size-lg: 4.8rem;  /* 48px */
+  --avatar-size-xl: 6.4rem;  /* 64px */
+  --avatar-size-2xl: 9.6rem; /* 96px */
+  
+  /* =============================
+     ACCESSIBILITÉ
+     ============================= */
+  
+  /**
+   * Focus visible pour l'accessibilité
+   */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--color-primary);
+  --focus-ring-style: solid;
+  
+  /**
+   * Tailles minimales pour les éléments interactifs
+   */
+  --min-touch-target: 4.4rem; /* 44px - Recommandation WCAG */
+  --min-click-target: 2.4rem; /* 24px - Minimum pour la souris */
+  
+  /* =============================
+     PERFORMANCE ET OPTIMISATION
+     ============================= */
+  
+  /**
+   * Variables pour les optimisations CSS
+   */
+  --will-change-transform: transform;
+  --will-change-auto: auto;
+  --backface-visibility-hidden: hidden;
+  --transform-style-preserve-3d: preserve-3d;
+  
+  /**
+   * Variables pour le lazy loading et les images
+   */
+  --image-loading-background: var(--color-gray-200);
+  --image-loading-shimmer: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  
+  /* =============================
+     THÈME ET PERSONNALISATION
+     ============================= */
+  
+  /**
+   * Variables de thème pouvant être surchargées
+   */
+  --theme-surface-level-0: var(--color-background-primary);
+  --theme-surface-level-1: var(--color-background-secondary);
+  --theme-surface-level-2: var(--color-background-tertiary);
+  --theme-surface-level-3: var(--color-gray-200);
+  
+  /**
+   * Opacités standardisées
+   */
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+  
+  /* =============================
+     VARIABLES CONDITIONNELLES
+     ============================= */
+  
+  /**
+   * Variables qui changent selon les préférences utilisateur
+   */
+  --motion-reduce: 0; /* Sera mis à 1 si prefers-reduced-motion: reduce */
+  --high-contrast: 0; /* Sera mis à 1 si prefers-contrast: high */
+  --dark-mode: 0;     /* Sera mis à 1 en mode sombre */
+}
+
+/* =============================
+   MEDIA QUERIES POUR LES PRÉFÉRENCES
+   ============================= */
+
+/**
+ * Réduction des animations pour l'accessibilité
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-reduce: 1;
+    --transition-duration-fast: 0ms;
+    --transition-duration-base: 0ms;
+    --transition-duration-slow: 0ms;
+    --transition-duration-slower: 0ms;
+  }
+}
+
+/**
+ * Contraste élevé pour l'accessibilité
+ */
+@media (prefers-contrast: high) {
+  :root {
+    --high-contrast: 1;
+    --color-border: var(--color-gray-800);
+    --color-text-secondary: var(--color-gray-800);
+  }
+}
+
+/**
+ * Préférence pour le mode sombre
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dark-mode: 1;
+  }
+}
+
+/* ================================================================================================
+   FIN DU FICHIER VARIABLES.CSS
+   ================================================================================================ */

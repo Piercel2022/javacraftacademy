@@ -1,0 +1,416 @@
+
+/* ================================================================================================
+   GLOBALS.CSS - Styles globaux de l'application JavaCraft Academy
+   ================================================================================================
+   
+   @fileoverview Fichier principal contenant les styles de base et les règles globales
+   @author JavaCraft Academy Team
+   @version 1.0.0
+   
+   Fonctionnalités principales :
+   - Reset CSS personnalisé pour une cohérence cross-browser
+   - Styles de base pour les éléments HTML
+   - Classes utilitaires globales
+   - Configuration des polices système
+   - Animations et transitions globales
+   - Styles d'accessibilité
+   
+   Relations :
+   - Importé par App.css et index.js
+   - Utilise les variables définies dans variables.css
+   - Étendu par components.css et responsive.css
+   - Base pour les thèmes light.css et dark.css
+   ================================================================================================ */
+
+/* Import des variables CSS globales */
+@import './variables.css';
+
+/* =============================
+   RESET CSS PERSONNALISÉ
+   ============================= */
+
+/**
+ * Reset moderne inspiré de Normalize.css et CSS Reset
+ * Assure une cohérence entre les navigateurs
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Configuration de base du document HTML
+ * - Définit la taille de police de base
+ * - Active le défilement fluide
+ * - Configure la hauteur minimale
+ */
+html {
+  font-size: 62.5%; /* 1rem = 10px pour faciliter les calculs */
+  scroll-behavior: smooth;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/**
+ * Styles de base pour le body
+ * - Police système optimisée
+ * - Couleurs par défaut
+ * - Amélioration du rendu des polices
+ */
+body {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* =============================
+   TYPOGRAPHIE GLOBALE
+   ============================= */
+
+/**
+ * Hiérarchie des titres avec échelle typographique
+ * Utilise les variables CSS pour une cohérence
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-heading);
+  margin-bottom: var(--spacing-sm);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+/**
+ * Styles pour les paragraphes et le contenu textuel
+ */
+p {
+  margin-bottom: var(--spacing-md);
+  max-width: 65ch; /* Optimal pour la lisibilité */
+}
+
+/**
+ * Styles pour les liens avec états interactifs
+ */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+a:hover,
+a:focus {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* =============================
+   ÉLÉMENTS DE FORMULAIRE
+   ============================= */
+
+/**
+ * Styles de base pour les éléments de formulaire
+ * Assure une cohérence visuelle et une bonne accessibilité
+ */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/**
+ * Styles pour les champs de saisie
+ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  background-color: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  transition: var(--transition-base);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/**
+ * Styles pour les boutons de base
+ */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: var(--font-weight-medium);
+  transition: var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =============================
+   ÉLÉMENTS MULTIMÉDIA
+   ============================= */
+
+/**
+ * Images responsives par défaut
+ */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/**
+ * Styles pour les éléments vidéo et audio
+ */
+video,
+audio {
+  width: 100%;
+  height: auto;
+}
+
+/* =============================
+   LISTES ET NAVIGATION
+   ============================= */
+
+/**
+ * Reset des styles de liste par défaut
+ */
+ul,
+ol {
+  list-style: none;
+}
+
+/**
+ * Styles pour les listes avec puces personnalisées
+ */
+.list-styled {
+  list-style: disc;
+  padding-left: var(--spacing-lg);
+}
+
+.list-styled li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* =============================
+   CLASSES UTILITAIRES GLOBALES
+   ============================= */
+
+/**
+ * Classes pour la gestion de la visibilité
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/**
+ * Classes pour l'alignement et la disposition
+ */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid { display: grid; }
+
+/**
+ * Classes pour les espacements
+ */
+.m-0 { margin: 0; }
+.mt-auto { margin-top: auto; }
+.mb-auto { margin-bottom: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.p-0 { padding: 0; }
+
+/**
+ * Classes pour les couleurs de texte
+ */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+
+/**
+ * Classes pour les arrière-plans
+ */
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-background-secondary); }
+.bg-transparent { background-color: transparent; }
+
+/* =============================
+   ANIMATIONS GLOBALES
+   ============================= */
+
+/**
+ * Animation de fondu d'entrée
+ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-sm));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Animation de rotation (pour les spinners)
+ */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * Animation de pulsation
+ */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/**
+ * Classes d'animation réutilisables
+ */
+.animate-fade-in {
+  animation: fadeIn var(--transition-duration-slow) ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* =============================
+   ÉTATS DE FOCUS ET ACCESSIBILITÉ
+   ============================= */
+
+/**
+ * Amélioration de la visibilité du focus pour l'accessibilité
+ */
+.focus-visible:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/**
+ * Styles pour les éléments interactifs au clavier
+ */
+[tabindex]:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* =============================
+   PRÉFÉRENCES UTILISATEUR
+   ============================= */
+
+/**
+ * Respect de la préférence de mouvement réduit
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/**
+ * Adaptation au contraste élevé
+ */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #000000;
+    --color-text-primary: #000000;
+    --color-background-primary: #ffffff;
+  }
+}

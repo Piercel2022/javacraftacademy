@@ -1,0 +1,1479 @@
+/* DARK.CSS - Thème sombre de JavaCraft Academy
+   ================================================================================================
+   
+   @fileoverview Définition du thème sombre pour une expérience utilisateur optimale
+   @author JavaCraft Academy Team
+   @version 1.0.1 - Fixed CSS selector issues
+   
+   Philosophie du thème sombre :
+   - Réduction de la fatigue oculaire en environnement peu éclairé
+   - Contrastes optimisés pour la lisibilité
+   - Couleurs soigneusement choisies pour préserver la hiérarchie visuelle
+   - Adaptation automatique selon les préférences système
+   
+   Caractéristiques techniques :
+   - Palette de couleurs cohérente et accessible
+   - Transitions fluides entre thèmes
+   - Optimisation de la consommation énergétique (écrans OLED)
+   - Respect des standards WCAG 2.1 AA
+   
+   Relations :
+   - Utilise les variables définies dans variables.css
+   - Surcharge sélective des propriétés de light.css
+   - Compatible avec tous les composants de component.css
+   - Adapté aux layouts responsifs de layout.css et responsive.css
+   
+   ================================================================================================ */
+
+/* ================================================================================================
+   DÉTECTION ET ACTIVATION DU THÈME SOMBRE
+   ================================================================================================ */
+
+/* Activation automatique selon les préférences système */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --theme-mode: 'dark';
+    }
+}
+
+/* Activation manuelle via classe CSS */
+[data-theme="dark"] {
+    --theme-mode: 'dark';
+}
+
+.theme-dark {
+    --theme-mode: 'dark';
+}
+
+/* ================================================================================================
+   VARIABLES COULEURS POUR THÈME SOMBRE
+   ================================================================================================ */
+
+/* Variables pour sélecteurs manuels */
+:root[data-theme="dark"],
+.theme-dark {
+    /* Couleurs de base sombres */
+    --color-background-primary: #0a0a0b;
+    --color-background-secondary: #1a1a1d;
+    --color-background-tertiary: #2a2a2f;
+    --color-background-quaternary: #3a3a41;
+    
+    /* Couleurs de surface */
+    --color-surface-primary: #16161a;
+    --color-surface-secondary: #242429;
+    --color-surface-tertiary: #32323a;
+    --color-surface-elevated: #404049;
+    
+    /* Couleurs de texte */
+    --color-text-primary: #f8f8f2;
+    --color-text-secondary: #d4d4aa;
+    --color-text-tertiary: #9f9f9d;
+    --color-text-quaternary: #6f6f6d;
+    --color-text-disabled: #4f4f4d;
+    
+    /* Couleurs d'accent adaptées */
+    --color-accent-primary: #66d9ef;
+    --color-accent-secondary: #a6e22e;
+    --color-accent-tertiary: #f92672;
+    --color-accent-quaternary: #fd971f;
+    --color-accent-quinary: #ae81ff;
+    
+    /* Couleurs d'état pour thème sombre */
+    --color-success-bg: #1a2e1a;
+    --color-success-border: #2d5d2d;
+    --color-success-text: #4ade80;
+    
+    --color-warning-bg: #2e2a1a;
+    --color-warning-border: #5d552d;
+    --color-warning-text: #fbbf24;
+    
+    --color-error-bg: #2e1a1a;
+    --color-error-border: #5d2d2d;
+    --color-error-text: #ef4444;
+    
+    --color-info-bg: #1a1e2e;
+    --color-info-border: #2d3d5d;
+    --color-info-text: #3b82f6;
+    
+    /* Couleurs interactives */
+    --color-link-primary: #66d9ef;
+    --color-link-hover: #a6e22e;
+    --color-link-visited: #ae81ff;
+    --color-link-active: #f92672;
+    
+    /* Couleurs de bordure */
+    --color-border-primary: #404049;
+    --color-border-secondary: #32323a;
+    --color-border-tertiary: #242429;
+    --color-border-focus: #66d9ef;
+    --color-border-error: #ef4444;
+    
+    /* Couleurs d'ombre */
+    --color-shadow-light: rgba(0, 0, 0, 0.2);
+    --color-shadow-medium: rgba(0, 0, 0, 0.4);
+    --color-shadow-heavy: rgba(0, 0, 0, 0.6);
+    --color-shadow-colored: rgba(102, 217, 239, 0.15);
+    
+    /* Couleurs de code et syntaxe */
+    --color-code-bg: #1e1e1e;
+    --color-code-border: #404049;
+    --color-code-text: #f8f8f2;
+    --color-code-comment: #75715e;
+    --color-code-keyword: #f92672;
+    --color-code-string: #e6db74;
+    --color-code-number: #ae81ff;
+    --color-code-function: #a6e22e;
+    --color-code-class: #66d9ef;
+    --color-code-variable: #fd971f;
+}
+
+/* Variables pour media query automatique */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Couleurs de base sombres */
+        --color-background-primary: #0a0a0b;
+        --color-background-secondary: #1a1a1d;
+        --color-background-tertiary: #2a2a2f;
+        --color-background-quaternary: #3a3a41;
+        
+        /* Couleurs de surface */
+        --color-surface-primary: #16161a;
+        --color-surface-secondary: #242429;
+        --color-surface-tertiary: #32323a;
+        --color-surface-elevated: #404049;
+        
+        /* Couleurs de texte */
+        --color-text-primary: #f8f8f2;
+        --color-text-secondary: #d4d4aa;
+        --color-text-tertiary: #9f9f9d;
+        --color-text-quaternary: #6f6f6d;
+        --color-text-disabled: #4f4f4d;
+        
+        /* Couleurs d'accent adaptées */
+        --color-accent-primary: #66d9ef;
+        --color-accent-secondary: #a6e22e;
+        --color-accent-tertiary: #f92672;
+        --color-accent-quaternary: #fd971f;
+        --color-accent-quinary: #ae81ff;
+        
+        /* Couleurs d'état pour thème sombre */
+        --color-success-bg: #1a2e1a;
+        --color-success-border: #2d5d2d;
+        --color-success-text: #4ade80;
+        
+        --color-warning-bg: #2e2a1a;
+        --color-warning-border: #5d552d;
+        --color-warning-text: #fbbf24;
+        
+        --color-error-bg: #2e1a1a;
+        --color-error-border: #5d2d2d;
+        --color-error-text: #ef4444;
+        
+        --color-info-bg: #1a1e2e;
+        --color-info-border: #2d3d5d;
+        --color-info-text: #3b82f6;
+        
+        /* Couleurs interactives */
+        --color-link-primary: #66d9ef;
+        --color-link-hover: #a6e22e;
+        --color-link-visited: #ae81ff;
+        --color-link-active: #f92672;
+        
+        /* Couleurs de bordure */
+        --color-border-primary: #404049;
+        --color-border-secondary: #32323a;
+        --color-border-tertiary: #242429;
+        --color-border-focus: #66d9ef;
+        --color-border-error: #ef4444;
+        
+        /* Couleurs d'ombre */
+        --color-shadow-light: rgba(0, 0, 0, 0.2);
+        --color-shadow-medium: rgba(0, 0, 0, 0.4);
+        --color-shadow-heavy: rgba(0, 0, 0, 0.6);
+        --color-shadow-colored: rgba(102, 217, 239, 0.15);
+        
+        /* Couleurs de code et syntaxe */
+        --color-code-bg: #1e1e1e;
+        --color-code-border: #404049;
+        --color-code-text: #f8f8f2;
+        --color-code-comment: #75715e;
+        --color-code-keyword: #f92672;
+        --color-code-string: #e6db74;
+        --color-code-number: #ae81ff;
+        --color-code-function: #a6e22e;
+        --color-code-class: #66d9ef;
+        --color-code-variable: #fd971f;
+    }
+}
+
+/* ================================================================================================
+   STYLES DE BASE POUR THÈME SOMBRE
+   ================================================================================================ */
+
+[data-theme="dark"] body,
+.theme-dark body {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--color-background-primary);
+        color: var(--color-text-primary);
+        transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+}
+
+/* ================================================================================================
+   TYPOGRAPHIE THÈME SOMBRE
+   ================================================================================================ */
+
+/* Styles pour sélecteurs manuels */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4,
+.theme-dark h5,
+.theme-dark h6 {
+    color: var(--color-text-primary);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] div,
+.theme-dark p,
+.theme-dark span,
+.theme-dark div {
+    color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] small,
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-secondary,
+.theme-dark small,
+.theme-dark .text-muted,
+.theme-dark .text-secondary {
+    color: var(--color-text-tertiary);
+}
+
+[data-theme="dark"] a,
+.theme-dark a {
+    color: var(--color-link-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+[data-theme="dark"] a:hover,
+.theme-dark a:hover {
+    color: var(--color-link-hover);
+    text-shadow: 0 0 8px currentColor;
+}
+
+[data-theme="dark"] a:visited,
+.theme-dark a:visited {
+    color: var(--color-link-visited);
+}
+
+[data-theme="dark"] a:active,
+.theme-dark a:active {
+    color: var(--color-link-active);
+}
+
+[data-theme="dark"] code,
+.theme-dark code {
+    background-color: var(--color-code-bg);
+    color: var(--color-code-text);
+    border: 1px solid var(--color-code-border);
+    padding: 0.2em 0.4em;
+    border-radius: var(--border-radius-small);
+    font-family: var(--font-family-mono);
+}
+
+[data-theme="dark"] pre,
+.theme-dark pre {
+    background-color: var(--color-code-bg);
+    border: 1px solid var(--color-code-border);
+    border-radius: var(--border-radius-medium);
+    padding: var(--spacing-medium);
+    overflow-x: auto;
+    box-shadow: var(--shadow-medium);
+}
+
+[data-theme="dark"] pre code,
+.theme-dark pre code {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Styles pour media query automatique */
+@media (prefers-color-scheme: dark) {
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--color-text-primary);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    p, span, div {
+        color: var(--color-text-secondary);
+    }
+    
+    small, .text-muted, .text-secondary {
+        color: var(--color-text-tertiary);
+    }
+    
+    a {
+        color: var(--color-link-primary);
+        text-decoration: none;
+        transition: color var(--transition-fast);
+    }
+    
+    a:hover {
+        color: var(--color-link-hover);
+        text-shadow: 0 0 8px currentColor;
+    }
+    
+    a:visited {
+        color: var(--color-link-visited);
+    }
+    
+    a:active {
+        color: var(--color-link-active);
+    }
+    
+    code {
+        background-color: var(--color-code-bg);
+        color: var(--color-code-text);
+        border: 1px solid var(--color-code-border);
+        padding: 0.2em 0.4em;
+        border-radius: var(--border-radius-small);
+        font-family: var(--font-family-mono);
+    }
+    
+    pre {
+        background-color: var(--color-code-bg);
+        border: 1px solid var(--color-code-border);
+        border-radius: var(--border-radius-medium);
+        padding: var(--spacing-medium);
+        overflow-x: auto;
+        box-shadow: var(--shadow-medium);
+    }
+    
+    pre code {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+}
+
+/* ================================================================================================
+   COMPOSANTS INTERFACE THÈME SOMBRE
+   ================================================================================================ */
+
+/* Styles pour sélecteurs manuels */
+[data-theme="dark"] .card,
+.theme-dark .card {
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-border-secondary);
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-normal);
+}
+
+[data-theme="dark"] .card:hover,
+.theme-dark .card:hover {
+    background-color: var(--color-surface-secondary);
+    border-color: var(--color-border-primary);
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-primary,
+.theme-dark .btn-primary {
+    background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+    color: var(--color-background-primary);
+    border: none;
+    box-shadow: 0 4px 12px rgba(102, 217, 239, 0.3);
+}
+
+[data-theme="dark"] .btn-primary:hover,
+.theme-dark .btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-accent-secondary), var(--color-accent-primary));
+    box-shadow: 0 6px 20px rgba(102, 217, 239, 0.4);
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-secondary,
+.theme-dark .btn-secondary {
+    background-color: var(--color-surface-tertiary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-primary);
+}
+
+[data-theme="dark"] .btn-secondary:hover,
+.theme-dark .btn-secondary:hover {
+    background-color: var(--color-surface-elevated);
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 12px rgba(102, 217, 239, 0.2);
+}
+
+[data-theme="dark"] .form-control,
+.theme-dark .form-control {
+    background-color: var(--color-surface-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-secondary);
+    transition: all var(--transition-normal);
+}
+
+[data-theme="dark"] .form-control:focus,
+.theme-dark .form-control:focus {
+    background-color: var(--color-surface-primary);
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 2px rgba(102, 217, 239, 0.2);
+    outline: none;
+}
+
+[data-theme="dark"] .form-control::placeholder,
+.theme-dark .form-control::placeholder {
+    color: var(--color-text-quaternary);
+}
+
+[data-theme="dark"] .form-label,
+.theme-dark .form-label {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+[data-theme="dark"] .navbar,
+.theme-dark .navbar {
+    background-color: var(--color-surface-primary);
+    border-bottom: 1px solid var(--color-border-secondary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .navbar-brand,
+.theme-dark .navbar-brand {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+[data-theme="dark"] .navbar-nav .nav-link,
+.theme-dark .navbar-nav .nav-link {
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+}
+
+[data-theme="dark"] .navbar-nav .nav-link:hover,
+.theme-dark .navbar-nav .nav-link:hover {
+    color: var(--color-accent-primary);
+    text-shadow: 0 0 8px currentColor;
+}
+
+[data-theme="dark"] .navbar-nav .nav-link.active,
+.theme-dark .navbar-nav .nav-link.active {
+    color: var(--color-accent-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Styles pour media query automatique */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background-color: var(--color-surface-primary);
+        border: 1px solid var(--color-border-secondary);
+        box-shadow: var(--shadow-light);
+        transition: all var(--transition-normal);
+    }
+    
+    .card:hover {
+        background-color: var(--color-surface-secondary);
+        border-color: var(--color-border-primary);
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-2px);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+        color: var(--color-background-primary);
+        border: none;
+        box-shadow: 0 4px 12px rgba(102, 217, 239, 0.3);
+    }
+    
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--color-accent-secondary), var(--color-accent-primary));
+        box-shadow: 0 6px 20px rgba(102, 217, 239, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+        background-color: var(--color-surface-tertiary);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border-primary);
+    }
+    
+    .btn-secondary:hover {
+        background-color: var(--color-surface-elevated);
+        border-color: var(--color-accent-primary);
+        box-shadow: 0 0 12px rgba(102, 217, 239, 0.2);
+    }
+    
+    .form-control {
+        background-color: var(--color-surface-secondary);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border-secondary);
+        transition: all var(--transition-normal);
+    }
+    
+    .form-control:focus {
+        background-color: var(--color-surface-primary);
+        border-color: var(--color-border-focus);
+        box-shadow: 0 0 0 2px rgba(102, 217, 239, 0.2);
+        outline: none;
+    }
+    
+    .form-control::placeholder {
+        color: var(--color-text-quaternary);
+    }
+    
+    .form-label {
+        color: var(--color-text-secondary);
+        font-weight: var(--font-weight-medium);
+    }
+    
+    .navbar {
+        background-color: var(--color-surface-primary);
+        border-bottom: 1px solid var(--color-border-secondary);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .navbar-brand {
+        color: var(--color-text-primary);
+        font-weight: var(--font-weight-bold);
+    }
+    
+    .navbar-nav .nav-link {
+        color: var(--color-text-secondary);
+        transition: color var(--transition-fast);
+    }
+    
+    .navbar-nav .nav-link:hover {
+        color: var(--color-accent-primary);
+        text-shadow: 0 0 8px currentColor;
+    }
+    
+    .navbar-nav .nav-link.active {
+        color: var(--color-accent-secondary);
+        font-weight: var(--font-weight-medium);
+    }
+}
+
+/* ================================================================================================
+   COMPOSANTS SPÉCIALISÉS THÈME SOMBRE
+   ================================================================================================ */
+
+/* Pour simplifier, je vais regrouper les alertes dans une section unifiée */
+[data-theme="dark"] .alert,
+.theme-dark .alert {
+    border-radius: var(--border-radius-medium);
+    border-width: 1px;
+    border-style: solid;
+}
+
+[data-theme="dark"] .alert-success,
+.theme-dark .alert-success {
+    background-color: var(--color-success-bg);
+    border-color: var(--color-success-border);
+    color: var(--color-success-text);
+}
+
+[data-theme="dark"] .alert-warning,
+.theme-dark .alert-warning {
+    background-color: var(--color-warning-bg);
+    border-color: var(--color-warning-border);
+    color: var(--color-warning-text);
+}
+
+[data-theme="dark"] .alert-error,
+.theme-dark .alert-error {
+    background-color: var(--color-error-bg);
+    border-color: var(--color-error-border);
+    color: var(--color-error-text);
+}
+
+[data-theme="dark"] .alert-info,
+.theme-dark .alert-info {
+    background-color: var(--color-info-bg);
+    border-color: var(--color-info-border);
+    color: var(--color-info-text);
+}
+
+@media (prefers-color-scheme: dark) {
+    .alert {
+        border-radius: var(--border-radius-medium);
+        border-width: 1px;
+        border-style: solid;
+    }
+    
+    .alert-success {
+        background-color: var(--color-success-bg);
+        border-color: var(--color-success-border);
+        color: var(--color-success-text);
+    }
+    
+    .alert-warning {
+        background-color: var(--color-warning-bg);
+        border-color: var(--color-warning-border);
+        color: var(--color-warning-text);
+    }
+    
+    .alert-error {
+        background-color: var(--color-error-bg);
+        border-color: var(--color-error-border);
+        color: var(--color-error-text);
+    }
+    
+    .alert-info {
+        background-color: var(--color-info-bg);
+        border-color: var(--color-info-border);
+        color: var(--color-info-text);
+    }
+}
+
+/* ================================================================================================
+   ÉTATS INTERACTIFS THÈME SOMBRE
+   ================================================================================================ */
+
+[data-theme="dark"] *:focus-visible,
+.theme-dark *:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-small);
+}
+
+[data-theme="dark"] ::selection,
+.theme-dark ::selection {
+    background-color: var(--color-accent-primary);
+    color: var(--color-background-primary);
+}
+
+[data-theme="dark"] ::-moz-selection,
+.theme-dark ::-moz-selection {
+    background-color: var(--color-accent-primary);
+    color: var(--color-background-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    *:focus-visible {
+        outline: 2px solid var(--color-accent-primary);
+        outline-offset: 2px;
+        border-radius: var(--border-radius-small);
+    }
+    
+    ::selection {
+        background-color: var(--color-accent-primary);
+        color: var(--color-background-primary);
+    }
+    
+    ::-moz-selection {
+        background-color: var(--color-accent-primary);
+        color: var(--color-background-primary);
+    }
+}
+
+/* ================================================================================================
+   SCROLLBARS PERSONNALISÉES
+   ================================================================================================ */
+
+[data-theme="dark"] ::-webkit-scrollbar,
+.theme-dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track,
+.theme-dark ::-webkit-scrollbar-track {
+    background-color: var(--color-surface-secondary);
+    border-radius: var(--border-radius-small);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb,
+.theme-dark ::-webkit-scrollbar-thumb {
+    background-color: var(--color-surface-elevated);
+    border-radius: var(--border-radius-small);
+    transition: background-color var(--transition-fast);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover,
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background-color: var(--color-surface-secondary);
+        border-radius: var(--border-radius-small);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--color-surface-elevated);
+        border-radius: var(--border-radius-small);
+        transition: background-color var(--transition-fast);
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color-accent-primary);
+    }
+}
+
+/* ================================================================================================
+   ANIMATIONS ET TRANSITIONS THÈME SOMBRE
+   ================================================================================================ */
+
+@keyframes loading-pulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes fade-in-dark {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--color-accent-primary);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--color-accent-primary), 0 0 30px var(--color-accent-primary);
+    }
+}
+
+@keyframes progress-shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+[data-theme="dark"] .loading,
+.theme-dark .loading {
+    animation: loading-pulse 2s infinite;
+}
+
+[data-theme="dark"] .fade-in,
+.theme-dark .fade-in {
+    animation: fade-in-dark var(--transition-normal) ease-out;
+}
+
+[data-theme="dark"] .glow,
+.theme-dark .glow {
+    animation: glow-pulse 3s infinite;
+}
+
+[data-theme="dark"] .progress-bar::after,
+.theme-dark .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: progress-shine 2s infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+    .loading {
+        animation: loading-pulse 2s infinite;
+    }
+    
+    .fade-in {
+        animation: fade-in-dark var(--transition-normal) ease-out;
+    }
+    
+    .glow {
+        animation: glow-pulse 3s infinite;
+    }
+    
+    .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: progress-shine 2s infinite;
+    }
+}
+
+/* ================================================================================================
+   COMPOSANTS SPÉCIAUX THÈME SOMBRE
+   ================================================================================================ */
+
+/* Modales et overlays */
+[data-theme="dark"] .modal-backdrop,
+.theme-dark .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] .modal-content,
+.theme-dark .modal-content {
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-heavy), 0 0 40px rgba(102, 217, 239, 0.1);
+}
+
+[data-theme="dark"] .modal-header,
+.theme-dark .modal-header {
+    border-bottom: 1px solid var(--color-border-secondary);
+    background: linear-gradient(135deg, var(--color-surface-secondary), var(--color-surface-primary));
+}
+
+[data-theme="dark"] .modal-title,
+.theme-dark .modal-title {
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .modal-footer,
+.theme-dark .modal-footer {
+    border-top: 1px solid var(--color-border-secondary);
+    background-color: var(--color-surface-secondary);
+}
+
+/* Tooltips */
+[data-theme="dark"] .tooltip,
+.theme-dark .tooltip {
+    background-color: var(--color-surface-elevated);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--shadow-medium);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .tooltip::before,
+.theme-dark .tooltip::before {
+    border-color: transparent transparent var(--color-border-primary) transparent;
+}
+
+/* Dropdowns et menus */
+[data-theme="dark"] .dropdown-menu,
+.theme-dark .dropdown-menu {
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-medium), 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .dropdown-item,
+.theme-dark .dropdown-item {
+    color: var(--color-text-secondary);
+    transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+.theme-dark .dropdown-item:hover {
+    background-color: var(--color-surface-secondary);
+    color: var(--color-text-primary);
+    border-radius: var(--border-radius-small);
+}
+
+[data-theme="dark"] .dropdown-item:active,
+.theme-dark .dropdown-item:active {
+    background-color: var(--color-accent-primary);
+    color: var(--color-background-primary);
+}
+
+[data-theme="dark"] .dropdown-divider,
+.theme-dark .dropdown-divider {
+    border-color: var(--color-border-secondary);
+}
+
+/* Tables */
+[data-theme="dark"] .table,
+.theme-dark .table {
+    color: var(--color-text-secondary);
+    background-color: var(--color-surface-primary);
+}
+
+[data-theme="dark"] .table th,
+.theme-dark .table th {
+    background-color: var(--color-surface-secondary);
+    color: var(--color-text-primary);
+    border-bottom: 2px solid var(--color-border-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+[data-theme="dark"] .table td,
+.theme-dark .table td {
+    border-bottom: 1px solid var(--color-border-tertiary);
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd),
+.theme-dark .table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--color-surface-secondary);
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover,
+.theme-dark .table-hover tbody tr:hover {
+    background-color: var(--color-surface-tertiary);
+    transform: scale(1.01);
+    transition: all var(--transition-fast);
+}
+
+/* Media query pour les composants spéciaux */
+@media (prefers-color-scheme: dark) {
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .modal-content {
+        background-color: var(--color-surface-primary);
+        border: 1px solid var(--color-border-primary);
+        border-radius: var(--border-radius-large);
+        box-shadow: var(--shadow-heavy), 0 0 40px rgba(102, 217, 239, 0.1);
+    }
+    
+    .modal-header {
+        border-bottom: 1px solid var(--color-border-secondary);
+        background: linear-gradient(135deg, var(--color-surface-secondary), var(--color-surface-primary));
+    }
+    
+    .modal-title {
+        color: var(--color-text-primary);
+    }
+    
+    .modal-footer {
+        border-top: 1px solid var(--color-border-secondary);
+        background-color: var(--color-surface-secondary);
+    }
+    
+    .tooltip {
+        background-color: var(--color-surface-elevated);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border-primary);
+        border-radius: var(--border-radius-small);
+        box-shadow: var(--shadow-medium);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    
+    .tooltip::before {
+        border-color: transparent transparent var(--color-border-primary) transparent;
+    }
+    
+    .dropdown-menu {
+        background-color: var(--color-surface-primary);
+        border: 1px solid var(--color-border-primary);
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--shadow-medium), 0 10px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .dropdown-item {
+        color: var(--color-text-secondary);
+        transition: all var(--transition-fast);
+    }
+    
+    .dropdown-item:hover {
+        background-color: var(--color-surface-secondary);
+        color: var(--color-text-primary);
+        border-radius: var(--border-radius-small);
+    }
+    
+    .dropdown-item:active {
+        background-color: var(--color-accent-primary);
+        color: var(--color-background-primary);
+    }
+    
+    .dropdown-divider {
+        border-color: var(--color-border-secondary);
+    }
+    
+    .table {
+        color: var(--color-text-secondary);
+        background-color: var(--color-surface-primary);
+    }
+    
+    .table th {
+        background-color: var(--color-surface-secondary);
+        color: var(--color-text-primary);
+        border-bottom: 2px solid var(--color-border-primary);
+        font-weight: var(--font-weight-semibold);
+    }
+    
+    .table td {
+        border-bottom: 1px solid var(--color-border-tertiary);
+    }
+    
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: var(--color-surface-secondary);
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: var(--color-surface-tertiary);
+        transform: scale(1.01);
+        transition: all var(--transition-fast);
+    }
+}
+
+/* ================================================================================================
+   COMPOSANTS AVANCÉS THÈME SOMBRE
+   ================================================================================================ */
+
+/* Progress bars */
+[data-theme="dark"] .progress,
+.theme-dark .progress {
+    background-color: var(--color-surface-secondary);
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .progress-bar,
+.theme-dark .progress-bar {
+    background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+    border-radius: var(--border-radius-large);
+    transition: width var(--transition-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Badges et labels */
+[data-theme="dark"] .badge,
+.theme-dark .badge {
+    background-color: var(--color-surface-elevated);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-primary);
+}
+
+[data-theme="dark"] .badge-primary,
+.theme-dark .badge-primary {
+    background-color: var(--color-accent-primary);
+    color: var(--color-background-primary);
+}
+
+[data-theme="dark"] .badge-success,
+.theme-dark .badge-success {
+    background-color: var(--color-success-text);
+    color: var(--color-background-primary);
+}
+
+[data-theme="dark"] .badge-warning,
+.theme-dark .badge-warning {
+    background-color: var(--color-warning-text);
+    color: var(--color-background-primary);
+}
+
+[data-theme="dark"] .badge-error,
+.theme-dark .badge-error {
+    background-color: var(--color-error-text);
+    color: var(--color-background-primary);
+}
+
+/* Tabs */
+[data-theme="dark"] .nav-tabs,
+.theme-dark .nav-tabs {
+    border-bottom: 1px solid var(--color-border-secondary);
+}
+
+[data-theme="dark"] .nav-tabs .nav-link,
+.theme-dark .nav-tabs .nav-link {
+    color: var(--color-text-secondary);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
+    transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .nav-tabs .nav-link:hover,
+.theme-dark .nav-tabs .nav-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-secondary);
+    border-color: var(--color-border-tertiary);
+}
+
+[data-theme="dark"] .nav-tabs .nav-link.active,
+.theme-dark .nav-tabs .nav-link.active {
+    color: var(--color-accent-primary);
+    background-color: var(--color-surface-primary);
+    border-color: var(--color-border-secondary) var(--color-border-secondary) var(--color-surface-primary);
+}
+
+[data-theme="dark"] .tab-content,
+.theme-dark .tab-content {
+    background-color: var(--color-surface-primary);
+    border: 1px solid var(--color-border-secondary);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+    padding: var(--spacing-large);
+}
+
+/* Accordions */
+[data-theme="dark"] .accordion,
+.theme-dark .accordion {
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+}
+
+[data-theme="dark"] .accordion-header,
+.theme-dark .accordion-header {
+    background-color: var(--color-surface-secondary);
+    border-bottom: 1px solid var(--color-border-tertiary);
+}
+
+[data-theme="dark"] .accordion-button,
+.theme-dark .accordion-button {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: none;
+    padding: var(--spacing-medium) var(--spacing-large);
+    width: 100%;
+    text-align: left;
+    transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .accordion-button:hover,
+.theme-dark .accordion-button:hover {
+    background-color: var(--color-surface-tertiary);
+    color: var(--color-accent-primary);
+}
+
+[data-theme="dark"] .accordion-button.collapsed,
+.theme-dark .accordion-button.collapsed {
+    background-color: var(--color-surface-secondary);
+}
+
+[data-theme="dark"] .accordion-body,
+.theme-dark .accordion-body {
+    background-color: var(--color-surface-primary);
+    padding: var(--spacing-large);
+    color: var(--color-text-secondary);
+}
+
+/* Media query pour les composants avancés */
+@media (prefers-color-scheme: dark) {
+    .progress {
+        background-color: var(--color-surface-secondary);
+        border-radius: var(--border-radius-large);
+        overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .progress-bar {
+        background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+        border-radius: var(--border-radius-large);
+        transition: width var(--transition-slow);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .badge {
+        background-color: var(--color-surface-elevated);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border-primary);
+    }
+    
+    .badge-primary {
+        background-color: var(--color-accent-primary);
+        color: var(--color-background-primary);
+    }
+    
+    .badge-success {
+        background-color: var(--color-success-text);
+        color: var(--color-background-primary);
+    }
+    
+    .badge-warning {
+        background-color: var(--color-warning-text);
+        color: var(--color-background-primary);
+    }
+    
+    .badge-error {
+        background-color: var(--color-error-text);
+        color: var(--color-background-primary);
+    }
+    
+    .nav-tabs {
+        border-bottom: 1px solid var(--color-border-secondary);
+    }
+    
+    .nav-tabs .nav-link {
+        color: var(--color-text-secondary);
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-medium) var(--border-radius-medium) 0 0;
+        transition: all var(--transition-fast);
+    }
+    
+    .nav-tabs .nav-link:hover {
+        color: var(--color-text-primary);
+        background-color: var(--color-surface-secondary);
+        border-color: var(--color-border-tertiary);
+    }
+    
+    .nav-tabs .nav-link.active {
+        color: var(--color-accent-primary);
+        background-color: var(--color-surface-primary);
+        border-color: var(--color-border-secondary) var(--color-border-secondary) var(--color-surface-primary);
+    }
+    
+    .tab-content {
+        background-color: var(--color-surface-primary);
+        border: 1px solid var(--color-border-secondary);
+        border-top: none;
+        border-radius: 0 0 var(--border-radius-medium) var(--border-radius-medium);
+        padding: var(--spacing-large);
+    }
+    
+    .accordion {
+        border: 1px solid var(--color-border-secondary);
+        border-radius: var(--border-radius-medium);
+        overflow: hidden;
+    }
+    
+    .accordion-header {
+        background-color: var(--color-surface-secondary);
+        border-bottom: 1px solid var(--color-border-tertiary);
+    }
+    
+    .accordion-button {
+        background-color: transparent;
+        color: var(--color-text-primary);
+        border: none;
+        padding: var(--spacing-medium) var(--spacing-large);
+        width: 100%;
+        text-align: left;
+        transition: all var(--transition-fast);
+    }
+    
+    .accordion-button:hover {
+        background-color: var(--color-surface-tertiary);
+        color: var(--color-accent-primary);
+    }
+    
+    .accordion-button.collapsed {
+        background-color: var(--color-surface-secondary);
+    }
+    
+    .accordion-body {
+        background-color: var(--color-surface-primary);
+        padding: var(--spacing-large);
+        color: var(--color-text-secondary);
+    }
+}
+
+/* ================================================================================================
+   UTILITAIRES ET HELPERS THÈME SOMBRE
+   ================================================================================================ */
+
+/* Classes utilitaires de couleurs */
+[data-theme="dark"] .text-primary,
+.theme-dark .text-primary {
+    color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .text-secondary,
+.theme-dark .text-secondary {
+    color: var(--color-text-secondary) !important;
+}
+
+[data-theme="dark"] .text-accent,
+.theme-dark .text-accent {
+    color: var(--color-accent-primary) !important;
+}
+
+[data-theme="dark"] .bg-primary,
+.theme-dark .bg-primary {
+    background-color: var(--color-background-primary) !important;
+}
+
+[data-theme="dark"] .bg-secondary,
+.theme-dark .bg-secondary {
+    background-color: var(--color-background-secondary) !important;
+}
+
+[data-theme="dark"] .bg-surface,
+.theme-dark .bg-surface {
+    background-color: var(--color-surface-primary) !important;
+}
+
+[data-theme="dark"] .border-primary,
+.theme-dark .border-primary {
+    border-color: var(--color-border-primary) !important;
+}
+
+[data-theme="dark"] .border-accent,
+.theme-dark .border-accent {
+    border-color: var(--color-accent-primary) !important;
+}
+
+/* Classes d'effets spéciaux */
+[data-theme="dark"] .glass-effect,
+.theme-dark .glass-effect {
+    background: rgba(22, 22, 26, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .neon-glow,
+.theme-dark .neon-glow {
+    box-shadow: 
+        0 0 5px var(--color-accent-primary),
+        0 0 10px var(--color-accent-primary),
+        0 0 15px var(--color-accent-primary),
+        0 0 20px var(--color-accent-primary);
+}
+
+[data-theme="dark"] .subtle-glow,
+.theme-dark .subtle-glow {
+    box-shadow: 0 0 20px rgba(102, 217, 239, 0.3);
+}
+
+/* Media query pour les utilitaires */
+@media (prefers-color-scheme: dark) {
+    .text-primary {
+        color: var(--color-text-primary) !important;
+    }
+    
+    .text-secondary {
+        color: var(--color-text-secondary) !important;
+    }
+    
+    .text-accent {
+        color: var(--color-accent-primary) !important;
+    }
+    
+    .bg-primary {
+        background-color: var(--color-background-primary) !important;
+    }
+    
+    .bg-secondary {
+        background-color: var(--color-background-secondary) !important;
+    }
+    
+    .bg-surface {
+        background-color: var(--color-surface-primary) !important;
+    }
+    
+    .border-primary {
+        border-color: var(--color-border-primary) !important;
+    }
+    
+    .border-accent {
+        border-color: var(--color-accent-primary) !important;
+    }
+    
+    .glass-effect {
+        background: rgba(22, 22, 26, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .neon-glow {
+        box-shadow: 
+            0 0 5px var(--color-accent-primary),
+            0 0 10px var(--color-accent-primary),
+            0 0 15px var(--color-accent-primary),
+            0 0 20px var(--color-accent-primary);
+    }
+    
+    .subtle-glow {
+        box-shadow: 0 0 20px rgba(102, 217, 239, 0.3);
+    }
+}
+
+/* ================================================================================================
+   OPTIMISATIONS ET FINALISATION
+   ================================================================================================ */
+
+/* Désactivation des animations si l'utilisateur préfère moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+    [data-theme="dark"] *,
+    .theme-dark *,
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print styles pour thème sombre */
+@media print {
+    [data-theme="dark"] *,
+    .theme-dark * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+}
+
+/* Support pour mode haut contraste */
+@media (prefers-contrast: high) {
+    [data-theme="dark"],
+    .theme-dark {
+        --color-text-primary: #ffffff;
+        --color-text-secondary: #ffffff;
+        --color-background-primary: #000000;
+        --color-background-secondary: #000000;
+        --color-border-primary: #ffffff;
+        --color-accent-primary: #00ffff;
+    }
+}
+
+/* ================================================================================================
+   FIN DU FICHIER DARK.CSS
+   ================================================================================================ */
+
+/* 
+   Ce fichier CSS complète l'implémentation du thème sombre pour JavaCraft Academy.
+   Il respecte les bonnes pratiques d'accessibilité et de performance.
+   
+   Fonctionnalités couvertes :
+   ✓ Variables de couleurs complètes
+   ✓ Activation automatique et manuelle
+   ✓ Composants d'interface complets
+   ✓ Animations et transitions
+   ✓ Accessibilité (WCAG 2.1 AA)
+   ✓ Support des préférences utilisateur
+   ✓ Optimisations performance
+   
+   Auteur : JavaCraft Academy Team
+   Version : 1.0.1
+   Dernière mise à jour : 2024
+*/

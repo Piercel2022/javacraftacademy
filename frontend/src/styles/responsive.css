@@ -1,0 +1,954 @@
+
+/* ================================================================================================
+   RESPONSIVE.CSS - Styles responsifs de JavaCraft Academy
+   ================================================================================================
+   
+   @fileoverview Définition des styles responsifs pour tous les écrans et appareils
+   @author JavaCraft Academy Team
+   @version 1.0.0
+   
+   Approche Mobile-First :
+   - Styles de base pour mobile (320px+)
+   - Adaptations progressives pour écrans plus larges
+   - Breakpoints cohérents et logiques
+   - Optimisation pour les appareils tactiles
+   
+   Breakpoints principaux :
+   - Mobile: 320px - 767px
+   - Tablet: 768px - 1023px  
+   - Desktop: 1024px - 1439px
+   - Large Desktop: 1440px+
+   
+   Relations :
+   - Utilise les variables définies dans variables.css
+   - Adapte les composants de component.css
+   - Compatible avec les layouts de layout.css
+   - Optimisé pour les thèmes light.css et dark.css
+   ================================================================================================ */
+
+/* =============================
+   VARIABLES RESPONSIVES
+   ============================= */
+
+:root {
+  /* Breakpoints personnalisés */
+  --bp-mobile: 320px;
+  --bp-mobile-lg: 480px;
+  --bp-tablet: 768px;
+  --bp-tablet-lg: 1024px;
+  --bp-desktop: 1200px;
+  --bp-desktop-lg: 1440px;
+  --bp-desktop-xl: 1920px;
+  
+  /* Espacements responsifs */
+  --container-padding-mobile: var(--spacing-4);
+  --container-padding-tablet: var(--spacing-6);
+  --container-padding-desktop: var(--spacing-8);
+  
+  /* Largeurs de conteneur */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  
+  /* Tailles de police adaptatives */
+  --text-scale-mobile: 0.9;
+  --text-scale-tablet: 1.0;
+  --text-scale-desktop: 1.1;
+}
+
+/* =============================
+   STYLES DE BASE MOBILE (320px+)
+   ============================= */
+
+/**
+ * Conteneur principal responsive
+ */
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-mobile);
+}
+
+.container--sm {
+  max-width: var(--container-sm);
+}
+
+.container--md {
+  max-width: var(--container-md);
+}
+
+.container--lg {
+  max-width: var(--container-lg);
+}
+
+.container--xl {
+  max-width: var(--container-xl);
+}
+
+.container--2xl {
+  max-width: var(--container-2xl);
+}
+
+/**
+ * Grille responsive
+ */
+.grid {
+  display: grid;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+.grid--1 { grid-template-columns: 1fr; }
+.grid--2 { grid-template-columns: 1fr; }
+.grid--3 { grid-template-columns: 1fr; }
+.grid--4 { grid-template-columns: 1fr; }
+.grid--6 { grid-template-columns: 1fr; }
+.grid--12 { grid-template-columns: 1fr; }
+
+/**
+ * Flexbox responsive
+ */
+.flex {
+  display: flex;
+  gap: var(--spacing-3);
+}
+
+.flex--col {
+  flex-direction: column;
+}
+
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+.flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex--between {
+  justify-content: space-between;
+}
+
+.flex--around {
+  justify-content: space-around;
+}
+
+.flex--end {
+  justify-content: flex-end;
+}
+
+/**
+ * Navigation mobile
+ */
+.nav {
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+}
+
+.nav__item {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border-primary);
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+/**
+ * Boutons mobile
+ */
+.btn {
+  width: 100%;
+  justify-content: center;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: calc(var(--text-base) * var(--text-scale-mobile));
+}
+
+.btn--sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: calc(var(--text-sm) * var(--text-scale-mobile));
+}
+
+.btn--lg {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: calc(var(--text-lg) * var(--text-scale-mobile));
+}
+
+/**
+ * Cartes mobile
+ */
+.card {
+  margin-bottom: var(--spacing-4);
+}
+
+.card__header,
+.card__body,
+.card__footer {
+  padding: var(--spacing-3);
+}
+
+/**
+ * Formulaires mobile
+ */
+.form-row {
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.form-control {
+  padding: var(--spacing-3);
+  font-size: calc(var(--text-base) * var(--text-scale-mobile));
+}
+
+/**
+ * Modales mobile
+ */
+.modal-overlay {
+  padding: var(--spacing-2);
+}
+
+.modal {
+  max-width: 100%;
+  max-height: 95vh;
+  margin: 0;
+}
+
+.modal__header,
+.modal__body,
+.modal__footer {
+  padding: var(--spacing-3);
+}
+
+/**
+ * Utilitaires de visibilité mobile
+ */
+.hide-mobile {
+  display: none !important;
+}
+
+.show-mobile {
+  display: block !important;
+}
+
+.show-mobile-flex {
+  display: flex !important;
+}
+
+.show-mobile-grid {
+  display: grid !important;
+}
+
+/* =============================
+   MOBILE LARGE (480px+)
+   ============================= */
+
+@media (min-width: 480px) {
+  /**
+   * Grille améliorée
+   */
+  .grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /**
+   * Boutons inline
+   */
+  .btn-group {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+  
+  .btn-group .btn {
+    flex: 1;
+  }
+  
+  /**
+   * Formulaires améliorés
+   */
+  .form-row {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  
+  .form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  
+  /**
+   * Navigation améliorée
+   */
+  .nav--horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .nav--horizontal .nav__item {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid var(--border-primary);
+    border-bottom: none;
+  }
+  
+  .nav--horizontal .nav__item:last-child {
+    border-right: none;
+  }
+}
+
+/* =============================
+   TABLET (768px+)
+   ============================= */
+
+@media (min-width: 768px) {
+  /**
+   * Conteneur et espacements
+   */
+  .container {
+    padding: 0 var(--container-padding-tablet);
+  }
+  
+  /**
+   * Grilles avancées
+   */
+  .grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid--6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid--12 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /**
+   * Navigation tablet
+   */
+  .nav {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-4);
+  }
+  
+  .nav__item {
+    width: auto;
+    padding: var(--spacing-2) var(--spacing-3);
+    border: none;
+  }
+  
+  /**
+   * Boutons tablet
+   */
+  .btn {
+    width: auto;
+    min-width: 120px;
+  }
+  
+  .btn--full-tablet {
+    width: 100%;
+  }
+  
+  /**
+   * Cartes tablet
+   */
+  .card__header,
+  .card__body,
+  .card__footer {
+    padding: var(--spacing-4);
+  }
+  
+  /**
+   * Modales tablet
+   */
+  .modal {
+    max-width: 600px;
+    margin: 5vh auto;
+  }
+  
+  .modal__header,
+  .modal__body,
+  .modal__footer {
+    padding: var(--spacing-4);
+  }
+  
+  /**
+   * Typographie tablet
+   */
+  html {
+    font-size: calc(var(--text-base) * var(--text-scale-tablet));
+  }
+  
+  /**
+   * Utilitaires de visibilité tablet
+   */
+  .hide-tablet {
+    display: none !important;
+  }
+  
+  .show-tablet {
+    display: block !important;
+  }
+  
+  .show-tablet-flex {
+    display: flex !important;
+  }
+  
+  .show-tablet-grid {
+    display: grid !important;
+  }
+  
+  .hide-mobile {
+    display: block !important;
+  }
+  
+  .show-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile-flex,
+  .show-mobile-grid {
+    display: none !important;
+  }
+}
+
+/* =============================
+   DESKTOP (1024px+)
+   ============================= */
+
+@media (min-width: 1024px) {
+  /**
+   * Conteneur et espacements
+   */
+  .container {
+    padding: 0 var(--container-padding-desktop);
+  }
+  
+  /**
+   * Grilles desktop
+   */
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .grid--6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  
+  .grid--12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  
+  /**
+   * Gap augmenté pour desktop
+   */
+  .grid {
+    gap: var(--spacing-6);
+  }
+  
+  .flex {
+    gap: var(--spacing-4);
+  }
+  
+  /**
+   * Navigation desktop
+   */
+  .nav {
+    gap: var(--spacing-6);
+  }
+  
+  /**
+   * Cartes desktop
+   */
+  .card {
+    transition: var(--transition-base);
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .card__header,
+  .card__body,
+  .card__footer {
+    padding: var(--spacing-6);
+  }
+  
+  /**
+   * Modales desktop
+   */
+  .modal {
+    max-width: 800px;
+  }
+  
+  .modal__header,
+  .modal__body,
+  .modal__footer {
+    padding: var(--spacing-6);
+  }
+  
+  /**
+   * Typographie desktop
+   */
+  html {
+    font-size: calc(var(--text-base) * var(--text-scale-desktop));
+  }
+  
+  /**
+   * Utilitaires de visibilité desktop
+   */
+  .hide-desktop {
+    display: none !important;
+  }
+  
+  .show-desktop {
+    display: block !important;
+  }
+  
+  .show-desktop-flex {
+    display: flex !important;
+  }
+  
+  .show-desktop-grid {
+    display: grid !important;
+  }
+  
+  .hide-tablet {
+    display: block !important;
+  }
+  
+  .show-tablet,
+  .show-tablet-flex,
+  .show-tablet-grid {
+    display: none !important;
+  }
+}
+
+/* =============================
+   LARGE DESKTOP (1440px+)
+   ============================= */
+
+@media (min-width: 1440px) {
+  /**
+   * Conteneurs larges
+   */
+  .container--fluid {
+    max-width: 90%;
+  }
+  
+  /**
+   * Espacements augmentés
+   */
+  .grid {
+    gap: var(--spacing-8);
+  }
+  
+  .flex {
+    gap: var(--spacing-6);
+  }
+  
+  /**
+   * Cartes larges
+   */
+  .card__header,
+  .card__body,
+  .card__footer {
+    padding: var(--spacing-8);
+  }
+  
+  /**
+   * Modales larges
+   */
+  .modal {
+    max-width: 1000px;
+  }
+  
+  /**
+   * Utilitaires de visibilité large
+   */
+  .hide-large {
+    display: none !important;
+  }
+  
+  .show-large {
+    display: block !important;
+  }
+  
+  .show-large-flex {
+    display: flex !important;
+  }
+  
+  .show-large-grid {
+    display: grid !important;
+  }
+}
+
+/* =============================
+   EXTRA LARGE DESKTOP (1920px+)
+   ============================= */
+
+@media (min-width: 1920px) {
+  /**
+   * Conteneurs extra larges
+   */
+  .container--2xl {
+    max-width: var(--container-2xl);
+  }
+  
+  /**
+   * Espacements maximum
+   */
+  .grid {
+    gap: var(--spacing-10);
+  }
+  
+  .flex {
+    gap: var(--spacing-8);
+  }
+  
+  /**
+   * Utilitaires de visibilité extra large
+   */
+  .hide-xl {
+    display: none !important;
+  }
+  
+  .show-xl {
+    display: block !important;
+  }
+  
+  .show-xl-flex {
+    display: flex !important;
+  }
+  
+  .show-xl-grid {
+    display: grid !important;
+  }
+}
+
+/* =============================
+   UTILITAIRES GÉNÉRAUX
+   ============================= */
+
+/**
+ * Classes d'espacement responsif
+ */
+.p-responsive {
+  padding: var(--spacing-3);
+}
+
+.m-responsive {
+  margin: var(--spacing-3);
+}
+
+@media (min-width: 768px) {
+  .p-responsive {
+    padding: var(--spacing-4);
+  }
+  
+  .m-responsive {
+    margin: var(--spacing-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .p-responsive {
+    padding: var(--spacing-6);
+  }
+  
+  .m-responsive {
+    margin: var(--spacing-6);
+  }
+}
+
+/**
+ * Images responsives
+ */
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/**
+ * Vidéos responsives
+ */
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-responsive iframe,
+.video-responsive object,
+.video-responsive embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/**
+ * Tableaux responsifs
+ */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive table {
+  min-width: 600px;
+}
+
+@media (max-width: 767px) {
+  .table-stack thead {
+    display: none;
+  }
+  
+  .table-stack tr {
+    display: block;
+    border: 1px solid var(--border-primary);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-3);
+  }
+  
+  .table-stack td {
+    display: block;
+    text-align: right;
+    padding: var(--spacing-1) 0;
+    border: none;
+  }
+  
+  .table-stack td::before {
+    content: attr(data-label) ": ";
+    float: left;
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+/**
+ * Utilitaires de débordement
+ */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+/**
+ * Utilitaires de position
+ */
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-index-fixed);
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-index-fixed);
+}
+
+/* =============================
+   PRINT STYLES
+   ============================= */
+
+@media print {
+  /**
+   * Optimisations pour l'impression
+   */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  p, blockquote {
+    orphans: 2;
+    widows: 2;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  
+  .grid {
+    display: block !important;
+  }
+  
+  .card {
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+  }
+}
+
+/* =============================
+   ANIMATIONS ET TRANSITIONS
+   ============================= */
+
+/**
+ * Préférences d'animation
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/**
+ * Animations d'apparition responsive
+ */
+@media (min-width: 768px) {
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .fade-in-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .stagger-animation > * {
+    animation-delay: calc(var(--stagger-delay, 0.1s) * var(--item-index, 0));
+  }
+}
+
+/* =============================
+   ACCESSIBILITÉ
+   ============================= */
+
+/**
+ * Focus visible amélioré
+ */
+@media (min-width: 768px) {
+  .focus-visible:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+/**
+ * Contrastes élevés
+ */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+  }
+  
+  .btn {
+    border-width: 2px;
+  }
+  
+  .form-control {
+    border-width: 2px;
+  }
+}
+
+/**
+ * Mode sombre automatique
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) {
+    --color-primary: #60a5fa;
+    --color-secondary: #64748b;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-primary: #334155;
+  }
+}
+
+/* =============================
+   FIN DU FICHIER
+   ============================= */
