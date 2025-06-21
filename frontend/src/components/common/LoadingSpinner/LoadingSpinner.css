@@ -1,0 +1,127 @@
+
+/* LoadingSpinner.css */
+
+.loading-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-circle {
+  border-radius: 50%;
+  border-style: solid;
+  animation: spin 1s linear infinite;
+}
+
+/* Tailles */
+.loading-spinner--small .spinner-circle {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.loading-spinner--medium .spinner-circle {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.loading-spinner--large .spinner-circle {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+.loading-spinner--xlarge .spinner-circle {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+/* Couleurs */
+.loading-spinner--primary .spinner-circle {
+  border-color: #e5e7eb;
+  border-top-color: #3b82f6;
+}
+
+.loading-spinner--secondary .spinner-circle {
+  border-color: #e5e7eb;
+  border-top-color: #6b7280;
+}
+
+.loading-spinner--success .spinner-circle {
+  border-color: #dcfce7;
+  border-top-color: #10b981;
+}
+
+.loading-spinner--warning .spinner-circle {
+  border-color: #fef3c7;
+  border-top-color: #f59e0b;
+}
+
+.loading-spinner--error .spinner-circle {
+  border-color: #fee2e2;
+  border-top-color: #ef4444;
+}
+
+.loading-spinner--white .spinner-circle {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+}
+
+.loading-spinner--dark .spinner-circle {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-top-color: #1f2937;
+}
+
+/* Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Variantes pour contextes spécifiques */
+.loading-spinner--button {
+  margin-right: 8px;
+}
+
+.loading-spinner--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+}
+
+.loading-spinner--overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* États désactivés */
+.loading-spinner--disabled .spinner-circle {
+  opacity: 0.5;
+  animation-duration: 2s;
+}
+
+/* Accessibilité - Réduction des mouvements */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-circle {
+    animation: none;
+  }
+  
+  .spinner-circle::after {
+    content: "⏳";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8em;
+  }
+}
