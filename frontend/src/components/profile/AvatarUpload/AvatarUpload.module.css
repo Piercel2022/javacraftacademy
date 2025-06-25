@@ -1,0 +1,439 @@
+/* Variables CSS pour le composant AvatarUpload */
+.avatarUpload {
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --warning-color: #ffc107;
+  --light-gray: #f8f9fa;
+  --medium-gray: #6c757d;
+  --dark-gray: #343a40;
+  --border-radius: 12px;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --transition: all 0.2s ease-in-out;
+}
+
+/* Conteneur principal */
+.avatarUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Zone de téléchargement */
+.uploadArea {
+  position: relative;
+  border: 2px dashed #e0e0e0;
+  border-radius: var(--border-radius);
+  background: var(--light-gray);
+  cursor: pointer;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.uploadArea:hover {
+  border-color: var(--primary-color);
+  background: rgba(0, 123, 255, 0.05);
+}
+
+.uploadArea.dragging {
+  border-color: var(--primary-color);
+  background: rgba(0, 123, 255, 0.1);
+  transform: scale(1.02);
+}
+
+.uploadArea.error {
+  border-color: var(--error-color);
+  background: rgba(220, 53, 69, 0.05);
+}
+
+/* Tailles de l'avatar */
+.small .uploadArea {
+  width: 80px;
+  height: 80px;
+}
+
+.medium .uploadArea {
+  width: 120px;
+  height: 120px;
+}
+
+.large .uploadArea {
+  width: 160px;
+  height: 160px;
+}
+
+/* Prévisualisation de l'avatar */
+.avatarPreview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay au survol */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.avatarPreview:hover .overlay {
+  opacity: 1;
+}
+
+.overlayContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.overlayContent .uploadIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Bouton de suppression */
+.removeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.removeButton:hover {
+  background: var(--error-color);
+  transform: scale(1.1);
+}
+
+.avatarPreview:hover .removeButton {
+  opacity: 1;
+}
+
+.removeButton svg {
+  width: 12px;
+  height: 12px;
+  stroke-width: 2;
+}
+
+/* Placeholder de téléchargement */
+.uploadPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+  gap: 12px;
+}
+
+.small .uploadPlaceholder {
+  padding: 10px;
+  gap: 6px;
+}
+
+.large .uploadPlaceholder {
+  padding: 30px;
+  gap: 16px;
+}
+
+/* Avatar par défaut */
+.defaultAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--medium-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.small .defaultAvatar {
+  width: 32px;
+  height: 32px;
+}
+
+.large .defaultAvatar {
+  width: 64px;
+  height: 64px;
+}
+
+.defaultAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.small .initials {
+  font-size: 12px;
+}
+
+.large .initials {
+  font-size: 20px;
+}
+
+/* Contenu du prompt de téléchargement */
+.uploadPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.uploadIcon {
+  width: 32px;
+  height: 32px;
+  color: var(--medium-gray);
+  stroke-width: 1.5;
+}
+
+.small .uploadIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.large .uploadIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.uploadText {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uploadLink {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.small .uploadLink {
+  font-size: 12px;
+}
+
+.large .uploadLink {
+  font-size: 16px;
+}
+
+.uploadHint {
+  color: var(--medium-gray);
+  font-size: 12px;
+}
+
+.small .uploadHint {
+  font-size: 10px;
+}
+
+.large .uploadHint {
+  font-size: 14px;
+}
+
+.uploadInfo {
+  margin: 0;
+  color: var(--medium-gray);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.small .uploadInfo {
+  font-size: 9px;
+}
+
+.large .uploadInfo {
+  font-size: 13px;
+}
+
+/* Input caché */
+.hiddenInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Message d'erreur */
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: 6px;
+  color: var(--error-color);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.errorIcon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+/* Indicateur de téléchargement */
+.uploadingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 123, 255, 0.1);
+  border: 1px solid rgba(0, 123, 255, 0.2);
+  border-radius: 6px;
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Spinner de chargement */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 123, 255, 0.2);
+  border-left: 2px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .avatarUpload {
+    max-width: 250px;
+  }
+  
+  .medium .uploadArea {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .large .uploadArea {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .uploadLink {
+    font-size: 13px !important;
+  }
+  
+  .uploadHint {
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatarUpload {
+    max-width: 200px;
+  }
+  
+  .large .uploadArea {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .avatarUpload {
+    --light-gray: #2d3748;
+    --medium-gray: #a0aec0;
+    --dark-gray: #f7fafc;
+  }
+  
+  .uploadArea {
+    border-color: #4a5568;
+    background: var(--light-gray);
+  }
+  
+  .uploadArea:hover {
+    background: rgba(0, 123, 255, 0.1);
+  }
+  
+  .uploadLink {
+    color: #63b3ed;
+  }
+  
+  .defaultAvatar {
+    background: #4a5568;
+  }
+}
+
+/* États focus pour l'accessibilité */
+.uploadArea:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.removeButton:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Animation d'entrée */
+.avatarUpload {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
