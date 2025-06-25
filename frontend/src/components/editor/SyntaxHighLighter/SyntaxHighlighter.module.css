@@ -1,0 +1,414 @@
+
+/* SyntaxHighlighter.module.css */
+.syntaxHighlighter {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-primary);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.syntaxHighlighter.expanded {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Thèmes */
+.syntaxHighlighter.dark {
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2d2d30;
+  --bg-tertiary: #3e3e42;
+  --bg-hover: #464649;
+  --text-primary: #d4d4d4;
+  --text-secondary: #9ca3af;
+  --border-color: #3e3e42;
+  --accent-color: #007acc;
+  --error-color: #f85149;
+  --warning-color: #ffc107;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+}
+
+.syntaxHighlighter.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-hover: #f5f5f5;
+  --text-primary: #24292e;
+  --text-secondary: #6a737d;
+  --border-color: #e1e4e8;
+  --accent-color: #0366d6;
+  --error-color: #d73a49;
+  --warning-color: #f66a0a;
+  --success-color: #28a745;
+  --info-color: #0366d6;
+}
+
+/* Tailles de police */
+.syntaxHighlighter.small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.syntaxHighlighter.medium {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.syntaxHighlighter.large {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* En-tête */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  min-height: 44px;
+}
+
+.languageLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 12px;
+  gap: 4px;
+}
+
+.button:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.button.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+.copyButton.copied {
+  background: var(--success-color);
+  color: white;
+}
+
+/* Zone de code */
+.codeContainer {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.lineNumbers {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-tertiary);
+  border-right: 1px solid var(--border-color);
+  user-select: none;
+  min-width: 40px;
+  padding: 16px 8px;
+}
+
+.lineNumber {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--text-secondary);
+  font-size: inherit;
+  line-height: inherit;
+  min-height: 1.5em;
+  padding-right: 8px;
+}
+
+.codeContent {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  background: var(--bg-primary);
+  white-space: pre;
+  color: var(--text-primary);
+  tab-size: 4;
+}
+
+/* Scrollbars personnalisées */
+.codeContent::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.codeContent::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.codeContent::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.codeContent::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Surlignage de syntaxe */
+.token.comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.token.string {
+  color: #ce9178;
+}
+
+.token.number {
+  color: #b5cea8;
+}
+
+.token.boolean {
+  color: #569cd6;
+}
+
+.token.keyword {
+  color: #c586c0;
+  font-weight: bold;
+}
+
+.token.function {
+  color: #dcdcaa;
+}
+
+.token.variable {
+  color: #9cdcfe;
+}
+
+.token.operator {
+  color: #d4d4d4;
+}
+
+.token.punctuation {
+  color: #cccccc;
+}
+
+.token.class-name {
+  color: #4ec9b0;
+}
+
+.token.tag {
+  color: #569cd6;
+}
+
+.token.attr-name {
+  color: #92c5f8;
+}
+
+.token.attr-value {
+  color: #ce9178;
+}
+
+/* Thème clair - tokens */
+.syntaxHighlighter.light .token.comment {
+  color: #008000;
+}
+
+.syntaxHighlighter.light .token.string {
+  color: #a31515;
+}
+
+.syntaxHighlighter.light .token.number {
+  color: #098658;
+}
+
+.syntaxHighlighter.light .token.boolean {
+  color: #0000ff;
+}
+
+.syntaxHighlighter.light .token.keyword {
+  color: #af00db;
+}
+
+.syntaxHighlighter.light .token.function {
+  color: #795e26;
+}
+
+.syntaxHighlighter.light .token.variable {
+  color: #001080;
+}
+
+.syntaxHighlighter.light .token.operator {
+  color: #000000;
+}
+
+.syntaxHighlighter.light .token.punctuation {
+  color: #000000;
+}
+
+.syntaxHighlighter.light .token.class-name {
+  color: #267f99;
+}
+
+.syntaxHighlighter.light .token.tag {
+  color: #800000;
+}
+
+.syntaxHighlighter.light .token.attr-name {
+  color: #e50000;
+}
+
+.syntaxHighlighter.light .token.attr-value {
+  color: #0451a5;
+}
+
+/* Surlignage de ligne */
+.highlightedLine {
+  background: rgba(255, 255, 0, 0.1);
+  position: relative;
+}
+
+.highlightedLine::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-color);
+}
+
+/* États d'erreur */
+.errorLine {
+  background: rgba(248, 81, 73, 0.1);
+  position: relative;
+}
+
+.errorLine::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--error-color);
+}
+
+/* Mode plein écran */
+.expanded .header {
+  padding: 16px 20px;
+}
+
+.expanded .codeContent {
+  padding: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.syntaxHighlighter {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .syntaxHighlighter.expanded {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+  
+  .header {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .languageLabel {
+    font-size: 11px;
+  }
+  
+  .button {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+  
+  .lineNumbers {
+    min-width: 32px;
+    padding: 12px 6px;
+  }
+  
+  .codeContent {
+    padding: 12px;
+  }
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .syntaxHighlighter,
+  .button,
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Focus visible */
+.button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Sélection de texte */
+.codeContent ::selection {
+  background: var(--accent-color);
+  color: white;
+}
+
+.codeContent ::-moz-selection {
+  background: var(--accent-color);
+  color: white;
+}

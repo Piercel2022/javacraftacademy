@@ -1,0 +1,541 @@
+
+/**
+ * CodeRunner.module.css
+ * Styles pour le composant CodeRunner
+ * 
+ * @description
+ * Feuille de style modulaire pour le composant d'exécution de code Java.
+ * Comprend les styles pour la barre de contrôle, la zone de sortie, les erreurs,
+ * les statistiques d'exécution et l'historique.
+ * 
+ * @author JavaCraft Academy
+ * @version 1.0.0
+ */
+
+/* Conteneur principal */
+.codeRunner {
+  display: flex;
+  flex-direction: column;
+  background: var(--background-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 200px;
+  font-family: var(--font-family-mono);
+  transition: border-color 0.2s ease;
+}
+
+.codeRunner:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--primary-color-alpha);
+}
+
+/* Barre de contrôle */
+.controlBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  gap: 12px;
+}
+
+.mainControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settingsControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Boutons de contrôle */
+.runButton {
+  background: var(--success-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.runButton:hover:not(:disabled) {
+  background: var(--success-color-dark);
+  transform: translateY(-1px);
+}
+
+.runButton:disabled {
+  background: var(--gray-400);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.stopButton {
+  background: var(--error-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stopButton:hover {
+  background: var(--error-color-dark);
+  transform: translateY(-1px);
+}
+
+.clearButton {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.clearButton:hover:not(:disabled) {
+  background: var(--background-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.clearButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.settingsButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settingsButton:hover {
+  background: var(--background-hover);
+  color: var(--text-primary);
+}
+
+/* Section d'entrée utilisateur */
+.inputSection {
+  padding: 16px;
+  background: var(--background-tertiary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.inputLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.userInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-mono);
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.userInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-alpha);
+}
+
+.userInput:disabled {
+  background: var(--background-disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Zone de sortie */
+.outputSection {
+  flex: 1;
+  padding: 16px;
+  background: var(--background-primary);
+  overflow-y: auto;
+  min-height: 150px;
+}
+
+/* Statistiques d'exécution */
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: var(--background-secondary);
+  border-radius: 4px;
+  border-left: 3px solid var(--info-color);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.statLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.statValue {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: var(--font-family-mono);
+}
+
+/* Conteneurs de sortie */
+.outputContainer,
+.errorContainer {
+  margin-bottom: 16px;
+}
+
+.outputHeader,
+.errorHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.outputHeader {
+  color: var(--success-color);
+}
+
+.errorHeader {
+  color: var(--error-color);
+}
+
+.successIcon,
+.errorIcon {
+  flex-shrink: 0;
+}
+
+/* Sortie et erreurs */
+.output,
+.error {
+  background: var(--background-code);
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  padding: 12px;
+  margin: 0;
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.output {
+  color: var(--text-primary);
+  border-left: 3px solid var(--success-color);
+}
+
+.error {
+  color: var(--error-color);
+  border-left: 3px solid var(--error-color);
+  background: var(--error-background);
+}
+
+/* Conteneur de chargement */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: var(--text-secondary);
+  gap: 12px;
+}
+
+.loadingContainer span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Message par défaut */
+.defaultMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
+  color: var(--text-secondary);
+  gap: 12px;
+}
+
+.defaultIcon {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+.defaultMessage p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.exerciseHint {
+  font-size: 12px !important;
+  color: var(--text-tertiary) !important;
+  font-style: italic;
+}
+
+/* Section d'historique */
+.historySection {
+  border-top: 1px solid var(--border-primary);
+  background: var(--background-secondary);
+}
+
+.historySummary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.historySummary:hover {
+  background: var(--background-hover);
+}
+
+.historyList {
+  max-height: 200px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border-primary);
+}
+
+.historyItem {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-primary);
+  transition: background-color 0.2s ease;
+}
+
+.historyItem:hover {
+  background: var(--background-hover);
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.historyHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.historyStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.historyStatus.success {
+  color: var(--success-color);
+}
+
+.historyStatus.error {
+  color: var(--error-color);
+}
+
+.historyTimestamp {
+  color: var(--text-tertiary);
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.historyCode {
+  background: var(--background-code);
+  border: 1px solid var(--border-primary);
+  border-radius: 3px;
+  padding: 8px;
+  margin: 4px 0;
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  overflow-x: auto;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.historyOutput {
+  background: var(--background-tertiary);
+  border-left: 2px solid var(--success-color);
+  padding: 6px 8px;
+  margin: 4px 0;
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.historyError {
+  background: var(--error-background);
+  border-left: 2px solid var(--error-color);
+  padding: 6px 8px;
+  margin: 4px 0;
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  color: var(--error-color);
+  white-space: pre-wrap;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+/* États réactifs */
+@media (hover: none) {
+  .runButton:hover:not(:disabled),
+  .clearButton:hover:not(:disabled),
+  .settingsButton:hover,
+  .historySummary:hover,
+  .historyItem:hover {
+    transform: none;
+  }
+}
+
+/* États de focus pour l'accessibilité */
+.runButton:focus,
+.stopButton:focus,
+.clearButton:focus,
+.settingsButton:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* États d'exécution */
+.running .runButton {
+  background: var(--warning-color);
+}
+
+.running .runButton:hover {
+  background: var(--warning-color-dark);
+}
+
+/* Mode sombre spécifique */
+.darkMode .output {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.darkMode .error {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.darkMode .historyCode {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .controlBar {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  
+  .mainControls,
+  .settingsControls {
+    justify-content: center;
+  }
+  
+  .stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .statItem {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .codeRunner {
+    border-radius: 4px;
+    min-height: 150px;
+  }
+  
+  .controlBar {
+    padding: 8px 12px;
+  }
+  
+  .runButton,
+  .stopButton,
+  .clearButton {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .outputSection {
+    padding: 12px;
+    min-height: 120px;
+  }
+  
+  .output,
+  .error {
+    font-size: 12px;
+    padding: 8px;
+    max-height: 200px;
+  }
+}
