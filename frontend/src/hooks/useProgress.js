@@ -1,7 +1,7 @@
 // frontend/src/hooks/useProgress.js
 import { useState, useEffect, useContext, useCallback } from 'react';
-import { ProgressContext } from '../context/ProgressContext';
-import { progressService } from '../services/progressService';
+import { useProgress as useProgressContext } from '../context/ProgressContext'; // Fixed import
+import progressService from '../services/progressService';
 import { useNotification } from './useNotification';
 
 /**
@@ -11,7 +11,7 @@ import { useNotification } from './useNotification';
  * @returns {Object} Objet contenant l'état et les méthodes de progression
  */
 export const useProgress = (courseId = null, userId = null) => {
-  const progressContext = useContext(ProgressContext);
+  const progressContext = useProgressContext(); // Use the context hook
   const { showNotification } = useNotification();
   
   // État local
