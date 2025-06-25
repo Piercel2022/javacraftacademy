@@ -1,0 +1,544 @@
+
+/**
+ * Styles pour le composant LearningPath
+ * Gère l'affichage des parcours d'apprentissage personnalisés
+ */
+
+/* ===== VARIABLES CSS ===== */
+:root {
+  --color-background: #ffffff;
+  --color-background-alt: #f8fafc;
+  --color-primary: #3b82f6;
+  --color-primary-light: #93c5fd;
+  --color-success: #10b981;
+  --color-success-light: #d1fae5;
+  --color-warning: #f59e0b;
+  --color-warning-light: #fef3c7;
+  --color-error: #ef4444;
+  --color-error-light: #fee2e2;
+  --color-accent: #8b5cf6;
+  --color-border: #e2e8f0;
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+}
+
+/* ===== CONTENEUR PRINCIPAL ===== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--color-background);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== EN-TÊTE DU PARCOURS ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.pathInfo {
+  flex: 1;
+  max-width: 70%;
+}
+
+.pathTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.pathDescription {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+.pathMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.pathMeta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pathMeta span::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+.headerActions {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* ===== SECTION PROGRESSION ===== */
+.progressSection {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--color-background-alt);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.progressHeader h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--color-text-primary);
+}
+
+.progressText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.progressBar {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--color-background);
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-success) 0%, var(--color-primary) 100%);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+/* ===== CONTAINER DES ÉTAPES ===== */
+.stepsContainer {
+  margin-bottom: 2rem;
+}
+
+.stepsTitle {
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.steps {
+  position: relative;
+}
+
+/* ===== ÉTAPES INDIVIDUELLES ===== */
+.step {
+  position: relative;
+  margin-bottom: 2rem;
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary-light);
+}
+
+.step.completed {
+  background: linear-gradient(135deg, var(--color-success-light) 0%, var(--color-background) 100%);
+  border-color: var(--color-success);
+}
+
+.step.unlocked {
+  border-color: var(--color-primary);
+}
+
+.step.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.step.locked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== CONNECTEURS ENTRE ÉTAPES ===== */
+.connector {
+  position: absolute;
+  top: -2rem;
+  left: 2rem;
+  width: 4px;
+  height: 2rem;
+  background: var(--color-border);
+  transition: background-color 0.3s ease;
+}
+
+.connector.activeConnector {
+  background: var(--color-primary);
+}
+
+.connector.completedConnector {
+  background: var(--color-success);
+}
+
+/* ===== EN-TÊTE D'ÉTAPE ===== */
+.stepHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.stepNumber {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-background-alt);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  transition: all 0.3s ease;
+}
+
+.stepNumber.completedNumber {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.step.unlocked .stepNumber {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.stepInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.stepTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.stepDescription {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.stepBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--color-background-alt);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.badge:first-child {
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border-color: var(--color-success-light);
+}
+
+.badge.facile {
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.badge.moyen {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+
+.badge.difficile {
+  background: var(--color-error-light);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.stepActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.expandButton, .startButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.expandButton {
+  background: var(--color-background-alt);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.expandButton:hover {
+  background: var(--color-border);
+}
+
+.startButton {
+  background: var(--color-primary);
+  color: white;
+}
+
+.startButton:hover {
+  background: var(--color-primary-light);
+}
+
+.startButton:disabled {
+  background: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* ===== CONTENU ÉTENDU D'ÉTAPE ===== */
+.stepContent {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  animation: expandContent 0.3s ease-out;
+}
+
+@keyframes expandContent {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.coursePreview {
+  margin-bottom: 1.5rem;
+}
+
+.objectives,
+.prerequisites {
+  margin-bottom: 1rem;
+}
+
+.objectives h4,
+.prerequisites h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.75rem 0;
+}
+
+.objectives ul,
+.prerequisites ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: none;
+}
+
+.objectives li,
+.prerequisites li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.objectives li::before {
+  content: '→';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.prerequisites li::before {
+  content: '•';
+  position: absolute;
+  left: -1.5rem;
+  color: var(--color-warning);
+  font-weight: 700;
+}
+
+.prerequisites li.completed {
+  color: var(--color-success);
+  text-decoration: line-through;
+}
+
+.prerequisites li.completed::before {
+  content: '✓';
+  color: var(--color-success);
+}
+
+/* ===== RECOMMANDATIONS ===== */
+.recommendations {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--color-background-alt);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.recommendations h3 {
+  font-size: 1.4rem;
+  color: var(--color-text-primary);
+  margin: 0 0 1.5rem 0;
+}
+
+.recommendationList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.recommendation {
+  padding: 1.5rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.recommendation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.recommendation p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.recommendation .badge {
+  margin-right: 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .pathInfo {
+    max-width: 100%;
+  }
+  
+  .pathTitle {
+    font-size: 2rem;
+  }
+  
+  .stepHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .stepActions {
+    justify-content: flex-start;
+  }
+  
+  .recommendationList {
+    grid-template-columns: 1fr;
+  }
+  
+  .pathMeta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.step:nth-child(1) { animation-delay: 0.1s; }
+.step:nth-child(2) { animation-delay: 0.2s; }
+.step:nth-child(3) { animation-delay: 0.3s; }
+.step:nth-child(4) { animation-delay: 0.4s; }
+.step:nth-child(5) { animation-delay: 0.5s; }
+
+/* ===== ÉTATS DE FOCUS POUR ACCESSIBILITÉ ===== */
+.expandButton:focus,
+.startButton:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.step:focus-within {
+  border-color: var(--color-primary);
+}
