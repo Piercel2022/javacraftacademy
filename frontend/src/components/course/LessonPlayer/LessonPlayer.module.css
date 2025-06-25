@@ -1,0 +1,789 @@
+
+/**
+ * Styles pour le composant LessonPlayer
+ * 
+ * @description
+ * Feuille de style modulaire pour le lecteur de leçons interactif.
+ * Gère l'apparence et les animations pour une expérience utilisateur optimale.
+ * 
+ * @features
+ * - Design responsive et adaptatif
+ * - Mode plein écran intégré
+ * - Animations fluides et transitions
+ * - Support des thèmes clair/sombre
+ * - Interface intuitive et moderne
+ * 
+ * @author JavaCraft Academy Team
+ * @since 1.0.0
+ */
+
+/* ===== CONTENEUR PRINCIPAL ===== */
+.lessonPlayer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--background-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  font-family: var(--font-family-base);
+}
+
+.lessonPlayer.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: var(--background-primary);
+}
+
+/* ===== ÉTAT DE CHARGEMENT ===== */
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--background-primary);
+}
+
+.loadingSpinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--color-primary-light);
+  border-top: 4px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== GESTION D'ERREUR ===== */
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--background-primary);
+  padding: 2rem;
+}
+
+.errorMessage {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+  background: var(--background-secondary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-medium);
+}
+
+.errorMessage h3 {
+  color: var(--color-error);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.errorMessage p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.retryButton {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.retryButton:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* ===== EN-TÊTE ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border-light);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  min-height: 80px;
+}
+
+.header.minimized {
+  min-height: 60px;
+  padding: 0.75rem 1.5rem;
+}
+
+.headerLeft {
+  flex: 1;
+  min-width: 0;
+}
+
+.lessonTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lessonMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stepIndicator {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.progressText {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.timeSpent {
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: var(--font-family-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ===== BOUTONS D'ACTION ===== */
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.actionButton:hover {
+  background: var(--background-hover);
+  transform: translateY(-1px);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+.actionButton.primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.actionButton.primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.actionButton.danger {
+  background: var(--color-error);
+  color: white;
+}
+
+.actionButton.danger:hover {
+  background: var(--color-error-dark);
+}
+
+.fullscreenButton {
+  background: transparent;
+  border: 1px solid var(--border-light);
+}
+
+.fullscreenButton:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+/* ===== CONTENU PRINCIPAL ===== */
+.mainContent {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lessonContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background: var(--background-primary);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-light) var(--background-secondary);
+}
+
+.lessonContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lessonContent::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+.lessonContent::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: 4px;
+}
+
+.lessonContent::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ===== ÉTAPES DE LEÇON ===== */
+.stepContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stepTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.stepDescription {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.stepObjectives {
+  background: var(--background-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--color-primary);
+}
+
+.stepObjectives h4 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.stepObjectives ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stepObjectives li {
+  padding: 0.5rem 0;
+  color: var(--text-primary);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.stepObjectives li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-success);
+  font-weight: bold;
+}
+
+/* ===== CODE ET CONTENU TECHNIQUE ===== */
+.codeBlock {
+  background: var(--background-code);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: var(--font-family-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.codeBlock pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.codeBlock code {
+  color: var(--text-code);
+  background: transparent;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.codeLanguage {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copyButton {
+  background: var(--background-tertiary);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ===== SIDEBAR DE NAVIGATION ===== */
+.sidebar {
+  width: 300px;
+  background: var(--background-secondary);
+  border-left: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebarHeader {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebarTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.toggleSidebar {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.toggleSidebar:hover {
+  background: var(--background-hover);
+}
+
+.sidebarContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.stepsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stepItem {
+  margin-bottom: 0.5rem;
+}
+
+.stepLink {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stepLink:hover {
+  background: var(--background-hover);
+  color: var(--text-primary);
+}
+
+.stepLink.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--background-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.stepLink.active .stepNumber {
+  background: var(--color-primary);
+  color: white;
+}
+
+.stepLink.completed .stepNumber {
+  background: var(--color-success);
+  color: white;
+}
+
+.stepName {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+/* ===== BARRE DE PROGRESSION ===== */
+.progressBar {
+  height: 4px;
+  background: var(--background-secondary);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  transition: width 0.3s ease;
+  transform-origin: left;
+}
+
+/* ===== CONTRÔLES DE NAVIGATION ===== */
+.navigationControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-light);
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.navButton.secondary {
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.navButton.secondary:hover:not(:disabled) {
+  background: var(--background-hover);
+  border-color: var(--color-primary);
+}
+
+.navButton.primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.navButton.primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.navInfo {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    height: 100vh;
+    z-index: 200;
+    transition: right 0.3s ease;
+  }
+  
+  .sidebar.open {
+    right: 0;
+  }
+  
+  .sidebarOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+    backdrop-filter: blur(4px);
+  }
+  
+  .lessonContent {
+    padding: 1.5rem;
+  }
+  
+  .navigationControls {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .navigationControls .navButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+    min-height: 70px;
+  }
+  
+  .lessonTitle {
+    font-size: 1.25rem;
+  }
+  
+  .lessonMeta {
+    gap: 0.5rem;
+  }
+  
+  .headerRight {
+    gap: 0.5rem;
+  }
+  
+  .timeSpent {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .lessonContent {
+    padding: 1rem;
+  }
+  
+  .stepTitle {
+    font-size: 1.5rem;
+  }
+  
+  .stepDescription {
+    font-size: 1rem;
+  }
+  
+  .codeBlock {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    min-height: auto;
+    padding: 0.75rem;
+  }
+  
+  .headerLeft {
+    width: 100%;
+  }
+  
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .lessonMeta {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .actionButton {
+    padding: 0.5rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+/* ===== ANIMATIONS ET TRANSITIONS ===== */
+.fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== ÉTATS FOCUS ET ACCESSIBILITÉ ===== */
+.actionButton:focus,
+.navButton:focus,
+.stepLink:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.skipLink {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skipLink:focus {
+  top: 6px;
+}
+
+/* ===== THÈME SOMBRE ===== */
+@media (prefers-color-scheme: dark) {
+  .lessonPlayer {
+    --background-primary: #1a1a1a;
+    --background-secondary: #2d2d2d;
+    --background-tertiary: #3d3d3d;
+    --background-hover: #4d4d4d;
+    --background-code: #252525;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-code: #e6e6e6;
+    --border-light: #404040;
+    --color-primary: #4f9cf9;
+    --color-primary-light: rgba(79, 156, 249, 0.1);
+    --color-primary-dark: #3d7bd9;
+    --color-success: #10b981;
+    --color-error: #ef4444;
+    --color-error-dark: #dc2626;
+    --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ===== IMPRESSION ===== */
+@media print {
+  .header,
+  .sidebar,
+  .navigationControls,
+  .actionButton {
+    display: none !important;
+  }
+  
+  .lessonPlayer {
+    height: auto;
+    overflow: visible;
+  }
+  
+  .mainContent {
+    flex-direction: column;
+  }
+  
+  .lessonContent {
+    overflow: visible;
+    padding: 0;
+  }
+  
+  .codeBlock {
+    break-inside: avoid;
+  }
+}
