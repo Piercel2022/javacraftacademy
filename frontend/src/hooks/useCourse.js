@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useContext } from 'react';
 import { CourseContext } from '../context/CourseContext';
-import { courseService } from '../services/courseService';
+import courseService  from '../services/courseService';
 import { useNotification } from './useNotification';
 import { useAuth } from './useAuth';
 
