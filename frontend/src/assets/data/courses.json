@@ -1,0 +1,453 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://javacraftacademy.com/schemas/courses.json",
+  "title": "JavaCraft Academy - Courses Data Schema",
+  "description": "Structure de données pour les cours Java de l'académie avec métadonnées complètes, progression, et relations entre composants",
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-24T10:00:00Z",
+  
+  "courses": [
+    {
+      "id": "java-fundamentals-2024",
+      "title": "Java Fundamentals - De Zéro à Héros",
+      "slug": "java-fundamentals",
+      "shortDescription": "Maîtrisez les bases de la programmation Java avec une approche pratique et moderne",
+      "longDescription": "Ce cours complet vous emmène de débutant absolu à développeur Java confiant. Apprenez les concepts fondamentaux, la programmation orientée objet, et développez des projets concrets qui enrichiront votre portfolio.",
+      "instructor": {
+        "id": "instructor_001",
+        "name": "Dr. Marie Dubois",
+        "title": "Senior Java Developer & Certified Trainer",
+        "avatar": "/assets/images/instructors/marie-dubois.jpg",
+        "bio": "15 ans d'expérience en développement Java, ancienne architecte chez Oracle",
+        "rating": 4.9,
+        "studentsCount": 12456
+      },
+      "metadata": {
+        "level": "beginner",
+        "duration": {
+          "total": "40 hours",
+          "estimated": "6-8 weeks",
+          "selfPaced": true
+        },
+        "language": "fr",
+        "subtitles": ["fr", "en"],
+        "category": "programming",
+        "subcategory": "java",
+        "price": {
+          "current": 99.99,
+          "original": 149.99,
+          "currency": "EUR",
+          "discount": 33
+        },
+        "rating": {
+          "average": 4.8,
+          "count": 2847,
+          "distribution": {
+            "5": 1823,
+            "4": 712,
+            "3": 234,
+            "2": 54,
+            "1": 24
+          }
+        },
+        "enrollment": {
+          "totalStudents": 15234,
+          "activeStudents": 8456,
+          "completionRate": 0.73
+        },
+        "lastUpdated": "2024-11-15T14:30:00Z",
+        "isActive": true,
+        "isFeatured": true,
+        "difficultyScore": 2.3
+      },
+      "prerequisites": [],
+      "whatYouWillLearn": [
+        "Maîtriser la syntaxe Java et les concepts de base",
+        "Comprendre et appliquer la programmation orientée objet",
+        "Développer des applications console et graphiques",
+        "Gérer les exceptions et déboguer efficacement",
+        "Utiliser les collections et structures de données",
+        "Implémenter des patterns de conception courants",
+        "Connecter Java aux bases de données",
+        "Créer des tests unitaires avec JUnit"
+      ],
+      "tags": [
+        "java", "programming", "oop", "beginner", "fundamentals", 
+        "console", "gui", "database", "testing", "patterns"
+      ],
+      "thumbnail": "/assets/images/courses/java-fundamentals-thumb.jpg",
+      "coverImage": "/assets/images/courses/java-fundamentals-cover.jpg",
+      "promoVideo": "/assets/videos/courses/java-fundamentals-promo.mp4",
+      
+      "modules": [
+        {
+          "id": "module_001",
+          "title": "Introduction et Configuration",
+          "description": "Installation de l'environnement et premiers pas",
+          "order": 1,
+          "duration": "3 hours",
+          "isLocked": false,
+          "lessons": [
+            {
+              "id": "lesson_001_001",
+              "title": "Bienvenue dans JavaCraft Academy",
+              "type": "video",
+              "duration": "12:30",
+              "isCompleted": false,
+              "isFree": true,
+              "content": {
+                "videoUrl": "/assets/videos/lessons/welcome.mp4",
+                "transcript": "/assets/transcripts/welcome.txt",
+                "slides": "/assets/slides/welcome.pdf"
+              },
+              "resources": [
+                {
+                  "title": "Guide de démarrage rapide",
+                  "type": "pdf",
+                  "url": "/assets/resources/quick-start-guide.pdf"
+                }
+              ]
+            },
+            {
+              "id": "lesson_001_002", 
+              "title": "Installation de Java JDK",
+              "type": "video",
+              "duration": "15:45",
+              "isCompleted": false,
+              "isFree": true,
+              "content": {
+                "videoUrl": "/assets/videos/lessons/jdk-installation.mp4",
+                "codeExamples": [
+                  {
+                    "title": "Vérification de l'installation",
+                    "code": "java -version\njavac -version",
+                    "language": "bash"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lesson_001_003",
+              "title": "Configuration de l'IDE (IntelliJ IDEA)",
+              "type": "video",
+              "duration": "20:15",
+              "isCompleted": false,
+              "isFree": false,
+              "content": {
+                "videoUrl": "/assets/videos/lessons/ide-setup.mp4",
+                "attachments": [
+                  {
+                    "title": "Paramètres IntelliJ recommandés",
+                    "type": "xml",
+                    "url": "/assets/config/intellij-settings.xml"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "module_002",
+          "title": "Syntaxe de Base et Variables",
+          "description": "Apprendre les fondamentaux du langage Java",
+          "order": 2,
+          "duration": "5 hours",
+          "isLocked": false,
+          "lessons": [
+            {
+              "id": "lesson_002_001",
+              "title": "Votre Premier Programme Java",
+              "type": "interactive",
+              "duration": "25:00",
+              "isCompleted": false,
+              "isFree": false,
+              "content": {
+                "videoUrl": "/assets/videos/lessons/first-program.mp4",
+                "codeExercise": {
+                  "title": "Hello World Amélioré",
+                  "description": "Créez un programme qui affiche un message personnalisé",
+                  "starterCode": "public class HelloWorld {\n    public static void main(String[] args) {\n        // Votre code ici\n    }\n}",
+                  "solution": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Bonjour JavaCraft Academy!\");\n        System.out.println(\"Je commence mon apprentissage Java\");\n    }\n}",
+                  "hints": [
+                    "Utilisez System.out.println() pour afficher du texte",
+                    "N'oubliez pas les guillemets pour les chaînes de caractères"
+                  ]
+                }
+              }
+            },
+            {
+              "id": "lesson_002_002",
+              "title": "Variables et Types de Données",
+              "type": "interactive",
+              "duration": "30:20",
+              "isCompleted": false,
+              "isFree": false,
+              "content": {
+                "videoUrl": "/assets/videos/lessons/variables-types.mp4",
+                "quiz": {
+                  "questions": [
+                    {
+                      "id": "q001",
+                      "type": "multiple-choice",
+                      "question": "Quel est le type de donnée approprié pour stocker l'âge d'une personne?",
+                      "options": ["String", "int", "double", "boolean"],
+                      "correctAnswer": 1,
+                      "explanation": "Le type int est approprié car l'âge est un nombre entier positif."
+                    }
+                  ]
+                },
+                "practiceExercises": [
+                  {
+                    "title": "Déclaration de Variables",
+                    "description": "Déclarez des variables pour différents types de données",
+                    "starterCode": "public class Variables {\n    public static void main(String[] args) {\n        // Déclarez vos variables ici\n    }\n}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "module_003",
+          "title": "Structures de Contrôle",
+          "description": "Conditions, boucles et logique de programme",
+          "order": 3,
+          "duration": "6 hours",
+          "isLocked": false,
+          "lessons": [
+            {
+              "id": "lesson_003_001",
+              "title": "Instructions Conditionnelles (if/else)",
+              "type": "interactive",
+              "duration": "35:10",
+              "isCompleted": false,
+              "isFree": false,
+              "content": {
+                "videoUrl": "/assets/videos/lessons/conditionals.mp4",
+                "project": {
+                  "title": "Calculateur de Notes",
+                  "description": "Créez un programme qui évalue des notes d'étudiants",
+                  "requirements": [
+                    "Demander une note à l'utilisateur",
+                    "Afficher la mention correspondante (A, B, C, D, F)",
+                    "Gérer les cas d'erreur"
+                  ],
+                  "difficulty": "beginner",
+                  "estimatedTime": "45 minutes"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      
+      "finalProject": {
+        "id": "project_java_fundamentals",
+        "title": "Système de Gestion de Bibliothèque",
+        "description": "Développez une application complète de gestion de bibliothèque avec interface console",
+        "requirements": [
+          "Gestion des livres (ajout, suppression, recherche)",
+          "Système d'emprunt et de retour",
+          "Gestion des utilisateurs",
+          "Rapports et statistiques",
+          "Interface utilisateur intuitive"
+        ],
+        "deliverables": [
+          "Code source complet",
+          "Documentation technique",
+          "Guide utilisateur",
+          "Présentation vidéo (5 min)"
+        ],
+        "evaluation": {
+          "criteria": [
+            {
+              "name": "Fonctionnalité",
+              "weight": 40,
+              "description": "Le programme fonctionne correctement et répond aux exigences"
+            },
+            {
+              "name": "Qualité du Code",
+              "weight": 30,
+              "description": "Code propre, bien structuré et commenté"
+            },
+            {
+              "name": "Interface Utilisateur",
+              "weight": 20,
+              "description": "Interface intuitive et gestion des erreurs"
+            },
+            {
+              "name": "Documentation",
+              "weight": 10,
+              "description": "Documentation claire et complète"
+            }
+          ],
+          "passingScore": 70
+        }
+      },
+      
+      "achievements": [
+        {
+          "id": "first_program",
+          "title": "Premier Programme",
+          "description": "Écrivez et exécutez votre premier programme Java",
+          "icon": "/assets/images/achievements/first-program.svg",
+          "points": 50
+        },
+        {
+          "id": "oop_master",
+          "title": "Maître de l'OOP",
+          "description": "Maîtrisez les concepts de la programmation orientée objet",
+          "icon": "/assets/images/achievements/oop-master.svg",
+          "points": 200
+        },
+        {
+          "id": "project_complete",
+          "title": "Projet Terminé",
+          "description": "Terminez le projet final avec succès",
+          "icon": "/assets/images/achievements/project-complete.svg",
+          "points": 500
+        }
+      ],
+      
+      "relatedCourses": [
+        "java-advanced-2024",
+        "spring-framework-2024",
+        "java-web-development-2024"
+      ],
+      
+      "faq": [
+        {
+          "question": "Dois-je avoir une expérience préalable en programmation?",
+          "answer": "Non, ce cours est conçu pour les débutants absolus. Nous commençons par les bases."
+        },
+        {
+          "question": "Quel matériel ai-je besoin?",
+          "answer": "Un ordinateur avec au moins 4GB de RAM et une connexion internet stable."
+        }
+      ]
+    },
+    
+    {
+      "id": "java-advanced-2024",
+      "title": "Java Avancé - Techniques Professionnelles",
+      "slug": "java-advanced",
+      "shortDescription": "Approfondissez vos compétences Java avec les techniques avancées utilisées en entreprise",
+      "longDescription": "Passez au niveau supérieur avec les concepts avancés de Java : multithreading, design patterns, performance optimization, et architectures modernes.",
+      "instructor": {
+        "id": "instructor_002",
+        "name": "Jean-Pierre Martin",
+        "title": "Architecte Java Senior & Tech Lead",
+        "avatar": "/assets/images/instructors/jean-pierre-martin.jpg",
+        "bio": "20+ ans d'expérience, expert en architectures distribuées et performance",
+        "rating": 4.9,
+        "studentsCount": 8932
+      },
+      "metadata": {
+        "level": "advanced",
+        "duration": {
+          "total": "60 hours",
+          "estimated": "10-12 weeks",
+          "selfPaced": true
+        },
+        "language": "fr",
+        "subtitles": ["fr", "en"],
+        "category": "programming",
+        "subcategory": "java",
+        "price": {
+          "current": 149.99,
+          "original": 199.99,
+          "currency": "EUR",
+          "discount": 25
+        },
+        "rating": {
+          "average": 4.9,
+          "count": 1543,
+          "distribution": {
+            "5": 1204,
+            "4": 278,
+            "3": 45,
+            "2": 12,
+            "1": 4
+          }
+        },
+        "enrollment": {
+          "totalStudents": 6789,
+          "activeStudents": 3456,
+          "completionRate": 0.68
+        },
+        "lastUpdated": "2024-10-22T09:15:00Z",
+        "isActive": true,
+        "isFeatured": true,
+        "difficultyScore": 8.7
+      },
+      "prerequisites": [
+        "java-fundamentals-2024"
+      ],
+      "whatYouWillLearn": [
+        "Maîtriser la programmation concurrente et le multithreading",
+        "Implémenter des design patterns avancés",
+        "Optimiser les performances des applications Java",
+        "Utiliser les APIs Java modernes (Streams, Optional, etc.)",
+        "Développer des architectures scalables",
+        "Gérer la mémoire et le garbage collection",
+        "Intégrer des frameworks et bibliothèques tierces",
+        "Appliquer les meilleures pratiques de sécurité"
+      ],
+      "tags": [
+        "java", "advanced", "multithreading", "performance", "patterns", 
+        "concurrency", "optimization", "architecture", "security", "streams"
+      ],
+      "thumbnail": "/assets/images/courses/java-advanced-thumb.jpg",
+      "coverImage": "/assets/images/courses/java-advanced-cover.jpg",
+      "promoVideo": "/assets/videos/courses/java-advanced-promo.mp4"
+    }
+  ],
+  
+  "categories": [
+    {
+      "id": "programming",
+      "name": "Programmation",
+      "description": "Cours de programmation dans différents langages",
+      "icon": "/assets/images/categories/programming.svg",
+      "subcategories": [
+        {
+          "id": "java",
+          "name": "Java",
+          "description": "Développement avec le langage Java",
+          "courseCount": 12
+        },
+        {
+          "id": "web",
+          "name": "Développement Web",
+          "description": "Technologies web modernes",
+          "courseCount": 8
+        }
+      ]
+    }
+  ],
+  
+  "learningPaths": [
+    {
+      "id": "java_developer_path",
+      "title": "Parcours Développeur Java",
+      "description": "De débutant à développeur Java professionnel",
+      "duration": "6-8 mois",
+      "difficulty": "beginner-to-advanced",
+      "courses": [
+        "java-fundamentals-2024",
+        "java-advanced-2024",
+        "spring-framework-2024",
+        "java-web-development-2024"
+      ],
+      "skills": [
+        "Programmation Java",
+        "Programmation Orientée Objet",
+        "Développement Web",
+        "Framework Spring",
+        "Bases de données",
+        "Tests unitaires"
+      ]
+    }
+  ]
+}

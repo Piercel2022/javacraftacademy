@@ -1,0 +1,736 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://javacraftacademy.com/schemas/users.json",
+  "title": "JavaCraft Academy - Users Data Schema",
+  "description": "Structure de données pour les profils utilisateurs avec progression, achievements et préférences",
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-24T10:00:00Z",
+  
+  "users": [
+    {
+      "id": "user_001",
+      "uuid": "550e8400-e29b-41d4-a716-446655440001",
+      "username": "marie.learner",
+      "email": "marie.learner@example.com",
+      "emailVerified": true,
+      "profile": {
+        "firstName": "Marie",
+        "lastName": "Dupont",
+        "displayName": "Marie D.",
+        "avatar": "/assets/images/avatars/marie-dupont.jpg",
+        "bio": "Développeuse passionnée en reconversion professionnelle. Ancienne comptable qui découvre le monde de la programmation avec Java.",
+        "dateOfBirth": "1990-05-15",
+        "location": {
+          "country": "France",
+          "city": "Paris",
+          "timezone": "Europe/Paris"
+        },
+        "socialLinks": {
+          "linkedin": "https://linkedin.com/in/marie-dupont-dev",
+          "github": "https://github.com/marie-learner",
+          "twitter": "@marie_codes"
+        },
+        "occupation": "Étudiante en reconversion",
+        "experience": "beginner",
+        "goals": [
+          "Devenir développeuse Java",
+          "Créer des applications web",
+          "Trouver un emploi dans la tech"
+        ]
+      },
+      "account": {
+        "status": "active",
+        "subscription": {
+          "type": "premium",
+          "startDate": "2024-01-15T08:00:00Z",
+          "endDate": "2026-01-15T08:00:00Z",
+          "autoRenew": true,
+          "paymentMethod": "credit_card"
+        },
+        "registrationDate": "2024-01-15T08:00:00Z",
+        "lastLogin": "2024-12-23T14:30:00Z",
+        "loginCount": 156,
+        "isVerified": true,
+        "role": "student"
+      },
+      "preferences": {
+        "language": "fr",
+        "theme": "dark",
+        "notifications": {
+          "email": {
+            "courseUpdates": true,
+            "achievements": true,
+            "reminders": true,
+            "newsletter": false
+          },
+          "push": {
+            "studyReminders": true,
+            "achievements": true,
+            "courseUpdates": false
+          }
+        },
+        "privacy": {
+          "profileVisibility": "public",
+          "showProgress": true,
+          "showAchievements": true
+        },
+        "learning": {
+          "dailyGoal": 60,
+          "preferredStudyTime": "evening",
+          "difficultyPreference": "gradual",
+          "videoSpeed": 1.25
+        }
+      },
+      "progress": {
+        "totalStudyTime": 2340,
+        "currentStreak": 7,
+        "longestStreak": 23,
+        "coursesEnrolled": 3,
+        "coursesCompleted": 1,
+        "lessonsCompleted": 45,
+        "totalLessons": 120,
+        "overallProgress": 0.375,
+        "level": 3,
+        "xp": 2850,
+        "nextLevelXp": 3500,
+        "weeklyGoal": 420,
+        "weeklyProgress": 285,
+        "lastActivity": "2024-12-23T14:30:00Z"
+      },
+      "enrolledCourses": [
+        {
+          "courseId": "java-fundamentals-2024",
+          "enrollmentDate": "2024-01-15T08:00:00Z",
+          "progress": 0.85,
+          "status": "in_progress",
+          "completedLessons": 34,
+          "totalLessons": 40,
+          "lastAccessed": "2024-12-23T14:30:00Z",
+          "timeSpent": 1980,
+          "averageRating": 5.0,
+          "notes": "Excellent cours pour débuter en Java. Les explications sont claires et les exercices progressifs.",
+          "currentLesson": "lesson_008_003",
+          "certificateEarned": false,
+          "bookmarks": [
+            "lesson_003_001",
+            "lesson_005_002",
+            "lesson_007_001"
+          ]
+        },
+        {
+          "courseId": "java-advanced-2024",
+          "enrollmentDate": "2024-11-01T10:00:00Z",
+          "progress": 0.15,
+          "status": "in_progress",
+          "completedLessons": 6,
+          "totalLessons": 55,
+          "lastAccessed": "2024-12-20T16:45:00Z",
+          "timeSpent": 360,
+          "currentLesson": "lesson_002_001",
+          "certificateEarned": false,
+          "bookmarks": []
+        }
+      ],
+      "achievements": [
+        {
+          "id": "first_program",
+          "unlockedDate": "2024-01-16T15:30:00Z",
+          "progress": 1.0,
+          "xpEarned": 50
+        },
+        {
+          "id": "week_streak",
+          "unlockedDate": "2024-01-22T09:15:00Z",
+          "progress": 1.0,
+          "xpEarned": 100
+        },
+        {
+          "id": "oop_master",
+          "unlockedDate": "2024-03-10T11:20:00Z",
+          "progress": 1.0,
+          "xpEarned": 200
+        },
+        {
+          "id": "quiz_champion",
+          "unlockedDate": "2024-05-15T14:45:00Z",
+          "progress": 1.0,
+          "xpEarned": 150
+        }
+      ],
+      "statistics": {
+        "studyHours": {
+          "thisWeek": 4.75,
+          "thisMonth": 18.5,
+          "allTime": 39.0
+        },
+        "performance": {
+          "averageQuizScore": 0.89,
+          "projectsCompleted": 3,
+          "codeSubmissions": 127,
+          "helpRequests": 8
+        },
+        "engagement": {
+          "forumPosts": 15,
+          "questionsAsked": 22,
+          "answersGiven": 8,
+          "likes": 45
+        }
+      },
+      "learningHistory": [
+        {
+          "date": "2024-12-23",
+          "activity": "lesson_completed",
+          "courseId": "java-fundamentals-2024",
+          "lessonId": "lesson_008_002",
+          "timeSpent": 45,
+          "score": 0.92
+        },
+        {
+          "date": "2024-12-22",
+          "activity": "quiz_completed",
+          "courseId": "java-fundamentals-2024",
+          "lessonId": "lesson_008_001",
+          "timeSpent": 12,
+          "score": 0.85
+        }
+      ]
+    },
+    
+    {
+      "id": "user_002",
+      "uuid": "550e8400-e29b-41d4-a716-446655440002",
+      "username": "alex.coder",
+      "email": "alex.coder@example.com",
+      "emailVerified": true,
+      "profile": {
+        "firstName": "Alexandre",
+        "lastName": "Martin",
+        "displayName": "Alex M.",
+        "avatar": "/assets/images/avatars/alex-martin.jpg",
+        "bio": "Développeur junior avec 2 ans d'expérience. Cherche à approfondir mes connaissances en Java et Spring.",
+        "dateOfBirth": "1995-08-22",
+        "location": {
+          "country": "France",
+          "city": "Lyon",
+          "timezone": "Europe/Paris"
+        },
+        "socialLinks": {
+          "linkedin": "https://linkedin.com/in/alex-martin-dev",
+          "github": "https://github.com/alex-coder",
+          "portfolio": "https://alexmartin.dev"
+        },
+        "occupation": "Développeur Junior",
+        "experience": "intermediate",
+        "goals": [
+          "Maîtriser Spring Framework",
+          "Devenir développeur senior",
+          "Contribuer à des projets open source"
+        ]
+      },
+      "account": {
+        "status": "active",
+        "subscription": {
+          "type": "premium",
+          "startDate": "2024-03-01T09:00:00Z",
+          "endDate": "2025-03-01T09:00:00Z",
+          "autoRenew": true,
+          "paymentMethod": "paypal"
+        },
+        "registrationDate": "2024-03-01T09:00:00Z",
+        "lastLogin": "2024-12-24T09:15:00Z",
+        "loginCount": 89,
+        "isVerified": true,
+        "role": "student"
+      },
+      "preferences": {
+        "language": "fr",
+        "theme": "light",
+        "notifications": {
+          "email": {
+            "courseUpdates": true,
+            "achievements": true,
+            "reminders": false,
+            "newsletter": true
+          },
+          "push": {
+            "studyReminders": false,
+            "achievements": true,
+            "courseUpdates": true
+          }
+        },
+        "privacy": {
+          "profileVisibility": "public",
+          "showProgress": true,
+          "showAchievements": true
+        },
+        "learning": {
+          "dailyGoal": 90,
+          "preferredStudyTime": "morning",
+          "difficultyPreference": "challenging",
+          "videoSpeed": 1.5
+        }
+      },
+      "progress": {
+        "totalStudyTime": 4680,
+        "currentStreak": 12,
+        "longestStreak": 31,
+        "coursesEnrolled": 4,
+        "coursesCompleted": 2,
+        "lessonsCompleted": 78,
+        "totalLessons": 165,
+        "overallProgress": 0.473,
+        "level": 5,
+        "xp": 5240,
+        "nextLevelXp": 6000,
+        "weeklyGoal": 630,
+        "weeklyProgress": 720,
+        "lastActivity": "2024-12-24T09:15:00Z"
+      },
+      "enrolledCourses": [
+        {
+          "courseId": "java-fundamentals-2024",
+          "enrollmentDate": "2024-03-01T09:00:00Z",
+          "progress": 1.0,
+          "status": "completed",
+          "completedLessons": 40,
+          "totalLessons": 40,
+          "lastAccessed": "2024-07-15T16:20:00Z",
+          "timeSpent": 2100,
+          "averageRating": 4.8,
+          "notes": "Bon cours de révision des bases Java",
+          "certificateEarned": true,
+          "certificateDate": "2024-07-15T16:20:00Z",
+          "bookmarks": []
+        },
+        {
+          "courseId": "java-advanced-2024",
+          "enrollmentDate": "2024-07-16T08:30:00Z",
+          "progress": 0.65,
+          "status": "in_progress",
+          "completedLessons": 36,
+          "totalLessons": 55,
+          "lastAccessed": "2024-12-24T09:15:00Z",
+          "timeSpent": 2580,
+          "averageRating": 4.9,
+          "currentLesson": "lesson_007_002",
+          "certificateEarned": false,
+          "bookmarks": [
+            "lesson_004_003",
+            "lesson_006_001"
+          ]
+        },
+        {
+          "courseId": "spring-boot-mastery",
+          "enrollmentDate": "2024-10-01T10:00:00Z",
+          "progress": 0.25,
+          "status": "in_progress",
+          "completedLessons": 8,
+          "totalLessons": 32,
+          "lastAccessed": "2024-12-20T18:30:00Z",
+          "timeSpent": 480,
+          "currentLesson": "lesson_003_001",
+          "certificateEarned": false,
+          "bookmarks": ["lesson_002_002"]
+        }
+      ],
+      "achievements": [
+        {
+          "id": "first_program",
+          "unlockedDate": "2024-03-02T10:15:00Z",
+          "progress": 1.0,
+          "xpEarned": 50
+        },
+        {
+          "id": "week_streak",
+          "unlockedDate": "2024-03-08T11:30:00Z",
+          "progress": 1.0,
+          "xpEarned": 100
+        },
+        {
+          "id": "month_streak",
+          "unlockedDate": "2024-04-01T09:45:00Z",
+          "progress": 1.0,
+          "xpEarned": 300
+        },
+        {
+          "id": "course_completed",
+          "unlockedDate": "2024-07-15T16:20:00Z",
+          "progress": 1.0,
+          "xpEarned": 500
+        },
+        {
+          "id": "oop_master",
+          "unlockedDate": "2024-05-20T14:10:00Z",
+          "progress": 1.0,
+          "xpEarned": 200
+        },
+        {
+          "id": "quiz_champion",
+          "unlockedDate": "2024-06-12T13:25:00Z",
+          "progress": 1.0,
+          "xpEarned": 150
+        },
+        {
+          "id": "code_warrior",
+          "unlockedDate": "2024-08-05T15:40:00Z",
+          "progress": 1.0,
+          "xpEarned": 250
+        }
+      ],
+      "statistics": {
+        "studyHours": {
+          "thisWeek": 12.0,
+          "thisMonth": 42.5,
+          "allTime": 78.0
+        },
+        "performance": {
+          "averageQuizScore": 0.92,
+          "projectsCompleted": 8,
+          "codeSubmissions": 245,
+          "helpRequests": 3
+        },
+        "engagement": {
+          "forumPosts": 28,
+          "questionsAsked": 12,
+          "answersGiven": 35,
+          "likes": 128
+        }
+      },
+      "learningHistory": [
+        {
+          "date": "2024-12-24",
+          "activity": "lesson_completed",
+          "courseId": "java-advanced-2024",
+          "lessonId": "lesson_007_001",
+          "timeSpent": 65,
+          "score": 0.95
+        },
+        {
+          "date": "2024-12-23",
+          "activity": "project_submitted",
+          "courseId": "java-advanced-2024",
+          "lessonId": "lesson_006_004",
+          "timeSpent": 120,
+          "score": 0.88
+        }
+      ]
+    },
+
+    {
+      "id": "user_003",
+      "uuid": "550e8400-e29b-41d4-a716-446655440003",
+      "username": "sophie.dev",
+      "email": "sophie.dev@example.com",
+      "emailVerified": true,
+      "profile": {
+        "firstName": "Sophie",
+        "lastName": "Dubois",
+        "displayName": "Sophie D.",
+        "avatar": "/assets/images/avatars/sophie-dubois.jpg",
+        "bio": "Développeuse senior avec 5 ans d'expérience. Mentor active dans la communauté tech.",
+        "dateOfBirth": "1988-12-03",
+        "location": {
+          "country": "France",
+          "city": "Toulouse",
+          "timezone": "Europe/Paris"
+        },
+        "socialLinks": {
+          "linkedin": "https://linkedin.com/in/sophie-dubois-dev",
+          "github": "https://github.com/sophie-dev",
+          "twitter": "@sophie_codes",
+          "blog": "https://sophiedev.blog"
+        },
+        "occupation": "Développeuse Senior",
+        "experience": "expert",
+        "goals": [
+          "Devenir architecte logiciel",
+          "Mentorer des juniors",
+          "Maîtriser les microservices"
+        ]
+      },
+      "account": {
+        "status": "active",
+        "subscription": {
+          "type": "premium_plus",
+          "startDate": "2024-01-01T00:00:00Z",
+          "endDate": "2025-01-01T00:00:00Z",
+          "autoRenew": true,
+          "paymentMethod": "bank_transfer"
+        },
+        "registrationDate": "2024-01-01T00:00:00Z",
+        "lastLogin": "2024-12-24T07:45:00Z",
+        "loginCount": 278,
+        "isVerified": true,
+        "role": "mentor"
+      },
+      "preferences": {
+        "language": "fr",
+        "theme": "auto",
+        "notifications": {
+          "email": {
+            "courseUpdates": true,
+            "achievements": false,
+            "reminders": false,
+            "newsletter": true
+          },
+          "push": {
+            "studyReminders": false,
+            "achievements": false,
+            "courseUpdates": true
+          }
+        },
+        "privacy": {
+          "profileVisibility": "public",
+          "showProgress": true,
+          "showAchievements": true
+        },
+        "learning": {
+          "dailyGoal": 45,
+          "preferredStudyTime": "morning",
+          "difficultyPreference": "expert",
+          "videoSpeed": 2.0
+        }
+      },
+      "progress": {
+        "totalStudyTime": 6840,
+        "currentStreak": 45,
+        "longestStreak": 67,
+        "coursesEnrolled": 6,
+        "coursesCompleted": 4,
+        "lessonsCompleted": 156,
+        "totalLessons": 245,
+        "overallProgress": 0.637,
+        "level": 8,
+        "xp": 9650,
+        "nextLevelXp": 12000,
+        "weeklyGoal": 315,
+        "weeklyProgress": 380,
+        "lastActivity": "2024-12-24T07:45:00Z"
+      },
+      "enrolledCourses": [
+        {
+          "courseId": "java-fundamentals-2024",
+          "enrollmentDate": "2024-01-01T00:00:00Z",
+          "progress": 1.0,
+          "status": "completed",
+          "completedLessons": 40,
+          "totalLessons": 40,
+          "lastAccessed": "2024-02-15T14:20:00Z",
+          "timeSpent": 800,
+          "averageRating": 4.5,
+          "notes": "Révision rapide des fondamentaux",
+          "certificateEarned": true,
+          "certificateDate": "2024-02-15T14:20:00Z",
+          "bookmarks": []
+        },
+        {
+          "courseId": "java-advanced-2024",
+          "enrollmentDate": "2024-02-16T08:00:00Z",
+          "progress": 1.0,
+          "status": "completed",
+          "completedLessons": 55,
+          "totalLessons": 55,
+          "lastAccessed": "2024-06-30T16:45:00Z",
+          "timeSpent": 2200,
+          "averageRating": 4.9,
+          "certificateEarned": true,
+          "certificateDate": "2024-06-30T16:45:00Z",
+          "bookmarks": []
+        },
+        {
+          "courseId": "spring-boot-mastery",
+          "enrollmentDate": "2024-07-01T09:00:00Z",
+          "progress": 1.0,
+          "status": "completed",
+          "completedLessons": 32,
+          "totalLessons": 32,
+          "lastAccessed": "2024-09-15T11:30:00Z",
+          "timeSpent": 1600,
+          "averageRating": 5.0,
+          "certificateEarned": true,
+          "certificateDate": "2024-09-15T11:30:00Z",
+          "bookmarks": []
+        },
+        {
+          "courseId": "microservices-architecture",
+          "enrollmentDate": "2024-09-16T10:00:00Z",
+          "progress": 0.78,
+          "status": "in_progress",
+          "completedLessons": 29,
+          "totalLessons": 48,
+          "lastAccessed": "2024-12-24T07:45:00Z",
+          "timeSpent": 2240,
+          "averageRating": 4.8,
+          "currentLesson": "lesson_008_002",
+          "certificateEarned": false,
+          "bookmarks": [
+            "lesson_005_003",
+            "lesson_007_001"
+          ]
+        }
+      ],
+      "achievements": [
+        {
+          "id": "first_program",
+          "unlockedDate": "2024-01-01T08:30:00Z",
+          "progress": 1.0,
+          "xpEarned": 50
+        },
+        {
+          "id": "week_streak",
+          "unlockedDate": "2024-01-07T09:15:00Z",
+          "progress": 1.0,
+          "xpEarned": 100
+        },
+        {
+          "id": "month_streak",
+          "unlockedDate": "2024-01-31T10:45:00Z",
+          "progress": 1.0,
+          "xpEarned": 300
+        },
+        {
+          "id": "course_completed",
+          "unlockedDate": "2024-02-15T14:20:00Z",
+          "progress": 1.0,
+          "xpEarned": 500
+        },
+        {
+          "id": "mentor_badge",
+          "unlockedDate": "2024-04-10T16:30:00Z",
+          "progress": 1.0,
+          "xpEarned": 1000
+        },
+        {
+          "id": "expert_level",
+          "unlockedDate": "2024-08-20T13:15:00Z",
+          "progress": 1.0,
+          "xpEarned": 750
+        },
+        {
+          "id": "community_hero",
+          "unlockedDate": "2024-11-05T15:45:00Z",
+          "progress": 1.0,
+          "xpEarned": 500
+        }
+      ],
+      "statistics": {
+        "studyHours": {
+          "thisWeek": 6.3,
+          "thisMonth": 28.7,
+          "allTime": 114.0
+        },
+        "performance": {
+          "averageQuizScore": 0.96,
+          "projectsCompleted": 15,
+          "codeSubmissions": 387,
+          "helpRequests": 0
+        },
+        "engagement": {
+          "forumPosts": 156,
+          "questionsAsked": 8,
+          "answersGiven": 245,
+          "likes": 892
+        }
+      },
+      "learningHistory": [
+        {
+          "date": "2024-12-24",
+          "activity": "lesson_completed",
+          "courseId": "microservices-architecture",
+          "lessonId": "lesson_008_001",
+          "timeSpent": 45,
+          "score": 0.98
+        },
+        {
+          "date": "2024-12-23",
+          "activity": "mentor_session",
+          "courseId": "java-fundamentals-2024",
+          "timeSpent": 90,
+          "notes": "Session de mentorat avec 3 étudiants"
+        }
+      ]
+    }
+  ],
+  
+  "userRoles": {
+    "student": {
+      "permissions": [
+        "view_courses",
+        "enroll_courses",
+        "submit_assignments",
+        "participate_forum",
+        "view_progress"
+      ]
+    },
+    "mentor": {
+      "permissions": [
+        "view_courses",
+        "enroll_courses",
+        "submit_assignments",
+        "participate_forum",
+        "view_progress",
+        "mentor_students",
+        "create_study_groups",
+        "moderate_forum"
+      ]
+    },
+    "instructor": {
+      "permissions": [
+        "view_courses",
+        "create_courses",
+        "edit_courses",
+        "grade_assignments",
+        "view_analytics",
+        "manage_students",
+        "moderate_forum"
+      ]
+    }
+  },
+
+  "subscriptionTypes": {
+    "free": {
+      "price": 0,
+      "features": [
+        "Access to 2 free courses",
+        "Basic progress tracking",
+        "Community forum access"
+      ],
+      "limitations": {
+        "coursesLimit": 2,
+        "downloadLimit": 0,
+        "supportLevel": "community"
+      }
+    },
+    "premium": {
+      "price": 29.99,
+      "features": [
+        "Access to all courses",
+        "Offline downloads",
+        "Progress analytics",
+        "Email support",
+        "Certificates"
+      ],
+      "limitations": {
+        "coursesLimit": null,
+        "downloadLimit": null,
+        "supportLevel": "email"
+      }
+    },
+    "premium_plus": {
+      "price": 49.99,
+      "features": [
+        "All premium features",
+        "1-on-1 mentoring sessions",
+        "Priority support",
+        "Advanced analytics",
+        "Early access to new courses"
+      ],
+      "limitations": {
+        "coursesLimit": null,
+        "downloadLimit": null,
+        "supportLevel": "priority"
+      }
+    }
+  }
+}

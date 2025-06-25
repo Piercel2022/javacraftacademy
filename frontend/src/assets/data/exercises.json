@@ -1,0 +1,327 @@
+
+{
+  "exercises": [
+    {
+      "id": "exercise_001",
+      "title": "Premier Programme Java",
+      "description": "Créez votre premier programme Java qui affiche un message de bienvenue.",
+      "difficulty": "beginner",
+      "category": "basics",
+      "type": "coding",
+      "lessonId": "lesson_001_003",
+      "courseId": "java_fundamentals",
+      "estimatedTime": 10,
+      "xpReward": 25,
+      "instructions": [
+        "Créez une classe publique nommée 'Welcome'",
+        "Ajoutez la méthode main avec la signature correcte",
+        "Utilisez System.out.println pour afficher 'Bienvenue dans JavaCraft Academy!'",
+        "Compilez et exécutez votre programme"
+      ],
+      "starterCode": "// Votre code ici\n",
+      "solution": "public class Welcome {\n    public static void main(String[] args) {\n        System.out.println(\"Bienvenue dans JavaCraft Academy!\");\n    }\n}",
+      "expectedOutput": "Bienvenue dans JavaCraft Academy!",
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Bienvenue dans JavaCraft Academy!",
+          "description": "Affichage du message de bienvenue"
+        }
+      ],
+      "hints": [
+        "N'oubliez pas le mot-clé 'public' pour la classe",
+        "La méthode main doit être 'public static void main(String[] args)'",
+        "Utilisez des guillemets doubles pour les chaînes de caractères"
+      ],
+      "tags": ["first-program", "hello-world", "basics"],
+      "rubric": {
+        "criteria": [
+          {
+            "name": "Syntaxe correcte",
+            "points": 5,
+            "description": "Le code compile sans erreur"
+          },
+          {
+            "name": "Sortie correcte",
+            "points": 5,
+            "description": "Le programme affiche le message attendu"
+          }
+        ],
+        "totalPoints": 10
+      }
+    },
+    {
+      "id": "exercise_002",
+      "title": "Variables et Types de Données",
+      "description": "Déclarez et utilisez différents types de variables en Java.",
+      "difficulty": "beginner",
+      "category": "variables",
+      "type": "coding",
+      "lessonId": "lesson_002_001",
+      "courseId": "java_fundamentals",
+      "estimatedTime": 15,
+      "xpReward": 35,
+      "instructions": [
+        "Déclarez une variable int nommée 'age' avec la valeur 25",
+        "Déclarez une variable String nommée 'nom' avec votre prénom",
+        "Déclarez une variable double nommée 'taille' avec votre taille en mètres",
+        "Déclarez une variable boolean nommée 'etudiant' avec la valeur true",
+        "Affichez toutes ces variables avec des messages descriptifs"
+      ],
+      "starterCode": "public class Variables {\n    public static void main(String[] args) {\n        // Déclarez vos variables ici\n        \n        // Affichez vos variables ici\n        \n    }\n}",
+      "solution": "public class Variables {\n    public static void main(String[] args) {\n        int age = 25;\n        String nom = \"Java\";\n        double taille = 1.75;\n        boolean etudiant = true;\n        \n        System.out.println(\"Age: \" + age);\n        System.out.println(\"Nom: \" + nom);\n        System.out.println(\"Taille: \" + taille);\n        System.out.println(\"Etudiant: \" + etudiant);\n    }\n}",
+      "expectedOutput": "Age: 25\nNom: Java\nTaille: 1.75\nEtudiant: true",
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Age: 25\nNom: Java\nTaille: 1.75\nEtudiant: true",
+          "description": "Affichage correct de toutes les variables"
+        }
+      ],
+      "hints": [
+        "Utilisez le bon type pour chaque variable (int, String, double, boolean)",
+        "N'oubliez pas d'initialiser vos variables",
+        "Utilisez l'opérateur + pour concaténer les chaînes"
+      ],
+      "tags": ["variables", "types", "declaration"],
+      "rubric": {
+        "criteria": [
+          {
+            "name": "Déclaration correcte",
+            "points": 6,
+            "description": "Toutes les variables sont déclarées avec le bon type"
+          },
+          {
+            "name": "Initialisation",
+            "points": 2,
+            "description": "Les variables sont initialisées avec des valeurs appropriées"
+          },
+          {
+            "name": "Affichage",
+            "points": 2,
+            "description": "Les variables sont affichées correctement"
+          }
+        ],
+        "totalPoints": 10
+      }
+    },
+  {
+  "id": "exercise_003",
+  "title": "Calculatrice Simple",
+  "description": "Créez une calculatrice simple qui effectue les quatre opérations de base.",
+  "difficulty": "beginner",
+  "category": "operations",
+  "type": "coding",
+  "lessonId": "lesson_002_002",
+  "courseId": "java_fundamentals",
+  "estimatedTime": 20,
+  "xpReward": 50,
+  "instructions": [
+    "Déclarez deux variables entières a et b avec les valeurs 15 et 4",
+    "Calculez et affichez la somme (a + b)",
+    "Calculez et affichez la différence (a - b)",
+    "Calculez et affichez le produit (a * b)",
+    "Calculez et affichez la division (a / b) et le reste (a % b)"
+  ],
+  "starterCode": "public class Calculatrice {\n public static void main(String[] args) {\n // Déclarez vos variables ici\n \n // Effectuez vos calculs ici\n \n }\n}",
+  "solution": "public class Calculatrice {\n public static void main(String[] args) {\n int a = 15;\n int b = 4;\n \n System.out.println(\"Somme: \" + (a + b));\n System.out.println(\"Différence: \" + (a - b));\n System.out.println(\"Produit: \" + (a * b));\n System.out.println(\"Division: \" + (a / b));\n System.out.println(\"Reste: \" + (a % b));\n }\n}",
+  "expectedOutput": "Somme: 19\nDifférence: 11\nProduit: 60\nDivision: 3\nReste: 3",
+  "testCases": [
+    {
+      "input": "",
+      "expectedOutput": "Somme: 19\nDifférence: 11\nProduit: 60\nDivision: 3\nReste: 3",
+      "description": "Calculs arithmétiques corrects"
+    }
+  ],
+  "hints": [
+    "Utilisez des parenthèses pour grouper les opérations dans println",
+    "La division entière tronque la partie décimale",
+    "L'opérateur % donne le reste de la division"
+  ],
+  "tags": ["arithmetic", "operations", "calculator"],
+  "rubric": {
+    "criteria": [
+      {
+        "name": "Variables correctes",
+        "points": 2,
+        "description": "Les variables a et b sont déclarées correctement"
+      },
+      {
+        "name": "Opérations de base",
+        "points": 6,
+        "description": "Addition, soustraction, multiplication correctes"
+      },
+      {
+        "name": "Division et modulo",
+        "points": 2,
+        "description": "Division et reste calculés correctement"
+      }
+    ],
+    "totalPoints": 10
+  }
+},
+    {
+      "id": "exercise_004",
+      "title": "Structures Conditionnelles",
+      "description": "Utilisez les structures if-else pour créer un programme de vérification d'âge.",
+      "difficulty": "beginner",
+      "category": "conditionals",
+      "type": "coding",
+      "lessonId": "lesson_003_001",
+      "courseId": "java_fundamentals",
+      "estimatedTime": 25,
+      "xpReward": 60,
+      "instructions": [
+        "Déclarez une variable int 'age' avec une valeur de votre choix",
+        "Utilisez if-else pour vérifier si la personne est mineure (< 18)",
+        "Affichez 'Mineur' si age < 18, sinon 'Majeur'",
+        "Ajoutez une condition pour vérifier si age >= 65 (senior)",
+        "Affichez le statut approprié: Mineur, Majeur, ou Senior"
+      ],
+      "starterCode": "public class VerificationAge {\n    public static void main(String[] args) {\n        // Déclarez la variable age\n        \n        // Ajoutez vos conditions ici\n        \n    }\n}",
+      "solution": "public class VerificationAge {\n    public static void main(String[] args) {\n        int age = 30;\n        \n        if (age < 18) {\n            System.out.println(\"Mineur\");\n        } else if (age >= 65) {\n            System.out.println(\"Senior\");\n        } else {\n            System.out.println(\"Majeur\");\n        }\n    }\n}",
+      "expectedOutput": "Majeur",
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Majeur",
+          "description": "Classification correcte pour age = 30"
+        }
+      ],
+      "hints": [
+        "Utilisez if-else if-else pour plusieurs conditions",
+        "L'ordre des conditions est important",
+        "Testez avec différentes valeurs d'âge"
+      ],
+      "tags": ["conditionals", "if-else", "age-verification"],
+      "rubric": {
+        "criteria": [
+          {
+            "name": "Structure conditionnelle",
+            "points": 5,
+            "description": "Utilisation correcte de if-else if-else"
+          },
+          {
+            "name": "Logique correcte",
+            "points": 3,
+            "description": "Les conditions sont dans le bon ordre"
+          },
+          {
+            "name": "Messages appropriés",
+            "points": 2,
+            "description": "Les messages affichés sont corrects"
+          }
+        ],
+        "totalPoints": 10
+      }
+    },
+    {
+      "id": "exercise_005",
+      "title": "Boucle While - Compte à Rebours",
+      "description": "Créez un compte à rebours en utilisant une boucle while.",
+      "difficulty": "beginner",
+      "category": "loops",
+      "type": "coding",
+      "lessonId": "lesson_004_001",
+      "courseId": "java_fundamentals",
+      "estimatedTime": 20,
+      "xpReward": 45,
+      "instructions": [
+        "Déclarez une variable int 'compteur' initialisée à 10",
+        "Utilisez une boucle while pour décrémenter le compteur",
+        "Affichez chaque valeur du compteur",
+        "Quand le compteur atteint 0, affichez 'Décollage!'"
+      ],
+      "starterCode": "public class CompteRebours {\n    public static void main(String[] args) {\n        // Initialisez le compteur\n        \n        // Créez votre boucle while\n        \n        // Affichez 'Décollage!' à la fin\n        \n    }\n}",
+      "solution": "public class CompteRebours {\n    public static void main(String[] args) {\n        int compteur = 10;\n        \n        while (compteur > 0) {\n            System.out.println(compteur);\n            compteur--;\n        }\n        \n        System.out.println(\"Décollage!\");\n    }\n}",
+      "expectedOutput": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nDécollage!",
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nDécollage!",
+          "description": "Compte à rebours de 10 à 1 suivi de 'Décollage!'"
+        }
+      ],
+      "hints": [
+        "La condition de la boucle doit être compteur > 0",
+        "N'oubliez pas de décrémenter le compteur avec compteur--",
+        "Le message final s'affiche après la boucle"
+      ],
+      "tags": ["while-loop", "countdown", "decrement"],
+      "rubric": {
+        "criteria": [
+          {
+            "name": "Boucle while correcte",
+            "points": 4,
+            "description": "La boucle while fonctionne correctement"
+          },
+          {
+            "name": "Décrémentation",
+            "points": 3,
+            "description": "Le compteur est décrémenté à chaque itération"
+          },
+          {
+            "name": "Affichage final",
+            "points": 3,
+            "description": "Le message 'Décollage!' s'affiche correctement"
+          }
+        ],
+        "totalPoints": 10
+      }
+    },
+    {
+      "id": "exercise_006",
+      "title": "Boucle For - Table de Multiplication",
+      "description": "Générez la table de multiplication d'un nombre en utilisant une boucle for.",
+      "difficulty": "beginner",
+      "category": "loops",
+      "type": "coding",
+      "lessonId": "lesson_004_002",
+      "courseId": "java_fundamentals",
+      "estimatedTime": 25,
+      "xpReward": 55,
+      "instructions": [
+        "Déclarez une variable int 'nombre' avec la valeur 7",
+        "Utilisez une boucle for pour i de 1 à 10",
+        "Affichez la multiplication sous la forme: '7 x 1 = 7'",
+        "Générez la table complète de multiplication"
+      ],
+      "starterCode": "public class TableMultiplication {\n    public static void main(String[] args) {\n        // Déclarez la variable nombre\n        \n        // Créez votre boucle for\n        \n    }\n}",
+      "solution": "public class TableMultiplication {\n    public static void main(String[] args) {\n        int nombre = 7;\n        \n        for (int i = 1; i <= 10; i++) {\n            System.out.println(nombre + \" x \" + i + \" = \" + (nombre * i));\n        }\n    }\n}",
+      "expectedOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70",
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63\n7 x 10 = 70",
+          "description": "Table de multiplication de 7 de 1 à 10"
+        }
+      ],
+      "hints": [
+        "La boucle for va de 1 à 10 inclus (i <= 10)",
+        "Utilisez la concaténation de chaînes avec +",
+        "N'oubliez pas les parenthèses pour le calcul (nombre * i)"
+      ],
+      "tags": ["for-loop", "multiplication-table", "formatting"],
+      "rubric": {
+        "criteria": [
+          {
+            "name": "Boucle for correcte",
+            "points": 4,
+            "description": "La boucle for itère de 1 à 10"
+          },
+          {
+            "name": "Calcul correct",
+            "points": 3,
+            "description": "La multiplication est calculée correctement"
+          },
+          {
+            "name": "Format d'affichage",
+            "points": 3,
+            "description": "Le format 'nombre x i = résultat' est respecté"
+          }
+        ],
+        "totalPoints": 10
+      }
+    }
+  ]
+}

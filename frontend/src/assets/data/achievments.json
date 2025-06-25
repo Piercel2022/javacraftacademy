@@ -1,0 +1,1062 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://javacraftacademy.com/schemas/achievements.json",
+  "title": "JavaCraft Academy - Achievements System Schema",
+  "description": "Système complet de récompenses, badges et défis pour motiver l'apprentissage",
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-24T10:00:00Z",
+  "achievements": [
+    {
+      "id": "first_program",
+      "name": "Premier Programme",
+      "category": "milestone",
+      "type": "single",
+      "icon": "/assets/images/achievements/first-program.svg",
+      "description": "Félicitations ! Vous avez écrit et exécuté votre premier programme Java.",
+      "longDescription": "Ce badge marque le début de votre parcours en programmation Java. Chaque grand développeur a commencé par écrire son premier 'Hello World' !",
+      "rarity": "common",
+      "xpReward": 50,
+      "unlockConditions": {
+        "type": "lesson_completed",
+        "target": "lesson_001_003",
+        "value": 1
+      },
+      "displayOrder": 1,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["beginner", "milestone", "programming"],
+      "stats": {
+        "totalUnlocked": 15678,
+        "percentageUnlocked": 89.2
+      }
+    },
+    {
+      "id": "hello_world",
+      "name": "Hello World",
+      "category": "milestone",
+      "type": "single",
+      "icon": "/assets/images/achievements/hello-world.svg",
+      "description": "Afficher 'Hello World' en Java - la tradition de tout programmeur !",
+      "longDescription": "Hello World est le premier programme que tout développeur écrit. C'est une tradition qui remonte aux années 1970 !",
+      "rarity": "common",
+      "xpReward": 25,
+      "unlockConditions": {
+        "type": "code_output",
+        "target": "Hello World",
+        "value": 1
+      },
+      "displayOrder": 2,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["beginner", "tradition", "first"],
+      "stats": {
+        "totalUnlocked": 15234,
+        "percentageUnlocked": 86.7
+      }
+    },
+    {
+      "id": "week_streak",
+      "name": "Semaine Studieuse",
+      "category": "consistency",
+      "type": "progressive",
+      "icon": "/assets/images/achievements/week-streak.svg",
+      "description": "Étudiez pendant 7 jours consécutifs",
+      "longDescription": "La régularité est la clé de l'apprentissage. Continuez sur cette lancée !",
+      "rarity": "uncommon",
+      "xpReward": 100,
+      "unlockConditions": {
+        "type": "daily_streak",
+        "target": "study_session",
+        "value": 7
+      },
+      "progressLevels": [
+        { "level": 1, "requirement": 7, "reward": 100 },
+        { "level": 2, "requirement": 14, "reward": 200 },
+        { "level": 3, "requirement": 30, "reward": 500 }
+      ],
+      "displayOrder": 10,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["consistency", "habit", "dedication"],
+      "stats": {
+        "totalUnlocked": 8934,
+        "percentageUnlocked": 50.8
+      }
+    },
+    {
+      "id": "month_streak",
+      "name": "Mois de Discipline",
+      "category": "consistency",
+      "type": "progressive",
+      "icon": "/assets/images/achievements/month-streak.svg",
+      "description": "Étudiez pendant 30 jours consécutifs",
+      "longDescription": "Un mois complet d'apprentissage continu ! Votre discipline est exemplaire.",
+      "rarity": "rare",
+      "xpReward": 300,
+      "unlockConditions": {
+        "type": "daily_streak",
+        "target": "study_session",
+        "value": 30
+      },
+      "progressLevels": [
+        { "level": 1, "requirement": 30, "reward": 300 },
+        { "level": 2, "requirement": 60, "reward": 600 },
+        { "level": 3, "requirement": 100, "reward": 1000 }
+      ],
+      "displayOrder": 11,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["consistency", "dedication", "marathon"],
+      "stats": {
+        "totalUnlocked": 3456,
+        "percentageUnlocked": 19.7
+      }
+    },
+    {
+      "id": "quiz_champion",
+      "name": "Champion des Quiz",
+      "category": "performance",
+      "type": "progressive",
+      "icon": "/assets/images/achievements/quiz-champion.svg",
+      "description": "Obtenez une note parfaite à 5 quiz",
+      "longDescription": "Votre maîtrise des concepts est impressionnante ! Continuez à viser l'excellence.",
+      "rarity": "uncommon",
+      "xpReward": 150,
+      "unlockConditions": {
+        "type": "quiz_perfect_score",
+        "target": "any_quiz",
+        "value": 5
+      },
+      "progressLevels": [
+        { "level": 1, "requirement": 5, "reward": 150 },
+        { "level": 2, "requirement": 15, "reward": 300 },
+        { "level": 3, "requirement": 30, "reward": 500 }
+      ],
+      "displayOrder": 20,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["performance", "excellence", "knowledge"],
+      "stats": {
+        "totalUnlocked": 5678,
+        "percentageUnlocked": 32.3
+      }
+    },
+    {
+      "id": "oop_master",
+      "name": "Maître de l'OOP",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/oop-master.svg",
+      "description": "Complétez tous les chapitres sur la Programmation Orientée Objet",
+      "longDescription": "Vous maîtrisez maintenant les concepts fondamentaux de l'OOP : encapsulation, héritage, polymorphisme et abstraction.",
+      "rarity": "rare",
+      "xpReward": 200,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "oop_fundamentals",
+        "value": 1
+      },
+      "displayOrder": 30,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["oop", "concept", "mastery"],
+      "stats": {
+        "totalUnlocked": 4321,
+        "percentageUnlocked": 24.6
+      }
+    },
+    {
+      "id": "exception_handler",
+      "name": "Gestionnaire d'Exceptions",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/exception-handler.svg",
+      "description": "Maîtrisez la gestion des exceptions en Java",
+      "longDescription": "Vous savez maintenant comment gérer les erreurs élégamment avec try-catch-finally et les exceptions personnalisées.",
+      "rarity": "uncommon",
+      "xpReward": 175,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "exception_handling",
+        "value": 1
+      },
+      "displayOrder": 31,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["exceptions", "error-handling", "robustness"],
+      "stats": {
+        "totalUnlocked": 3892,
+        "percentageUnlocked": 22.1
+      }
+    },
+    {
+      "id": "collections_expert",
+      "name": "Expert des Collections",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/collections-expert.svg",
+      "description": "Maîtrisez les Collections Java (List, Set, Map)",
+      "longDescription": "Vous maîtrisez maintenant les structures de données essentielles de Java et savez quand utiliser chaque type de collection.",
+      "rarity": "rare",
+      "xpReward": 225,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "java_collections",
+        "value": 1
+      },
+      "displayOrder": 32,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["collections", "data-structures", "java-api"],
+      "stats": {
+        "totalUnlocked": 2987,
+        "percentageUnlocked": 17.0
+      }
+    },
+    {
+      "id": "course_completed",
+      "name": "Diplômé",
+      "category": "milestone",
+      "type": "progressive",
+      "icon": "/assets/images/achievements/course-completed.svg",
+      "description": "Terminez votre premier cours complet",
+      "longDescription": "Félicitations ! Vous avez terminé votre premier cours. C'est le début d'un parcours d'apprentissage continu.",
+      "rarity": "rare",
+      "xpReward": 500,
+      "unlockConditions": {
+        "type": "course_completed",
+        "target": "any_course",
+        "value": 1
+      },
+      "progressLevels": [
+        { "level": 1, "requirement": 1, "reward": 500 },
+        { "level": 2, "requirement": 3, "reward": 1000 },
+        { "level": 3, "requirement": 5, "reward": 1500 }
+      ],
+      "displayOrder": 50,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["milestone", "completion", "graduation"],
+      "stats": {
+        "totalUnlocked": 2134,
+        "percentageUnlocked": 12.1
+      }
+    },
+    {
+      "id": "night_owl",
+      "name": "Chouette de Nuit",
+      "category": "special",
+      "type": "single",
+      "icon": "/assets/images/achievements/night-owl.svg",
+      "description": "Codez après minuit",
+      "longDescription": "Les meilleurs développeurs ne connaissent pas d'horaires ! Vous avez programmé après minuit.",
+      "rarity": "uncommon",
+      "xpReward": 75,
+      "unlockConditions": {
+        "type": "code_time",
+        "target": "after_midnight",
+        "value": 1
+      },
+      "displayOrder": 60,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["special", "time", "dedication"],
+      "stats": {
+        "totalUnlocked": 6789,
+        "percentageUnlocked": 38.6
+      }
+    },
+    {
+      "id": "early_bird",
+      "name": "Lève-tôt",
+      "category": "special",
+      "type": "single",
+      "icon": "/assets/images/achievements/early-bird.svg",
+      "description": "Commencez à coder avant 7h du matin",
+      "longDescription": "L'avenir appartient à ceux qui se lèvent tôt ! Vous avez commencé votre journée de programmation très tôt.",
+      "rarity": "uncommon",
+      "xpReward": 75,
+      "unlockConditions": {
+        "type": "code_time",
+        "target": "before_7am",
+        "value": 1
+      },
+      "displayOrder": 61,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["special", "time", "motivation"],
+      "stats": {
+        "totalUnlocked": 4567,
+        "percentageUnlocked": 26.0
+      }
+    },
+    {
+      "id": "bug_hunter",
+      "name": "Chasseur de Bugs",
+      "category": "skill",
+      "type": "progressive",
+      "icon": "/assets/images/achievements/bug-hunter.svg",
+      "description": "Corrigez 10 erreurs de compilation",
+      "longDescription": "Chaque erreur corrigée vous rend plus fort ! Vous développez votre capacité de débogage.",
+      "rarity": "common",
+      "xpReward": 100,
+      "unlockConditions": {
+        "type": "errors_fixed",
+        "target": "compilation_error",
+        "value": 10
+      },
+      "progressLevels": [
+        { "level": 1, "requirement": 10, "reward": 100 },
+        { "level": 2, "requirement": 50, "reward": 200 },
+        { "level": 3, "requirement": 100, "reward": 400 }
+      ],
+      "displayOrder": 70,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["debugging", "problem-solving", "skill"],
+      "stats": {
+        "totalUnlocked": 9876,
+        "percentageUnlocked": 56.2
+      }
+    },
+    {
+      "id": "speed_demon",
+      "name": "Démon de la Vitesse",
+      "category": "performance",
+      "type": "single",
+      "icon": "/assets/images/achievements/speed-demon.svg",
+      "description": "Complétez un exercice en moins d'une minute",
+      "longDescription": "Vitesse et précision ! Vous avez résolu un exercice avec une rapidité impressionnante.",
+      "rarity": "rare",
+      "xpReward": 150,
+      "unlockConditions": {
+        "type": "exercise_time",
+        "target": "less_than_60s",
+        "value": 1
+      },
+      "displayOrder": 80,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["speed", "efficiency", "performance"],
+      "stats": {
+        "totalUnlocked": 1234,
+        "percentageUnlocked": 7.0
+      }
+    },
+    {
+      "id": "syntax_master",
+      "name": "Maître de la Syntaxe",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/syntax-master.svg",
+      "description": "Écrivez 50 lignes de code sans erreur de syntaxe",
+      "longDescription": "Votre maîtrise de la syntaxe Java est excellente ! Vous écrivez du code propre et sans erreur.",
+      "rarity": "uncommon",
+      "xpReward": 125,
+      "unlockConditions": {
+        "type": "clean_code",
+        "target": "50_lines_no_syntax_error",
+        "value": 1
+      },
+      "displayOrder": 90,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["syntax", "clean-code", "precision"],
+      "stats": {
+        "totalUnlocked": 3456,
+        "percentageUnlocked": 19.7
+      }
+    },
+    {
+      "id": "loop_master",
+      "name": "Maître des Boucles",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/loop-master.svg",
+      "description": "Maîtrisez les boucles for, while et do-while",
+      "longDescription": "Les boucles n'ont plus de secrets pour vous ! Vous savez quand et comment utiliser chaque type de boucle.",
+      "rarity": "uncommon",
+      "xpReward": 150,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "loops_and_iterations",
+        "value": 1
+      },
+      "displayOrder": 100,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["loops", "control-structures", "fundamentals"],
+      "stats": {
+        "totalUnlocked": 7654,
+        "percentageUnlocked": 43.5
+      }
+    },
+    {
+      "id": "array_ninja",
+      "name": "Ninja des Tableaux",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/array-ninja.svg",
+      "description": "Maîtrisez les tableaux et les tableaux multidimensionnels",
+      "longDescription": "Vous manipulez les tableaux avec l'agilité d'un ninja ! Arrays et matrices n'ont plus de secrets pour vous.",
+      "rarity": "uncommon",
+      "xpReward": 175,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "arrays_and_matrices",
+        "value": 1
+      },
+      "displayOrder": 110,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["arrays", "data-structures", "manipulation"],
+      "stats": {
+        "totalUnlocked": 5432,
+        "percentageUnlocked": 30.9
+      }
+    },
+    {
+      "id": "string_wizard",
+      "name": "Magicien des Chaînes",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/string-wizard.svg",
+      "description": "Maîtrisez les opérations sur les chaînes de caractères",
+      "longDescription": "Vous manipulez les String comme un vrai magicien ! Concaténation, manipulation et regex sont vos sorts favoris.",
+      "rarity": "uncommon",
+      "xpReward": 150,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "strings_and_text",
+        "value": 1
+      },
+      "displayOrder": 120,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["strings", "text-processing", "manipulation"],
+      "stats": {
+        "totalUnlocked": 6789,
+        "percentageUnlocked": 38.6
+      }
+    },
+    {
+      "id": "method_architect",
+      "name": "Architecte des Méthodes",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/method-architect.svg",
+      "description": "Créez 10 méthodes différentes avec paramètres et valeurs de retour",
+      "longDescription": "Vous concevez vos méthodes comme un architecte ! Votre code est modulaire et réutilisable.",
+      "rarity": "uncommon",
+      "xpReward": 200,
+      "unlockConditions": {
+        "type": "methods_created",
+        "target": "with_parameters_and_return",
+        "value": 10
+      },
+      "displayOrder": 130,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["methods", "functions", "modular-code"],
+      "stats": {
+        "totalUnlocked": 4321,
+        "percentageUnlocked": 24.6
+      }
+    },
+    {
+      "id": "inheritance_guru",
+      "name": "Gourou de l'Héritage",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/inheritance-guru.svg",
+      "description": "Créez une hiérarchie de classes avec héritage",
+      "longDescription": "L'héritage est votre spécialité ! Vous savez structurer vos classes pour maximiser la réutilisabilité.",
+      "rarity": "rare",
+      "xpReward": 250,
+      "unlockConditions": {
+        "type": "inheritance_used",
+        "target": "class_hierarchy",
+        "value": 1
+      },
+      "displayOrder": 140,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["inheritance", "oop", "class-design"],
+      "stats": {
+        "totalUnlocked": 2987,
+        "percentageUnlocked": 17.0
+      }
+    },
+    {
+      "id": "interface_implementer",
+      "name": "Implémenteur d'Interfaces",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/interface-implementer.svg",
+      "description": "Implémentez votre première interface Java",
+      "longDescription": "Les interfaces sont vos contrats ! Vous comprenez l'importance de la programmation par contrat.",
+      "rarity": "rare",
+      "xpReward": 225,
+      "unlockConditions": {
+        "type": "interface_implemented",
+        "target": "first_interface",
+        "value": 1
+      },
+      "displayOrder": 150,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["interfaces", "contracts", "oop"],
+      "stats": {
+        "totalUnlocked": 2456,
+        "percentageUnlocked": 14.0
+      }
+    },
+    {
+      "id": "file_handler",
+      "name": "Gestionnaire de Fichiers",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/file-handler.svg",
+      "description": "Lisez et écrivez dans des fichiers avec les classes I/O",
+      "longDescription": "Vous maîtrisez les entrées/sorties ! Fichiers texte et binaires n'ont plus de secrets pour vous.",
+      "rarity": "rare",
+      "xpReward": 275,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "file_io_operations",
+        "value": 1
+      },
+      "displayOrder": 160,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["io", "files", "data-persistence"],
+      "stats": {
+        "totalUnlocked": 1876,
+        "percentageUnlocked": 10.7
+      }
+    },
+    {
+      "id": "thread_manager",
+      "name": "Gestionnaire de Threads",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/thread-manager.svg",
+      "description": "Créez et gérez des threads en Java",
+      "longDescription": "La programmation concurrente est votre domaine ! Vous savez faire travailler plusieurs threads ensemble.",
+      "rarity": "epic",
+      "xpReward": 400,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "multithreading",
+        "value": 1
+      },
+      "displayOrder": 170,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["threads", "concurrency", "advanced"],
+      "stats": {
+        "totalUnlocked": 987,
+        "percentageUnlocked": 5.6
+      }
+    },
+    {
+      "id": "lambda_lover",
+      "name": "Amoureux des Lambda",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/lambda-lover.svg",
+      "description": "Utilisez les expressions lambda et les streams",
+      "longDescription": "Java 8+ n'a plus de secrets pour vous ! Vous écrivez du code fonctionnel élégant et expressif.",
+      "rarity": "epic",
+      "xpReward": 350,
+      "unlockConditions": {
+        "type": "chapter_completed",
+        "target": "lambda_and_streams",
+        "value": 1
+      },
+      "displayOrder": 180,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["lambda", "streams", "functional-programming"],
+      "stats": {
+        "totalUnlocked": 1456,
+        "percentageUnlocked": 8.3
+      }
+    },
+    {
+      "id": "pattern_master",
+      "name": "Maître des Patterns",
+      "category": "skill",
+      "type": "single",
+      "icon": "/assets/images/achievements/pattern-master.svg",
+      "description": "Implémentez 3 design patterns différents",
+      "longDescription": "Vous pensez en patterns ! Singleton, Factory, Observer... vous savez résoudre les problèmes avec élégance.",
+      "rarity": "legendary",
+      "xpReward": 500,
+      "unlockConditions": {
+        "type": "design_patterns_used",
+        "target": "different_patterns",
+        "value": 3
+      },
+      "displayOrder": 190,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["design-patterns", "architecture", "expert"],
+      "stats": {
+        "totalUnlocked": 456,
+        "percentageUnlocked": 2.6
+      }
+    },
+    {
+      "id": "marathon_coder",
+      "name": "Codeur Marathon",
+      "category": "endurance",
+      "type": "single",
+      "icon": "/assets/images/achievements/marathon-coder.svg",
+      "description": "Codez pendant plus de 4 heures en une session",
+      "longDescription": "Votre endurance est légendaire ! Vous avez maintenu votre concentration pendant plus de 4 heures consécutives.",
+      "rarity": "rare",
+      "xpReward": 300,
+      "unlockConditions": {
+        "type": "session_duration",
+        "target": "more_than_4_hours",
+        "value": 1
+      },
+      "displayOrder": 200,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["endurance", "dedication", "marathon"],
+      "stats": {
+        "totalUnlocked": 789,
+        "percentageUnlocked": 4.5
+      }
+    },
+    {
+      "id": "perfectionist",
+      "name": "Perfectionniste",
+      "category": "performance",
+      "type": "single",
+      "icon": "/assets/images/achievements/perfectionist.svg",
+      "description": "Obtenez 100% à 10 quiz différents",
+      "longDescription": "Votre quête de perfection est admirable ! Vous ne vous contentez jamais de moins que l'excellence.",
+      "rarity": "epic",
+      "xpReward": 400,
+      "unlockConditions": {
+        "type": "perfect_quizzes",
+        "target": "different_quizzes",
+        "value": 10
+      },
+      "displayOrder": 210,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["perfection", "excellence", "dedication"],
+      "stats": {
+        "totalUnlocked": 234,
+        "percentageUnlocked": 1.3
+      }
+    },
+    {
+      "id": "help_guru",
+      "name": "Gourou de l'Aide",
+      "category": "community",
+      "type": "progressive",
+      "icon": "/assets/images/achievements/help-guru.svg",
+      "description": "Aidez 5 autres étudiants dans les forums",
+      "longDescription": "Votre esprit d'entraide fait de vous un membre précieux de la communauté JavaCraft !",
+      "rarity": "uncommon",
+      "xpReward": 100,
+      "unlockConditions": {
+        "type": "help_others",
+        "target": "forum_answers",
+        "value": 5
+      },
+      "progressLevels": [
+        { "level": 1, "requirement": 5, "reward": 100 },
+        { "level": 2, "requirement": 20, "reward": 250 },
+        { "level": 3, "requirement": 50, "reward": 500 }
+      ],
+      "displayOrder": 220,
+      "isVisible": true,
+      "isSecret": false,
+      "tags": ["community", "helping", "mentoring"],
+      "stats": {
+        "totalUnlocked": 2345,
+        "percentageUnlocked": 13.3
+      }
+    },
+    {
+      "id": "coffee_coder",
+      "name": "Codeur au Café",
+      "category": "special",
+      "type": "secret",
+      "icon": "/assets/images/achievements/coffee-coder.svg",
+      "description": "???",
+      "longDescription": "Un badge mystérieux pour les vrais développeurs...",
+      "rarity": "rare",
+      "xpReward": 200,
+      "unlockConditions": {
+        "type": "easter_egg",
+        "target": "coffee_break_code",
+        "value": 1
+      },
+      "displayOrder": 999,
+      "isVisible": false,
+      "isSecret": true,
+      "tags": ["secret", "easter-egg", "coffee"],
+      "stats": {
+        "totalUnlocked": 156,
+        "percentageUnlocked": 0.9
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "milestone",
+      "name": "Étapes Importantes",
+      "description": "Badges marquant les grandes étapes de votre apprentissage",
+      "icon": "/assets/images/categories/milestone.svg",
+      "color": "#FFD700"
+    },
+    {
+      "id": "consistency",
+      "name": "Régularité",
+      "description": "Badges récompensant votre assiduité et votre discipline",
+      "icon": "/assets/images/categories/consistency.svg",
+      "color": "#32CD32"
+    },
+    {
+      "id": "performance",
+      "name": "Performance",
+      "description": "Badges pour l'excellence dans les exercices et quiz",
+      "icon": "/assets/images/categories/performance.svg",
+      "color": "#FF6347"
+    },
+    {
+      "id": "skill",
+      "name": "Compétences",
+      "description": "Badges de maîtrise des concepts et techniques Java",
+      "icon":  "/assets/images/categories/skill.svg",
+      "color": "#4169E1"
+    },
+    {
+      "id": "special",
+      "name": "Spéciaux",
+      "description": "Badges uniques pour des moments particuliers",
+      "icon": "/assets/images/categories/special.svg",
+      "color": "#FF69B4"
+    },
+    {
+      "id": "endurance",
+      "name": "Endurance",
+      "description": "Badges pour les sessions d'apprentissage prolongées",
+      "icon": "/assets/images/categories/endurance.svg",
+      "color": "#8B4513"
+    },
+    {
+      "id": "community",
+      "name": "Communauté",
+      "description": "Badges pour l'entraide et la participation communautaire",
+      "icon": "/assets/images/categories/community.svg",
+      "color": "#20B2AA"
+    }
+  ],
+  "rarityLevels": [
+    {
+      "id": "common",
+      "name": "Commun",
+      "description": "Badges facilement obtenus par la plupart des étudiants",
+      "color": "#808080",
+      "multiplier": 1.0,
+      "displayOrder": 1
+    },
+    {
+      "id": "uncommon",
+      "name": "Peu Commun",
+      "description": "Badges nécessitant un effort soutenu",
+      "color": "#32CD32",
+      "multiplier": 1.5,
+      "displayOrder": 2
+    },
+    {
+      "id": "rare",
+      "name": "Rare",
+      "description": "Badges pour les étudiants déterminés",
+      "color": "#4169E1",
+      "multiplier": 2.0,
+      "displayOrder": 3
+    },
+    {
+      "id": "epic",
+      "name": "Épique",
+      "description": "Badges pour les accomplissements exceptionnels",
+      "color": "#9932CC",
+      "multiplier": 3.0,
+      "displayOrder": 4
+    },
+    {
+      "id": "legendary",
+      "name": "Légendaire",
+      "description": "Badges pour les maîtres absolus",
+      "color": "#FFD700",
+      "multiplier": 5.0,
+      "displayOrder": 5
+    }
+  ],
+  "challengeTypes": [
+    {
+      "id": "daily",
+      "name": "Défis Quotidiens",
+      "description": "Défis qui se renouvellent chaque jour",
+      "duration": "24h",
+      "icon": "/assets/images/challenges/daily.svg",
+      "color": "#FF6347"
+    },
+    {
+      "id": "weekly",
+      "name": "Défis Hebdomadaires",
+      "description": "Défis plus complexes sur une semaine",
+      "duration": "7d",
+      "icon": "/assets/images/challenges/weekly.svg",
+      "color": "#4169E1"
+    },
+    {
+      "id": "monthly",
+      "name": "Défis Mensuels",
+      "description": "Grands défis pour le mois entier",
+      "duration": "30d",
+      "icon": "/assets/images/challenges/monthly.svg",
+      "color": "#9932CC"
+    },
+    {
+      "id": "special_event",
+      "name": "Événements Spéciaux",
+      "description": "Défis liés aux événements et saisons",
+      "duration": "variable",
+      "icon": "/assets/images/challenges/special.svg",
+      "color": "#FFD700"
+    }
+  ],
+  "leaderboards": [
+    {
+      "id": "global_xp",
+      "name": "Classement XP Global",
+      "description": "Classement basé sur l'expérience totale",
+      "type": "cumulative",
+      "resetPeriod": "never",
+      "displayLimit": 100
+    },
+    {
+      "id": "monthly_progress",
+      "name": "Progrès Mensuel",
+      "description": "Classement du mois en cours",
+      "type": "periodic",
+      "resetPeriod": "monthly",
+      "displayLimit": 50
+    },
+    {
+      "id": "streak_champions",
+      "name": "Champions de la Régularité",
+      "description": "Plus longues séries d'étude",
+      "type": "streak",
+      "resetPeriod": "never",
+      "displayLimit": 25
+    },
+    {
+      "id": "quiz_masters",
+      "name": "Maîtres des Quiz",
+      "description": "Meilleurs scores aux quiz",
+      "type": "performance",
+      "resetPeriod": "weekly",
+      "displayLimit": 30
+    }
+  ],
+  "notifications": {
+    "achievementUnlocked": {
+      "title": "🏆 Badge Débloqué !",
+      "template": "Félicitations ! Vous avez débloqué le badge '{achievementName}' et gagné {xpReward} XP !",
+      "sound": "/assets/sounds/achievement.mp3",
+      "displayDuration": 5000,
+      "showAnimation": true
+    },
+    "levelUp": {
+      "title": "⬆️ Montée de Niveau !",
+      "template": "Niveau {newLevel} atteint ! Vous avez maintenant {totalXP} XP !",
+      "sound": "/assets/sounds/level-up.mp3",
+      "displayDuration": 4000,
+      "showAnimation": true
+    },
+    "streakMilestone": {
+      "title": "🔥 Série Record !",
+      "template": "Incroyable ! {streakDays} jours consécutifs d'apprentissage !",
+      "sound": "/assets/sounds/streak.mp3",
+      "displayDuration": 3000,
+      "showAnimation": true
+    },
+    "challengeCompleted": {
+      "title": "✅ Défi Terminé !",
+      "template": "Défi '{challengeName}' terminé ! Récompense : {reward}",
+      "sound": "/assets/sounds/challenge.mp3",
+      "displayDuration": 4000,
+      "showAnimation": true
+    }
+  },
+  "gamificationSettings": {
+    "xpCalculation": {
+      "lessonCompletion": 25,
+      "quizPerfectScore": 50,
+      "exerciseCompleted": 15,
+      "firstAttemptSuccess": 10,
+      "helpOthers": 20,
+      "dailyLogin": 5,
+      "streakBonus": {
+        "7days": 1.1,
+        "14days": 1.2,
+        "30days": 1.5,
+        "60days": 2.0,
+        "100days": 3.0
+      }
+    },
+    "levelThresholds": [
+      { "level": 1, "xpRequired": 0 },
+      { "level": 2, "xpRequired": 100 },
+      { "level": 3, "xpRequired": 250 },
+      { "level": 4, "xpRequired": 500 },
+      { "level": 5, "xpRequired": 1000 },
+      { "level": 10, "xpRequired": 3000 },
+      { "level": 15, "xpRequired": 7500 },
+      { "level": 20, "xpRequired": 15000 },
+      { "level": 25, "xpRequired": 25000 },
+      { "level": 30, "xpRequired": 40000 },
+      { "level": 50, "xpRequired": 100000 },
+      { "level": 100, "xpRequired": 500000 }
+    ],
+    "badgeDisplaySettings": {
+      "showProgress": true,
+      "animateUnlock": true,
+      "groupByCategory": true,
+      "showRarity": true,
+      "enableComparison": true,
+      "showGlobalStats": false
+    }
+  },
+  "integrations": {
+    "socialMedia": {
+      "enableSharing": true,
+      "platforms": ["twitter", "linkedin", "facebook"],
+      "shareTemplates": {
+        "achievement": "🏆 Je viens de débloquer le badge '{achievementName}' sur JavaCraft Academy ! #JavaCraft #Programming #Learning",
+        "level": "⬆️ Niveau {level} atteint sur JavaCraft Academy ! Mon parcours Java continue ! #JavaCraft #Programming",
+        "course": "🎓 Cours '{courseName}' terminé sur JavaCraft Academy ! Prêt pour le suivant ! #JavaCraft #Java"
+      }
+    },
+    "emailNotifications": {
+      "enabled": true,
+      "types": {
+        "weeklyProgress": true,
+        "monthlyReport": true,
+        "streakReminder": true,
+        "newChallenges": false
+      }
+    }
+  },
+  "analytics": {
+    "trackingEvents": [
+      "achievement_unlocked",
+      "level_up",
+      "quiz_completed",
+      "lesson_completed",
+      "streak_milestone",
+      "challenge_started",
+      "challenge_completed",
+      "badge_shared",
+      "leaderboard_viewed",
+      "help_provided"
+    ],
+    "retentionMetrics": {
+      "dailyActiveUsers": true,
+      "weeklyRetention": true,
+      "achievementImpact": true,
+      "engagementScore": true
+    }
+  },
+  "customization": {
+    "themes": [
+      {
+        "id": "default",
+        "name": "Thème Classique",
+        "colors": {
+          "primary": "#4169E1",
+          "secondary": "#32CD32",
+          "accent": "#FFD700"
+        }
+      },
+      {
+        "id": "dark",
+        "name": "Thème Sombre",
+        "colors": {
+          "primary": "#6495ED",
+          "secondary": "#90EE90",
+          "accent": "#F0E68C"
+        }
+      },
+      {
+        "id": "java_classic",
+        "name": "Java Classique",
+        "colors": {
+          "primary": "#ED8B00",
+          "secondary": "#5382A1",
+          "accent": "#F89820"
+        }
+      }
+    ],
+    "avatarCustomization": {
+      "enabled": true,
+      "unlockedByAchievements": true,
+      "categories": ["hats", "glasses", "backgrounds", "frames"]
+    }
+  },
+  "administration": {
+    "achievementManagement": {
+      "canCreate": true,
+      "canEdit": true,
+      "canDisable": true,
+      "requiresApproval": true
+    },
+    "statisticsAccess": {
+      "globalStats": true,
+      "userProgress": true,
+      "engagementMetrics": true,
+      "achievementEffectiveness": true
+    },
+    "contentModeration": {
+      "reportSystem": true,
+      "autoModeration": false,
+      "communityGuidelines": true
+    }
+  },
+  "metadata": {
+    "createdBy": "JavaCraft Academy Team",
+    "createdDate": "2024-12-24T10:00:00Z",
+    "lastModified": "2024-12-24T10:00:00Z",
+    "version": "1.0.0",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2024-12-24",
+        "changes": [
+          "Initial release of the achievements system",
+          "Added 30+ unique badges across all skill levels",
+          "Implemented progressive achievements with multiple levels",
+          "Added secret badges and easter eggs",
+          "Created comprehensive gamification framework"
+        ]
+      }
+    ],
+    "supportedLanguages": ["fr", "en", "es", "de"],
+    "minimumVersion": {
+      "api": "2.0.0",
+      "frontend": "1.5.0",
+      "mobile": "1.2.0"
+    }
+  }
+}
