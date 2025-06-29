@@ -1,0 +1,321 @@
+
+
+{
+  "javaTemplates": {
+    "metadata": {
+      "version": "2.0",
+      "lastUpdated": "2025-06-26",
+      "totalTemplates": 12,
+      "categories": ["beginner", "intermediate", "advanced"]
+    },
+    "beginner": {
+      "helloWorld": {
+        "name": "Hello World",
+        "description": "Programme Java basique affichant 'Hello World'",
+        "category": "beginner",
+        "difficulty": 1,
+        "estimatedTime": "5 min",
+        "tags": ["basics", "output", "first-program"],
+        "code": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}",
+        "explanation": "Structure de base d'un programme Java avec la méthode main",
+        "keyPoints": [
+          "Déclaration de classe publique",
+          "Méthode main obligatoire",
+          "System.out.println pour afficher"
+        ]
+      },
+      "variables": {
+        "name": "Variables et Types",
+        "description": "Déclaration et utilisation de variables avec différents types primitifs",
+        "category": "beginner",
+        "difficulty": 2,
+        "estimatedTime": "10 min",
+        "tags": ["variables", "types", "primitives"],
+        "code": "public class Variables {\n    public static void main(String[] args) {\n        // Types primitifs\n        int age = 25;\n        double price = 19.99;\n        boolean isActive = true;\n        char grade = 'A';\n        String name = \"JavaCraft\";\n        \n        // Affichage des variables\n        System.out.println(\"Nom: \" + name);\n        System.out.println(\"Âge: \" + age + \" ans\");\n        System.out.println(\"Prix: \" + price + \"€\");\n        System.out.println(\"Actif: \" + (isActive ? \"Oui\" : \"Non\"));\n        System.out.println(\"Note: \" + grade);\n        \n        // Opérations arithmétiques\n        System.out.println(\"\\nOpérations:\");\n        System.out.println(\"Age + 5 = \" + (age + 5));\n        System.out.println(\"Prix * 2 = \" + (price * 2));\n    }\n}",
+        "explanation": "Déclaration et manipulation de variables avec différents types de données",
+        "keyPoints": [
+          "Types primitifs: int, double, boolean, char",
+          "Type référence: String",
+          "Opérateurs arithmétiques",
+          "Opérateur ternaire"
+        ]
+      },
+      "conditionals": {
+        "name": "Structures Conditionnelles",
+        "description": "Utilisation des conditions if/else et switch",
+        "category": "beginner",
+        "difficulty": 3,
+        "estimatedTime": "15 min",
+        "tags": ["conditionals", "control-flow", "if-else", "switch"],
+        "code": "public class Conditionals {\n    public static void main(String[] args) {\n        int score = 85;\n        \n        // Structure if-else-if\n        System.out.println(\"Score: \" + score);\n        if (score >= 90) {\n            System.out.println(\"Mention: Excellent! 🌟\");\n        } else if (score >= 80) {\n            System.out.println(\"Mention: Très bien! 👍\");\n        } else if (score >= 70) {\n            System.out.println(\"Mention: Bien ✓\");\n        } else if (score >= 60) {\n            System.out.println(\"Mention: Passable\");\n        } else {\n            System.out.println(\"Mention: Insuffisant ❌\");\n        }\n        \n        // Switch avec enum simulé\n        char grade = 'B';\n        System.out.println(\"\\nNote: \" + grade);\n        switch (grade) {\n            case 'A':\n                System.out.println(\"Parfait! Continue ainsi!\");\n                break;\n            case 'B':\n                System.out.println(\"Bon travail! Encore un effort!\");\n                break;\n            case 'C':\n                System.out.println(\"Acceptable, mais peut mieux faire\");\n                break;\n            case 'D':\n                System.out.println(\"Insuffisant, il faut travailler\");\n                break;\n            default:\n                System.out.println(\"Note non reconnue\");\n        }\n        \n        // Conditions complexes\n        boolean hasLicense = true;\n        int drivingAge = 20;\n        if (hasLicense && drivingAge >= 18) {\n            System.out.println(\"\\n🚗 Autorisé à conduire\");\n        } else {\n            System.out.println(\"\\n🚫 Non autorisé à conduire\");\n        }\n    }\n}",
+        "explanation": "Utilisation des structures conditionnelles avec exemples pratiques",
+        "keyPoints": [
+          "Conditions if/else-if multiples",
+          "Switch avec gestion des cas",
+          "Opérateurs logiques (&&, ||)",
+          "Conditions complexes"
+        ]
+      },
+      "loops": {
+        "name": "Boucles",
+        "description": "Maîtrise des boucles for, while et do-while",
+        "category": "beginner",
+        "difficulty": 3,
+        "estimatedTime": "20 min",
+        "tags": ["loops", "control-flow", "iteration"],
+        "code": "public class Loops {\n    public static void main(String[] args) {\n        // Boucle for classique\n        System.out.println(\"=== Boucle for classique ===\");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(\"Itération \" + i + \": \" + (i * i));\n        }\n        \n        // Boucle while\n        System.out.println(\"\\n=== Boucle while ===\");\n        int count = 10;\n        while (count > 0) {\n            System.out.println(\"Compte à rebours: \" + count);\n            count -= 2; // Décrémente de 2\n        }\n        \n        // Boucle do-while\n        System.out.println(\"\\n=== Boucle do-while ===\");\n        int num = 1;\n        do {\n            System.out.println(\"Nombre: \" + num + \" (carré: \" + (num * num) + \")\");\n            num++;\n        } while (num <= 4);\n        \n        // Boucles imbriquées - Table de multiplication\n        System.out.println(\"\\n=== Table de multiplication (3x3) ===\");\n        for (int i = 1; i <= 3; i++) {\n            for (int j = 1; j <= 3; j++) {\n                System.out.printf(\"%2d \", i * j);\n            }\n            System.out.println(); // Nouvelle ligne\n        }\n        \n        // Utilisation de break et continue\n        System.out.println(\"\\n=== Nombres pairs de 1 à 10 ===\");\n        for (int i = 1; i <= 10; i++) {\n            if (i % 2 != 0) {\n                continue; // Passe au suivant si impair\n            }\n            System.out.print(i + \" \");\n            if (i == 8) {\n                break; // Arrête à 8\n            }\n        }\n        System.out.println();\n    }\n}",
+        "explanation": "Utilisation complète des différents types de boucles avec exemples pratiques",
+        "keyPoints": [
+          "For, while, do-while",
+          "Boucles imbriquées",
+          "Break et continue",
+          "Compteurs et conditions"
+        ]
+      },
+      "arrays": {
+        "name": "Tableaux",
+        "description": "Manipulation complète des tableaux unidimensionnels et multidimensionnels",
+        "category": "beginner",
+        "difficulty": 4,
+        "estimatedTime": "25 min",
+        "tags": ["arrays", "collections", "data-structures"],
+        "code": "public class Arrays {\n    public static void main(String[] args) {\n        // Déclaration et initialisation\n        int[] numbers = {10, 25, 7, 42, 15};\n        String[] fruits = {\"Pomme\", \"Banane\", \"Orange\", \"Fraise\"};\n        \n        System.out.println(\"=== Parcours avec index ===\");\n        for (int i = 0; i < numbers.length; i++) {\n            System.out.println(\"Index \" + i + \": \" + numbers[i]);\n        }\n        \n        System.out.println(\"\\n=== Parcours for-each ===\");\n        for (String fruit : fruits) {\n            System.out.println(\"🍎 \" + fruit);\n        }\n        \n        // Opérations sur tableaux\n        System.out.println(\"\\n=== Statistiques ===\");\n        int sum = 0, max = numbers[0], min = numbers[0];\n        for (int num : numbers) {\n            sum += num;\n            max = Math.max(max, num);\n            min = Math.min(min, num);\n        }\n        System.out.println(\"Somme: \" + sum);\n        System.out.println(\"Moyenne: \" + (sum / (double) numbers.length));\n        System.out.println(\"Maximum: \" + max);\n        System.out.println(\"Minimum: \" + min);\n        \n        // Tableau 2D - Matrice\n        int[][] matrix = {\n            {1, 2, 3},\n            {4, 5, 6},\n            {7, 8, 9}\n        };\n        \n        System.out.println(\"\\n=== Matrice 3x3 ===\");\n        for (int i = 0; i < matrix.length; i++) {\n for (int j = 0; j < matrix[i].length; j++) {\n   System.out.printf(\"%3d \", matrix[i][j]);\n            }\n            System.out.println();\n        }\n        \n        // Recherche dans un tableau\n        System.out.println(\"\\n=== Recherche ===\");\n        String searchFruit = \"Orange\";\n        boolean found = false;\n        int position = -1;\n        for (int i = 0; i < fruits.length; i++) {\n            if (fruits[i].equals(searchFruit)) {\n                found = true;\n                position = i;\n                break;\n            }\n        }\n        System.out.println(searchFruit + (found ? \" trouvé à la position \" + position : \" non trouvé\"));\n        \n        // Tri simple (bubble sort)\n        int[] toSort = {64, 34, 25, 12, 22, 11, 90};\n        System.out.println(\"\\n=== Tri (avant): \" + java.util.Arrays.toString(toSort));\n        bubbleSort(toSort);\n        System.out.println(\"=== Tri (après): \" + java.util.Arrays.toString(toSort));\n    }\n    \n    private static void bubbleSort(int[] arr) {\n  int n = arr.length;\n  for (int i = 0; i < n - 1; i++) {\n  for (int j = 0; j < n - i - 1; j++) {\n if (arr[j] > arr[j + 1]) {\n     // Échange\n  int temp = arr[j];\n   arr[j] = arr[j + 1];\n  arr[j + 1] = temp;\n  }\n  }\n  }\n    }\n}",
+        "explanation": "Manipulation complète des tableaux avec recherche, tri et statistiques",
+        "keyPoints": [
+          "Déclaration et initialisation",
+          "Parcours avec index et for-each",
+          "Tableaux multidimensionnels",
+          "Algorithmes de base (recherche, tri)"
+        ]
+      }
+    },
+    "intermediate": {
+      "oop": {
+        "name": "Programmation Orientée Objet",
+        "description": "Classes, objets, encapsulation et méthodes",
+        "category": "intermediate",
+        "difficulty": 5,
+        "estimatedTime": "30 min",
+        "tags": ["oop", "class", "methods", "encapsulation"],
+        "code": "// Classe représentant un compte bancaire\nclass BankAccount {\n    // Attributs privés (encapsulation)\n    private String accountNumber;\n    private String ownerName;\n    private double balance;\n    private static int accountCounter = 1000;\n    \n    // Constructeur\n    public BankAccount(String ownerName, double initialBalance) {\n        this.accountNumber = \"ACC\" + (++accountCounter);\n        this.ownerName = ownerName;\n        this.balance = Math.max(0, initialBalance); // Pas de solde négatif initial\n    }\n    \n    // Méthodes d'accès (getters)\n    public String getAccountNumber() { return accountNumber; }\n    public String getOwnerName() { return ownerName; }\n    public double getBalance() { return balance; }\n    \n    // Méthodes métier\n    public boolean deposit(double amount) {\n        if (amount > 0) {\n            balance += amount;\n            System.out.println(\"💰 Dépôt de \" + amount + \"€ effectué.\");\n            return true;\n        }\n        System.out.println(\"❌ Montant invalide pour le dépôt.\");\n        return false;\n    }\n    \n    public boolean withdraw(double amount) {\n        if (amount > 0 && amount <= balance) {\n            balance -= amount;\n            System.out.println(\"💸 Retrait de \" + amount + \"€ effectué.\");\n            return true;\n        }\n        System.out.println(\"❌ Retrait impossible (solde insuffisant ou montant invalide).\");\n        return false;\n    }\n    \n    public boolean transfer(BankAccount destinationAccount, double amount) {\n        if (this.withdraw(amount)) {\n            destinationAccount.deposit(amount);\n            System.out.println(\"🔄 Virement de \" + amount + \"€ vers \" + destinationAccount.getOwnerName());\n            return true;\n        }\n        return false;\n    }\n    \n    public void displayAccountInfo() {\n        System.out.println(\"\\n=== Informations du compte ===\");\n        System.out.println(\"Numéro: \" + accountNumber);\n        System.out.println(\"Titulaire: \" + ownerName);\n        System.out.printf(\"Solde: %.2f€%n\", balance);\n    }\n    \n    // Méthode toString pour affichage\n    @Override\n    public String toString() {\n        return String.format(\"BankAccount{%s, %s, %.2f€}\", \n                           accountNumber, ownerName, balance);\n    }\n}\n\npublic class OOPExample {\n    public static void main(String[] args) {\n        System.out.println(\"=== SYSTÈME BANCAIRE ===\");\n        \n        // Création des comptes\n        BankAccount account1 = new BankAccount(\"Alice Martin\", 1000.0);\n        BankAccount account2 = new BankAccount(\"Bob Durand\", 500.0);\n        \n        // Affichage initial\n        account1.displayAccountInfo();\n        account2.displayAccountInfo();\n        \n        System.out.println(\"\\n=== OPÉRATIONS ===\");\n        \n        // Opérations sur les comptes\n        account1.deposit(200);\n        account1.withdraw(150);\n        account2.deposit(50);\n        \n        // Virement\n        System.out.println(\"\\n--- Virement ---\");\n        account1.transfer(account2, 300);\n        \n        // État final\n        System.out.println(\"\\n=== ÉTAT FINAL ===\");\n        account1.displayAccountInfo();\n        account2.displayAccountInfo();\n        \n        // Test des cas d'erreur\n        System.out.println(\"\\n=== TESTS D'ERREUR ===\");\n        account1.withdraw(2000); // Solde insuffisant\n        account1.deposit(-100);  // Montant négatif\n    }\n}",
+        "explanation": "Exemple complet de POO avec encapsulation, constructeurs et méthodes métier",
+        "keyPoints": [
+          "Encapsulation avec attributs privés",
+          "Constructeurs avec validation",
+          "Méthodes d'accès et méthodes métier",
+          "Méthodes statiques et toString"
+        ]
+      },
+      "inheritance": {
+        "name": "Héritage et Polymorphisme",
+        "description": "Héritage de classes avec redéfinition de méthodes",
+        "category": "intermediate",
+        "difficulty": 6,
+        "estimatedTime": "35 min",
+        "tags": ["oop", "inheritance", "polymorphism", "extends"],
+        "code": "// Classe abstraite de base\nabstract class Vehicle {\n    protected String brand;\n    protected String model;\n    protected int year;\n    protected double price;\n    \n    public Vehicle(String brand, String model, int year, double price) {\n        this.brand = brand;\n        this.model = model;\n        this.year = year;\n        this.price = price;\n    }\n    \n    // Méthode abstraite à implémenter\n    public abstract void start();\n    public abstract double calculateInsurance();\n    \n    // Méthodes communes\n    public void displayInfo() {\n        System.out.printf(\"%s %s (%d) - %.2f€%n\", brand, model, year, price);\n    }\n    \n    public int getAge() {\n        return 2024 - year;\n    }\n    \n    // Getters\n    public String getBrand() { return brand; }\n    public String getModel() { return model; }\n    public double getPrice() { return price; }\n}\n\n// Classe dérivée: Voiture\nclass Car extends Vehicle {\n    private int doors;\n    private String fuelType;\n    \n    public Car(String brand, String model, int year, double price, int doors, String fuelType) {\n        super(brand, model, year, price);\n        this.doors = doors;\n        this.fuelType = fuelType;\n    }\n    \n    @Override\n    public void start() {\n        System.out.println(\"🚗 \" + brand + \" \" + model + \" démarre avec la clé.\");\n    }\n    \n    @Override\n    public double calculateInsurance() {\n        double baseRate = price * 0.05; // 5% du prix\n        if (getAge() > 10) baseRate *= 0.8; // Réduction pour véhicules anciens\n        return baseRate;\n    }\n    \n    @Override\n    public void displayInfo() {\n        super.displayInfo();\n        System.out.println(\"  Type: Voiture (\" + doors + \" portes, \" + fuelType + \")\");\n    }\n    \n    public void openTrunk() {\n        System.out.println(\"🧳 Coffre ouvert.\");\n    }\n}\n\n// Classe dérivée: Moto\nclass Motorcycle extends Vehicle {\n    private int engineSize;\n    private boolean hasSidecar;\n    \n    public Motorcycle(String brand, String model, int year, double price, int engineSize, boolean hasSidecar) {\n        super(brand, model, year, price);\n        this.engineSize = engineSize;\n        this.hasSidecar = hasSidecar;\n    }\n    \n    @Override\n    public void start() {\n        System.out.println(\"🏍️ \" + brand + \" \" + model + \" démarre avec le bouton de démarrage.\");\n    }\n    \n    @Override\n    public double calculateInsurance() {\n        double baseRate = price * 0.08; // 8% du prix (plus risqué)\n        if (engineSize > 600) baseRate *= 1.5; // Majoration pour grosses cylindrées\n        if (hasSidecar) baseRate *= 0.9; // Réduction pour side-car (plus stable)\n        return baseRate;\n    }\n    \n    @Override\n    public void displayInfo() {\n        super.displayInfo();\n        System.out.println(\"  Type: Moto (\" + engineSize + \"cc\" + (hasSidecar ? \", avec side-car\" : \"\") + \")\");\n    }\n    \n    public void wheelie() {\n        if (engineSize > 250) {\n            System.out.println(\"🤸 Wheelie réalisé!\");\n        } else {\n            System.out.println(\"❌ Cylindrée trop faible pour un wheelie.\");\n        }\n    }\n}\n\n// Classe dérivée: Camion\nclass Truck extends Vehicle {\n    private double maxLoad;\n    private int axles;\n    \n    public Truck(String brand, String model, int year, double price, double maxLoad, int axles) {\n        super(brand, model, year, price);\n        this.maxLoad = maxLoad;\n        this.axles = axles;\n    }\n    \n    @Override\n    public void start() {\n        System.out.println(\"🚛 \" + brand + \" \" + model + \" démarre avec un rugissement.\");\n    }\n    \n    @Override\n    public double calculateInsurance() {\n        double baseRate = price * 0.06; // 6% du prix\n        baseRate += maxLoad * 10; // Majoration selon la charge utile\n        return baseRate;\n    }\n    \n    @Override\n    public void displayInfo() {\n        super.displayInfo();\n        System.out.println(\"  Type: Camion (\" + maxLoad + \"t, \" + axles + \" essieux)\");\n    }\n    \n    public void loadCargo(double weight) {\n        if (weight <= maxLoad) {\n            System.out.println(\"📦 Chargement de \" + weight + \"t effectué.\");\n        } else {\n            System.out.println(\"❌ Surcharge! Capacité maximale: \" + maxLoad + \"t\");\n        }\n    }\n}\n\npublic class InheritanceExample {\n    public static void main(String[] args) {\n        System.out.println(\"=== GARAGE AUTOMOBILE ===\");\n        \n        // Création du parc de véhicules\n        Vehicle[] vehicles = {\n            new Car(\"Toyota\", \"Corolla\", 2020, 25000, 4, \"Essence\"),\n            new Car(\"Tesla\", \"Model 3\", 2023, 45000, 4, \"Électrique\"),\n            new Motorcycle(\"Yamaha\", \"MT-07\", 2021, 8000, 689, false),\n            new Motorcycle(\"Harley-Davidson\", \"Sportster\", 2019, 15000, 883, true),\n            new Truck(\"Volvo\", \"FH16\", 2018, 80000, 25.0, 3)\n        };\n        \n        // Affichage des informations (polymorphisme)\n        System.out.println(\"\\n=== INVENTAIRE ===\");\n        for (int i = 0; i < vehicles.length; i++) {\n            System.out.println(\"\\n\" + (i + 1) + \". \");\n            vehicles[i].displayInfo();\n            System.out.printf(\"   Assurance annuelle: %.2f€%n\", vehicles[i].calculateInsurance());\n        }\n        \n        // Démonstration du polymorphisme\n        System.out.println(\"\\n=== DÉMARRAGE DES VÉHICULES ===\");\n        for (Vehicle vehicle : vehicles) {\n            vehicle.start();\n        }\n        \n        // Utilisation des méthodes spécifiques\n        System.out.println(\"\\n=== FONCTIONNALITÉS SPÉCIFIQUES ===\");\n        \n        // Cast et vérification de type\n        for (Vehicle vehicle : vehicles) {\n            if (vehicle instanceof Car) {\n                Car car = (Car) vehicle;\n                car.openTrunk();\n            } else if (vehicle instanceof Motorcycle) {\n                Motorcycle moto = (Motorcycle) vehicle;\n                moto.wheelie();\n            } else if (vehicle instanceof Truck) {\n                Truck truck = (Truck) vehicle;\n                truck.loadCargo(20.0);\n            }\n        }\n        \n        // Statistiques\n        System.out.println(\"\\n=== STATISTIQUES ===\");\n        double totalValue = 0;\n        double totalInsurance = 0;\n        int carCount = 0, motoCount = 0, truckCount = 0;\n        \n        for (Vehicle vehicle : vehicles) {\n            totalValue += vehicle.getPrice();\n            totalInsurance += vehicle.calculateInsurance();\n            \n            if (vehicle instanceof Car) carCount++;\n            else if (vehicle instanceof Motorcycle) motoCount++;\n            else if (vehicle instanceof Truck) truckCount++;\n        }\n        \n        System.out.println(\"Nombre total de véhicules: \" + vehicles.length);\n        System.out.println(\"  - Voitures: \" + carCount);\n        System.out.println(\"  - Motos: \" + motoCount);\n        System.out.println(\"  - Camions: \" + truckCount);\n        System.out.printf(\"Valeur totale: %.2f€%n\", totalValue);\n        System.out.printf(\"Coût total assurance: %.2f€%n\", totalInsurance);\n    }\n}",
+        "explanation": "Démonstration complète de l'héritage avec polymorphisme et méthodes abstraites",
+        "keyPoints": [
+          "Classe abstraite avec méthodes abstraites",
+          "Héritage avec extends et super",
+          "Redéfinition de méthodes (@Override)",
+          "Polymorphisme et instanceof"
+        ]
+      },
+      "collections": 
+      {
+        "name": "Collections Java",
+        "description": "Utilisation des collections: ArrayList, HashMap, TreeSet",
+        "category": "intermediate",
+        "difficulty": 6,
+        "estimatedTime": "40 min",
+        "tags": ["collections", "arraylist", "hashmap", "generics"],
+        "code": "import java.util.*;\n\n class Student implements Comparable<Student> { \n    private String name;\n    private int age;\n    private double grade;\n    private List<String> subjects;\n    \n    public Student(String name, int age, double grade) {\n        this.name = name;\n        this.age = age;\n        this.grade = grade;\n        this.subjects = new ArrayList<>();\n    }\n    \n    public void addSubject(String subject) {\n        subjects.add(subject);\n    }\n    \n    // Implémentation de Comparable pour le tri\n    @Override\n    public int compareTo(Student other) {\n        return Double.compare(other.grade, this.grade); // Tri décroissant par note\n    }\n    \n    @Override\n    public String toString() {\n        return String.format(\"%s (age:%d, note:%.1f, matières:%s)\", \n name, age, grade, subjects);\n    }\n    \n    // Getters\n    public String getName() { return name; }\n    public int getAge() { return age; }\n    public double getGrade() { return grade; }\n    public List<String> getSubjects() { return subjects; }\n}\n\npublic class CollectionsExample {\n    public static void main(String[] args) {\n        demonstrateArrayList();\n        demonstrateHashMap();\n        demonstrateTreeSet();\n        demonstrateAdvancedOperations();\n    }\n    \n    private static void demonstrateArrayList() {\n System.out.println(\"=== ARRAYLIST - GESTION D'ÉTUDIANTS ===\");\n        \n        // Création et ajout d'étudiants\n        List<Student> students = new ArrayList<>();\n students.add(new Student(\"Alice Martin\", 20, 16.5));\n students.add(new Student(\"Bob Durand\", 22, 14.0));\n students.add(new Student(\"Charlie Petit\", 19, 18.0));\n students.add(new Student(\"Diana Moreau\", 21, 15.5));\n  \n  // Ajout de matières\n students.get(0).addSubject(\"Mathématiques\");\nstudents.get(0).addSubject(\"Physique\");\nstudents.get(1).addSubject(\"Informatique\");\nstudents.get(2).addSubject(\"Mathématiques\");\nstudents.get(2).addSubject(\"Chimie\");\n \n
+
+        System.out.println("\\nListe des étudiants :");
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println((i + 1) + ". " + students.get(i));
+        }
+        
+        Collections.sort(students);
+        System.out.println("\\nAprès tri par note (décroissant) :");
+        students.forEach(student -> System.out.println("📚 " + student));
+        
+        String searchName = "Charlie Petit";
+        Student found = students.stream()
+            .filter(s -> s.getName().equals(searchName))
+            .findFirst()
+            .orElse(null);
+        
+        System.out.println("\\nRecherche de '" + searchName + "': " + 
+                         (found != null ? "✅ Trouvé - " + found : "❌ Non trouvé"));
+        
+        double avgGrade = students.stream()
+            .mapToDouble(Student::getGrade)
+            .average()
+            .orElse(0.0);
+        System.out.printf("\\nMoyenne générale: %.2f\\n", avgGrade);
+    },
+    
+    private static void demonstrateHashMap() {
+        System.out.println("\\n=== HASHMAP - SYSTÈME DE NOTES PAR MATIÈRE ===");
+        
+        Map<String, Map<String, Double>> gradeBook = new HashMap<>();
+        
+        addGrades(gradeBook, "Alice Martin", "Mathématiques", 16.5);
+        addGrades(gradeBook, "Alice Martin", "Physique", 15.0);
+        addGrades(gradeBook, "Alice Martin", "Chimie", 17.5);
+        
+        addGrades(gradeBook, "Bob Durand", "Informatique", 18.0);
+        addGrades(gradeBook, "Bob Durand", "Mathématiques", 12.5);
+        
+        addGrades(gradeBook, "Charlie Petit", "Physique", 19.0);
+        addGrades(gradeBook, "Charlie Petit", "Chimie", 16.0);
+        addGrades(gradeBook, "Charlie Petit", "Mathématiques", 18.5);
+        
+       
+        System.out.println("\\nCarnet de notes :");
+        gradeBook.forEach((student, subjects) -> {
+            System.out.println("\\n👤 " + student + " :");
+            subjects.forEach((subject, grade) -> 
+                System.out.printf("  📖 %s: %.1f/20\\n", subject, grade));
+            
+            double avg = subjects.values().stream()
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0.0);
+            System.out.printf("  📊 Moyenne: %.2f/20\\n", avg);
+        });
+        
+        
+        System.out.println("\\n=== MOYENNES PAR MATIÈRE ===");
+        Map<String, List<Double>> subjectGrades = new HashMap<>();
+        
+        gradeBook.values().forEach(studentGrades -> 
+            studentGrades.forEach((subject, grade) -> 
+                subjectGrades.computeIfAbsent(subject, k -> new ArrayList<>()).add(grade)));
+        
+        subjectGrades.forEach((subject, grades) -> {
+            double avg = grades.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
+            System.out.printf("📚 %s: %.2f/20 (%d étudiants)\\n", subject, avg, grades.size());
+        });
+    }
+    
+    private static void addGrades(Map<String, Map<String, Double>> gradeBook, 
+                                String student, String subject, double grade) {
+        gradeBook.computeIfAbsent(student, k -> new HashMap<>()).put(subject, grade);
+    }
+    
+    private static void demonstrateTreeSet() {
+        System.out.println("\\n=== TREESET - GESTION AUTOMATIQUE DU TRI ===");
+        
+        // TreeSet pour maintenir les étudiants triés automatiquement
+        Set<Student> topStudents = new TreeSet<>();
+        
+        topStudents.add(new Student("Alexandre Dumas", 23, 17.8));
+        topStudents.add(new Student("Marie Curie", 22, 19.2));
+        topStudents.add(new Student("Albert Einstein", 24, 18.9));
+        topStudents.add(new Student("Ada Lovelace", 21, 19.5));
+        topStudents.add(new Student("Isaac Newton", 25, 18.7));
+        
+        System.out.println("\\nTop étudiants (tri automatique par note) :");
+        int rank = 1;
+        for (Student student : topStudents) {
+            System.out.println(rank++ + ". 🏆 " + student);
+        }
+        
+        // Démonstration des Set operations
+        Set<String> mathStudents = new HashSet<>(Arrays.asList("Alice", "Bob", "Charlie", "Diana"));
+        Set<String> physicsStudents = new HashSet<>(Arrays.asList("Alice", "Charlie", "Eve", "Frank"));
+        
+        System.out.println("\\n=== OPÉRATIONS SUR LES ENSEMBLES ===");
+        System.out.println("Étudiants en Maths: " + mathStudents);
+        System.out.println("Étudiants en Physique: " + physicsStudents);
+        
+        // Intersection (étudiants dans les deux matières)
+        Set<String> intersection = new HashSet<>(mathStudents);
+        intersection.retainAll(physicsStudents);
+        System.out.println("\\n🔗 Intersection (Maths ET Physique): " + intersection);
+        
+        // Union (tous les étudiants)
+        Set<String> union = new HashSet<>(mathStudents);
+        union.addAll(physicsStudents);
+        System.out.println("🔄 Union (Maths OU Physique): " + union);
+        
+        // Différence (seulement en Maths)
+        Set<String> onlyMath = new HashSet<>(mathStudents);
+        onlyMath.removeAll(physicsStudents);
+        System.out.println("➖ Différence (seulement Maths): " + onlyMath);
+    }
+    
+    private static void demonstrateAdvancedOperations() 
+    {
+        System.out.println("\\n=== OPÉRATIONS AVANCÉES AVEC STREAMS ===");
+        
+        List<Student> allStudents = Arrays.asList(
+            new Student("Alice", 20, 16.5),
+            new Student("Bob", 22, 14.0),
+            new Student("Charlie", 19, 18.0),
+            new Student("Diana", 21, 15.5),
+            new Student("Eve", 23, 12.0),
+            new Student("Frank", 20, 17.5)
+        );
+        
+        // Ajout de matières pour la démonstration
+        allStudents.get(0).addSubject("Maths");
+        allStudents.get(0).addSubject("Physique");
+        allStudents.get(1).addSubject("Info");
+        allStudents.get(2).addSubject("Maths");
+        allStudents.get(2).addSubject("Chimie");
+        allStudents.get(3).addSubject("Bio");
+        allStudents.get(4).addSubject("Maths");
+        allStudents.get(5).addSubject("Physique");
+        
+        // Filtrage et statistiques
+        System.out.println("\\n📊 Étudiants avec note >= 15:");
+        allStudents.stream()
+            .filter(s -> s.getGrade() >= 15.0)
+            .forEach(s -> System.out.println("  ✅ " + s.getName() + " (note: " + s.getGrade() + ")"));
+        
+        // Groupement par tranche d'âge
+        System.out.println("\\n👥 Groupement par tranche d'âge:");
+        Map<String, List<Student>> ageGroups = new HashMap<>();
+        allStudents.forEach(student -> {
+            String ageGroup = student.getAge() < 21 ? "Moins de 21 ans" : "21 ans et plus";
+            ageGroups.computeIfAbsent(ageGroup, k -> new ArrayList<>()).add(student);
+        });
+        
+        ageGroups.forEach((group, students) -> {
+            System.out.println("\\n" + group + " (" + students.size() + " étudiants):");
+            students.forEach(s -> System.out.println("  • " + s.getName()));
+        });
+        
+        // Recherche des matières les plus populaires
+        System.out.println("\\n📚 Popularité des matières:");
+        Map<String, Integer> subjectCount = new HashMap<>();
+        allStudents.stream()
+            .flatMap(s -> s.getSubjects().stream())
+            .forEach(subject -> subjectCount.merge(subject, 1, Integer::sum));
+        
+        subjectCount.entrySet().stream()
+            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+            .forEach(entry -> System.out.println("  " + entry.getKey() + ": " + entry.getValue() + " étudiants"));
+        
+        // Performance summary
+        System.out.println("\\n=== RÉSUMÉ GLOBAL ===");
+        DoubleSummaryStatistics stats = allStudents.stream()
+            .mapToDouble(Student::getGrade)
+            .summaryStatistics();
+        
+        System.out.printf("📈 Statistiques des notes:\\n");
+        System.out.printf("  • Nombre d'étudiants: %d\\n", stats.getCount());
+        System.out.printf("  • Note moyenne: %.2f\\n", stats.getAverage());
+        System.out.printf("  • Note minimale: %.2f\\n", stats.getMin());
+        System.out.printf("  • Note maximale: %.2f\\n", stats.getMax());
+        
+        long excellentStudents = allStudents.stream()
+            .filter(s -> s.getGrade() >= 16.0)
+            .count();
+        System.out.printf("  • Étudiants excellents (≥16): %d\\n", excellentStudents);
+    }
+}
