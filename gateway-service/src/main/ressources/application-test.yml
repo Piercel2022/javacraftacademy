@@ -1,0 +1,391 @@
+# ===============================================================================
+# APPLICATION-TEST.YML - Configuration de test pour Gateway Service
+# ===============================================================================
+# Ce fichier configure l'environnement de test pour le service de passerelle API
+# qui agit comme point d'entrée unique pour toutes les requêtes de l'écosystème
+# d'applications de Java Craft Academy.
+#
+# FONCTIONNALITÉS PRINCIPALES DU GATEWAY SERVICE:
+# ===============================================
+# 1. Routage intelligent des requêtes vers les microservices appropriés
+# 2. Authentification et autorisation centralisées via JWT
+# 3. Limitation du taux de requêtes (Rate Limiting) avec Redis
+# 4. Validation des requêtes entrantes
+# 5. Logging et monitoring des transactions
+# 6. Gestion CORS pour les applications web
+# 7. Circuit breaker pour la résilience
+# 8. Load balancing et service discovery
+#
+# RELATIONS AVEC L'ÉCOSYSTÈME D'APPLICATIONS:
+# ==========================================
+# Le Gateway Service entretient les relations suivantes:
+#
+# SERVICES CONSOMMÉS:
+# - user-service: Validation des utilisateurs et gestion des profils
+# - auth-service: Service d'authentification et gestion des tokens JWT
+# - notification-service: Envoi de notifications système
+# - audit-service: Logging des activités et audit trail
+# - config-server: Configuration centralisée (Spring Cloud Config)
+# - eureka-server: Service discovery et registration
+#
+# SERVICES CLIENTS:
+# - web-frontend: Application React/Angular
+# - mobile-app: Applications mobiles iOS/Android
+# - third-party-integrations: APIs tierces et partenaires
+# - admin-dashboard: Interface d'administration
+#
+# INFRASTRUCTURE DEPENDENCIES:
+# - Redis: Cache distribué et rate limiting
+# - PostgreSQL: Stockage des configurations et logs
+# - RabbitMQ: Messagerie asynchrone
+# - Consul: Service mesh et configuration
+# ===============================================================================
+
+# Configuration du serveur pour les tests
+server:
+  port: 8080  # Port par défaut pour les tests (différent de dev/prod)
+  servlet:
+    context-path: /gateway  # Contexte applicatif
+  compression:
+    enabled: true
+    mime-types: application/json,text/css,text/html,application/javascript
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+
+# Configuration Spring principale
+spring:
+  application:
+    name: gateway-service-test
+  profiles:
+    active: test
+  
+  # Configuration de la base de données H2 pour les tests
+  datasource:
+    url: jdbc:h2:mem:gateway_test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      leak-detection-threshold: 60000
+
+  # Configuration H2 Console pour debugging des tests
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+  # Configuration JPA/Hibernate pour les tests
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop  # Recrée la DB à chaque test
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false  # Désactivé pour éviter le spam dans les logs de test
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+
+  # Configuration Redis embarqué pour les tests
+  redis:
+    host: localhost
+    port: 6370  # Port différent pour éviter les conflits
+    database: 1  # Base différente des autres environnements
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+    timeout: 2000ms
+
+  # Configuration Spring Cloud Gateway
+  cloud:
+    gateway:
+      # Configuration des routes pour les tests
+      routes:
+        # Route vers le service utilisateur (mock pour les tests)
+        - id: user-service-test
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - name: AuthenticationFilter
+            - name: RateLimitingFilter
+              args:
+                requests-per-minute: 100  # Plus permissif en test
+            - name: LoggingFilter
+            - StripPrefix=1
+
+        # Route vers le service d'authentification (mock pour les tests)
+        - id: auth-service-test
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - name: RequestValidationFilter
+            - name: LoggingFilter
+            - StripPrefix=1
+
+        # Route vers le service de notification (mock pour les tests)
+        - id: notification-service-test
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - name: AuthenticationFilter
+            - name: RateLimitingFilter
+              args:
+                requests-per-minute: 50
+            - StripPrefix=1
+
+        # Route vers le service d'audit (mock pour les tests)
+        - id: audit-service-test
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/audit/**
+          filters:
+            - name: AuthenticationFilter
+            - name: LoggingFilter
+            - StripPrefix=1
+
+      # Configuration globale des filtres
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              replenish-rate: 10
+              burst-capacity: 20
+              requested-tokens: 1
+
+      # Configuration CORS pour les tests
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"  # Frontend React en dev
+              - "http://localhost:4200"  # Frontend Angular en dev
+              - "http://localhost:8080"  # Tests e2e
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+            maxAge: 3600
+
+    # Configuration Service Discovery pour les tests (désactivé)
+    discovery:
+      enabled: false
+
+  # Configuration de la sécurité pour les tests
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/auth/realms/test
+          jwk-set-uri: http://localhost:8082/auth/realms/test/protocol/openid-connect/certs
+
+# Configuration de logging pour les tests
+logging:
+  level:
+    com.javacraftacademy.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.netty: DEBUG
+    io.netty: INFO
+    org.springframework.boot.test: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{36}] - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{36}] - %msg%n"
+  file:
+    name: logs/gateway-test.log
+    max-size: 10MB
+    max-history: 5
+
+# Configuration JWT pour les tests
+jwt:
+  secret: test-secret-key-for-jwt-token-signing-in-gateway-service-tests-environment
+  expiration: 3600000  # 1 heure pour les tests
+  refresh-expiration: 86400000  # 24 heures pour les tests
+  issuer: gateway-service-test
+  audience: java-craft-academy-test
+
+# Configuration Rate Limiting pour les tests
+rate-limiting:
+  enabled: true
+  default-requests-per-minute: 100  # Plus permissif en test
+  burst-capacity-multiplier: 2
+  redis:
+    key-prefix: "gateway:ratelimit:test:"
+    ttl: 3600  # 1 heure
+  
+  # Règles spécifiques par endpoint pour les tests
+  rules:
+    "/api/auth/login":
+      requests-per-minute: 20
+      burst-capacity: 5
+    "/api/users/register":
+      requests-per-minute: 10
+      burst-capacity: 3
+    "/api/notifications/send":
+      requests-per-minute: 30
+      burst-capacity: 10
+
+# Configuration des timeouts pour les tests
+timeout:
+  connection: 5000  # 5 secondes
+  read: 10000       # 10 secondes
+  write: 10000      # 10 secondes
+
+# Configuration Circuit Breaker pour les tests
+circuit-breaker:
+  enabled: true
+  failure-threshold: 5      # Seuil d'échec plus bas pour les tests
+  recovery-timeout: 30000   # 30 secondes de récupération
+  timeout: 5000            # 5 secondes de timeout
+
+# Configuration Health Check pour les tests
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,gateway
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+    redis:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5, 0.95, 0.99
+      sla:
+        http.server.requests: 100ms, 200ms, 500ms
+
+# Configuration des tests spécifique
+test:
+  # Configuration des mocks de services
+  mock-services:
+    user-service:
+      enabled: true
+      port: 8081
+      delay: 100  # Délai simulé en ms
+    auth-service:
+      enabled: true
+      port: 8082
+      delay: 150
+    notification-service:
+      enabled: true
+      port: 8083
+      delay: 200
+    audit-service:
+      enabled: true
+      port: 8084
+      delay: 50
+
+  # Configuration des données de test
+  test-data:
+    users:
+      admin:
+        username: "admin"
+        password: "admin123"
+        roles: ["ADMIN", "USER"]
+      user:
+        username: "testuser"
+        password: "user123"
+        roles: ["USER"]
+    
+    # Tokens JWT de test prégénérés
+    jwt-tokens:
+      valid-admin: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.test.admin.token"
+      valid-user: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.test.user.token"
+      expired: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.test.expired.token"
+      invalid: "invalid.jwt.token"
+
+  # Configuration des scénarios de test
+  scenarios:
+    load-test:
+      concurrent-users: 10
+      requests-per-user: 50
+      ramp-up-period: 30
+    
+    stress-test:
+      concurrent-users: 100
+      requests-per-user: 100
+      ramp-up-period: 60
+
+# Configuration environnement de test
+environment:
+  name: test
+  version: 1.0.0-TEST
+  build-timestamp: ${BUILD_TIMESTAMP:#{T(java.time.Instant).now()}}
+  git-commit: ${GIT_COMMIT:unknown}
+
+# Configuration externe pour les tests d'intégration
+external-services:
+  # URLs des services externes mockés
+  user-service-url: http://localhost:8081
+  auth-service-url: http://localhost:8082
+  notification-service-url: http://localhost:8083
+  audit-service-url: http://localhost:8084
+  
+  # Configuration des timeouts pour les appels externes
+  timeouts:
+    connection: 2000
+    read: 5000
+    
+  # Configuration retry policy
+  retry:
+    max-attempts: 3
+    delay: 1000
+    multiplier: 2
+
+# Configuration des features flags pour les tests
+feature-flags:
+  rate-limiting: true
+  request-validation: true
+  jwt-authentication: true
+  cors-enabled: true
+  metrics-collection: true
+  circuit-breaker: true
+  request-logging: true
+
+# Configuration de cache pour les tests
+cache:
+  redis:
+    ttl: 300  # 5 minutes pour les tests
+    key-prefix: "gateway:test:"
+  local:
+    max-size: 100
+    ttl: 60   # 1 minute pour le cache local
