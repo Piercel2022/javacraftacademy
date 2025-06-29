@@ -1,0 +1,323 @@
+# ===================================================================================
+# CONFIGURATION DE DÉVELOPPEMENT DU GATEWAY SERVICE
+# ===================================================================================
+# Cette configuration est spécifique à l'environnement de développement.
+# Elle surcharge les paramètres de base pour faciliter le développement et le debug.
+#
+# SPÉCIFICITÉS DÉVELOPPEMENT:
+# - Logs plus détaillés pour le debugging
+# - Timeouts plus longs pour faciliter le debug
+# - CORS permissif pour les tests locaux
+# - Rate limiting relâché
+# - Actuator endpoints exposés pour le monitoring
+# - Configuration Redis locale
+# - Base de données H2 pour les tests
+#
+# RELATIONS DÉVELOPPEMENT:
+# - Connexion aux services locaux (localhost)
+# - Eureka server local
+# - Redis local pour le cache
+# - Frontend de développement (React/Angular)
+# - Outils de développement (Swagger, Actuator)
+# ===================================================================================
+
+# Configuration serveur développement
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: true
+
+# Configuration Spring pour développement
+spring:
+  # Configuration Redis locale
+  redis:
+    host: localhost
+    port: 6379
+    password: 
+    database: 0
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+  
+  # Configuration H2 pour les tests locaux
+  datasource:
+    url: jdbc:h2:mem:gateway_dev
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  
+  # Configuration Gateway développement
+  cloud:
+    gateway:
+      routes:
+        # Routes avec timeouts étendus pour le développement
+        - id: user-service-dev
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - AuthenticationFilter
+            - RateLimitingFilter=100,60  # Limite relâchée pour dev
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 50
+                redis-rate-limiter.burstCapacity: 100
+        
+        - id: formation-service-dev
+          uri: lb://formation-service
+          predicates:
+            - Path=/api/formations/**
+          filters:
+            - AuthenticationFilter
+            - RateLimitingFilter=100,60
+            - StripPrefix=1
+        
+        - id: student-service-dev
+          uri: lb://student-service
+          predicates:
+            - Path=/api/students/**
+          filters:
+            - AuthenticationFilter
+            - RateLimitingFilter=100,60
+            - StripPrefix=1
+        
+        # Route spéciale pour les tests sans authentification
+        - id: test-route
+          uri: lb://user-service
+          predicates:
+            - Path=/api/test/**
+          filters:
+            - StripPrefix=1
+        
+        # Route pour les mocks de développement
+        - id: mock-service
+          uri: http://localhost:9999
+          predicates:
+            - Path=/api/mock/**
+          filters:
+            - StripPrefix=1
+      
+      # Timeouts étendus pour le développement
+      httpclient:
+        connect-timeout: 10000
+        response-timeout: 60000
+        pool:
+          max-connections: 50
+          max-idle-time: 60s
+
+# Configuration Eureka pour développement
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 5  # Plus fréquent pour le dev
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 10  # Plus fréquent pour le dev
+    lease-expiration-duration-in-seconds: 30
+
+# Configuration JWT développement
+jwt:
+  secret: devSecretKey123456789012345678901234567890
+  expiration: 3600000  # 1 heure pour faciliter le développement
+  refresh-expiration: 86400000  # 1 jour
+
+# Configuration CORS permissive pour développement
+cors:
+  allowed-origins:
+    - http://localhost:3000  # React dev server
+    - http://localhost:4200  # Angular dev server
+    - http://localhost:8081  # Autre port de dev
+    - http://localhost:3001  # Tests
+    - http://127.0.0.1:3000
+    - http://127.0.0.1:4200
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+    - PATCH
+    - HEAD
+  allowed-headers:
+    - "*"
+  allow-credentials: true
+  max-age: 3600
+
+# Rate limiting relâché pour développement
+rate-limit:
+  default:
+    requests-per-minute: 1000  # Très permissif
+    burst-capacity: 2000
+  auth:
+    requests-per-minute: 100
+    burst-capacity: 200
+  api:
+    requests-per-minute: 1000
+    burst-capacity: 2000
+
+# Configuration complète du monitoring pour développement
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Tous les endpoints exposés
+      base-path: /actuator
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    gateway:
+      enabled: true
+    beans:
+      enabled: true
+    env:
+      enabled: true
+    configprops:
+      enabled: true
+    loggers:
+      enabled: true
+  health:
+    redis:
+      enabled: true
+    db:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true
+
+# Configuration logs détaillés pour développement
+logging:
+  level:
+    root: INFO
+    com.javacraftacademy.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.reactive: DEBUG
+    org.springframework.data.redis: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
+    reactor.netty: DEBUG
+    io.lettuce.core: DEBUG
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: logs/gateway-service-dev.log
+    max-size: 100MB
+    max-history: 10
+
+# Configuration application développement
+app:
+  security:
+    jwt:
+      public-paths:
+        - /api/auth/**
+        - /api/health/**
+        - /actuator/**
+        - /swagger-ui/**
+        - /v3/api-docs/**
+        - /h2-console/**
+        - /api/test/**  # Endpoints de test
+        - /api/mock/**  # Services mockés
+    
+    # Configuration debug pour les permissions
+    debug-mode: true
+    log-requests: true
+    log-responses: true
+  
+  # Circuit breakers plus tolérants en développement
+  circuit-breaker:
+    failure-rate-threshold: 70  # Plus tolérant
+    wait-duration-in-open-state: 10000  # Plus court
+    sliding-window-size: 5
+    minimum-number-of-calls: 3
+  
+  # Retry configuration pour développement
+  retry:
+    max-attempts: 5  # Plus de tentatives
+    wait-duration: 500  # Plus court
+    multiplier: 1.5
+  
+  # Timeouts étendus pour le debugging
+  timeout:
+    connection: 10000
+    read: 60000
+    write: 60000
+
+# Configuration Swagger/OpenAPI pour développement
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: Gateway API
+      - url: http://localhost:8081/v3/api-docs
+        name: User Service API
+      - url: http://localhost:8082/v3/api-docs
+        name: Formation Service API
+
+# Configuration de développement spécifique
+dev:
+  # Activation du mode debug
+  debug: true
+  
+  # Mock services pour tests isolés
+  mock-services:
+    enabled: true
+    user-service: http://localhost:9001
+    formation-service: http://localhost:9002
+    payment-service: http://localhost:9003
+  
+  # Base de données de test
+  test-data:
+    load-sample-data: true
+    auto-create-admin: true
+    admin-username: admin
+    admin-password: admin123
+  
+  # Configuration des tests
+  testing:
+    disable-security: false
+    mock-jwt: false
+    auto-login: false
