@@ -1,0 +1,729 @@
+/* 
+ * PricingCard.module.css
+ * Styles pour le composant PricingCard
+ * 
+ * @author JavaCraft Academy
+ * @version 1.0.0
+ * @since 2024-01-01
+ * 
+ * Description:
+ * Styles complets pour le composant PricingCard avec support des thèmes,
+ * animations, responsive design et accessibilité.
+ */
+
+/* Variables CSS personnalisées */
+.pricingCard {
+  --accent-color: #007bff;
+  --border-radius: 12px;
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --shadow-popular: 0 8px 32px rgba(0, 123, 255, 0.3);
+  --transition-duration: 0.3s;
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --gradient-popular: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-current: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+/* Carte principale */
+.pricingCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  min-height: 500px;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-duration) var(--transition-easing);
+  overflow: hidden;
+}
+
+/* États de la carte */
+.pricingCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-color);
+}
+
+.pricingCard.animated {
+  animation: fadeInUp 0.6s var(--transition-easing);
+}
+
+.pricingCard.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.pricingCard.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Carte populaire */
+.pricingCard.popular {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-popular);
+  position: relative;
+}
+
+.pricingCard.popular::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-popular);
+}
+
+.pricingCard.popular:hover {
+  transform: translateY(-8px);
+}
+
+/* Carte plan actuel */
+.pricingCard.current {
+  border-color: #28a745;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.pricingCard.current::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-current);
+}
+
+/* Badges */
+.popularBadge,
+.currentBadge {
+  position: absolute;
+  top: -1px;
+  right: 1rem;
+  background: var(--accent-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.popularBadge {
+  background: var(--gradient-popular);
+}
+
+.currentBadge {
+  background: var(--gradient-current);
+}
+
+.popularText,
+.currentText {
+  display: block;
+  white-space: nowrap;
+}
+
+/* En-tête */
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.planName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #212529;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.planDescription {
+  font-size: 1rem;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Section prix */
+.pricing {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.priceContainer {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.originalPrice {
+  font-size: 1.125rem;
+  color: #6c757d;
+  text-decoration: line-through;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.currentPrice {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.currency {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #495057;
+  align-self: flex-start;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #212529;
+  line-height: 1;
+}
+
+.period {
+  font-size: 1.125rem;
+  color: #6c757d;
+  font-weight: 500;
+  align-self: flex-end;
+}
+
+.savings {
+  font-size: 0.875rem;
+  color: #28a745;
+  font-weight: 600;
+  background: rgba(40, 167, 69, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Sélecteur de période */
+.billingToggle {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 0.25rem;
+  margin-top: 1rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.billingButton {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6c757d;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-easing);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.billingButton:hover {
+  color: #495057;
+}
+
+.billingButton.active {
+  background: white;
+  color: var(--accent-color);
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.discountBadge {
+  background: #dc3545;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Fonctionnalités */
+.features {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f8f9fa;
+  transition: all var(--transition-duration) var(--transition-easing);
+}
+
+.featureItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.featureItem:hover {
+  background: rgba(0, 123, 255, 0.03);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.featureText {
+  font-size: 0.875rem;
+  color: #495057;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.toggleFeatures {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  transition: all var(--transition-duration) var(--transition-easing);
+}
+
+.toggleFeatures:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Boutons d'action */
+.actionContainer {
+  margin-top: auto;
+}
+
+.actionButton {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-easing);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.actionButton.primary {
+  background: var(--accent-color);
+  color: white;
+}
+
+.actionButton.primary:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.3);
+}
+
+.actionButton.secondary {
+  background: transparent;
+  color: var(--accent-color);
+}
+
+.actionButton.secondary:hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+.actionButton.outline {
+  background: transparent;
+  border: 2px solid #e9ecef;
+  color: #495057;
+}
+
+.actionButton.outline:hover {
+  border-color: var(--accent-color);
+  background: rgba(0, 123, 255, 0.05);
+  color: var(--accent-color);
+}
+
+.actionButton.current {
+  background: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.actionButton.current:hover {
+  background: #218838;
+  border-color: #1e7e34;
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.actionButton.loading {
+  pointer-events: none;
+}
+
+.actionButton.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.actionButton.loading .buttonText {
+  opacity: 0;
+}
+
+/* Pied de page */
+.footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f8f9fa;
+  text-align: center;
+}
+
+.footerText {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.footerLink {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: all var(--transition-duration) var(--transition-easing);
+}
+
+.footerLink:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Indicateurs de changement */
+.priceChange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.priceIncrease {
+  color: #dc3545;
+}
+
+.priceDecrease {
+  color: #28a745;
+}
+
+.changeIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Comparaison */
+.comparison {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.comparisonTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #495057;
+  margin: 0 0 0.5rem 0;
+}
+
+.comparisonList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparisonItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.comparisonItem:last-child {
+  margin-bottom: 0;
+}
+
+.comparisonIcon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipContent {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #212529;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-duration) var(--transition-easing);
+  z-index: 1000;
+}
+
+.tooltipContent::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #212529;
+}
+
+.tooltip:hover .tooltipContent {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pricingCard {
+    max-width: 100%;
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+  
+  .amount {
+    font-size: 2.5rem;
+  }
+  
+  .planName {
+    font-size: 1.25rem;
+  }
+  
+  .actionButton {
+    padding: 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .billingToggle {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .billingButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricingCard {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .pricing {
+    margin-bottom: 1.5rem;
+  }
+  
+  .features {
+    margin-bottom: 1.5rem;
+  }
+  
+  .amount {
+    font-size: 2rem;
+  }
+  
+  .featureItem {
+    margin-bottom: 0.5rem;
+  }
+  
+  .popularBadge,
+  .currentBadge {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .pricingCard {
+    background: #1a1a1a;
+    border-color: #333;
+    color: #e9ecef;
+  }
+  
+  .planName {
+    color: #ffffff;
+  }
+  
+  .amount {
+    color: #ffffff;
+  }
+  
+  .featureText {
+    color: #e9ecef;
+  }
+  
+  .billingToggle {
+    background: #333;
+  }
+  
+  .billingButton.active {
+    background: #444;
+  }
+  
+  .comparison {
+    background: #333;
+  }
+  
+  .footer {
+    border-top-color: #333;
+  }
+  
+  .featureItem {
+    border-bottom-color: #333;
+  }
+  
+  .featureItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* États d'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible pour l'accessibilité */
+.actionButton:focus-visible,
+.billingButton:focus-visible,
+.toggleFeatures:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Styles pour l'impression */
+@media print {
+  .pricingCard {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .actionButton {
+    border: 1px solid #000;
+  }
+  
+  .popularBadge,
+  .currentBadge {
+    background: #000 !important;
+    color: #fff !important;
+  }
+}
