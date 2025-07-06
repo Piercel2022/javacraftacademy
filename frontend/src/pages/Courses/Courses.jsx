@@ -1,4 +1,3 @@
-// Absolute path: frontend/src/pages/Courses/Courses.jsx
 import React, { useState, useEffect } from 'react';
 import CourseCard from '../../components/course/CourseCard';
 import Loading from '../../components/common/Loading';
@@ -7,42 +6,39 @@ import styles from './Courses.module.css';
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
 
-  useEffect(() => {
-    // Mock data - replace with actual API call
-    setTimeout(() => {
-      setCourses([
-        {
-          id: 1,
-          title: 'Java Fundamentals',
-          description: 'Learn the basics of Java programming',
-          level: 'beginner',
-          duration: '4 weeks',
-          image: '/api/placeholder/300/200',
-          progress: 0
-        },
-        {
-          id: 2,
-          title: 'Object-Oriented Programming',
-          description: 'Master OOP concepts in Java',
-          level: 'intermediate',
-          duration: '6 weeks',
-          image: '/api/placeholder/300/200',
-          progress: 45
-        },
-        {
-          id: 3,
-          title: 'Advanced Java Development',
-          description: 'Advanced topics and frameworks',
-          level: 'advanced',
-          duration: '8 weeks',
-          image: '/api/placeholder/300/200',
-          progress: 0
+  const fetchCourses = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const response = await fetch('/api/courses', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Add authorization header if needed
+          // 'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-      ]);
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setCourses(data);
+    } catch (err) {
+      console.error('Error fetching courses:', err);
+      setError(err.message);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourses();
   }, []);
 
   const filteredCourses = courses.filter(course => 
@@ -50,6 +46,20 @@ const Courses = () => {
   );
 
   if (loading) return <Loading />;
+
+  if (error) {
+    return (
+      <div className={styles.coursesContainer}>
+        <div className={styles.errorContainer}>
+          <h2>Error loading courses</h2>
+          <p>{error}</p>
+          <button onClick={fetchCourses} className={styles.retryButton}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.coursesContainer}>
@@ -84,9 +94,15 @@ const Courses = () => {
       </div>
       
       <div className={styles.coursesGrid}>
-        {filteredCourses.map(course => (
-          <CourseCard key={course.id} course={course} />
-        ))}
+        {filteredCourses.length > 0 ? (
+          filteredCourses.map(course => (
+            <CourseCard key={course.id} course={course} />
+          ))
+        ) : (
+          <div className={styles.noCourses}>
+            <p>No courses found for the selected filter.</p>
+          </div>
+        )}
       </div>
     </div>
   );
