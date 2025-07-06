@@ -14,6 +14,7 @@ const CourseCard = ({
   onEnroll,
   onView
 }) => {
+  if (!course) return null;
   const navigate = useNavigate();
   const { enrollInCourse, isEnrolled } = useCourse();
   const { getCourseProgress } = useProgress();
