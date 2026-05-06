@@ -33,7 +33,7 @@
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         
         <!-- Database versions -->
-        <postgresql.version>42.7.1</postgresql.version>
+        <postgresql.version>42.7.11</postgresql.version>
         <h2.version>2.2.224</h2.version>
         <redis.version>4.4.6</redis.version>
         
